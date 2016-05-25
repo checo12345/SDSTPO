@@ -108,6 +108,10 @@ class Frame extends JFrame implements ActionListener{
         frame.pack();
         
         c.iniciar();
+    
+        
+        
+        //////soy huizar
         
        }
        @Override
