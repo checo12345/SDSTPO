@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mx.util.Imagen;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
@@ -85,38 +80,26 @@ public class Captura extends JPanel {
    
     public static void main(String[] args){
         Frame f=new Frame("Capturador V1.0");
-                    
-            
-            
-        
     }
-
-    
 }
 class Frame extends JFrame implements ActionListener{
-       Captura c=null;
-       public Frame(String t){
-           JFrame frame=new JFrame(t);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);//centrar en pantalla
-       JButton b=new JButton("captura") ;
-       b.addActionListener(this);
-        c=new Captura("192.168.43.127");
-        c.setVisible(true);
-        frame.getContentPane().add(c, java.awt.BorderLayout.CENTER);        
-        frame.getContentPane().add(b, java.awt.BorderLayout.SOUTH);        
-        frame.pack();
-        
-        c.iniciar();
-    
-        
-        
-        //////soy huizar
-        
-       }
+        Captura c=null;
+        public Frame(String t){
+            JFrame frame=new JFrame(t);
+            frame.setVisible(true);
+            frame.setLocationRelativeTo(null);//centrar en pantalla
+            JButton b=new JButton("captura") ;
+            b.addActionListener(this);
+            c=new Captura("192.168.1.149");
+            c.setVisible(true);
+            frame.getContentPane().add(c, java.awt.BorderLayout.CENTER);        
+            frame.getContentPane().add(b, java.awt.BorderLayout.SOUTH);        
+            frame.pack();
+            c.iniciar();
+        }
        @Override
     public void actionPerformed(ActionEvent ae) {
         c.capturar();
         c.iniciar();
     }
-   }
+}
