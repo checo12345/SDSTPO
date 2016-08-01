@@ -1,6 +1,4 @@
-
 package org.opencv.imgproc;
-
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -20,6 +18,9 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.highgui.Highgui;
 import Imagenes.* ;
+import static org.opencv.core.Core.addWeighted;
+import static org.opencv.core.Core.addWeighted;
+import static org.opencv.core.Core.countNonZero;
 import org.opencv.core.Rect;
 
 public class prueba {
@@ -31,25 +32,46 @@ public class prueba {
     }
 }
 class Procesar {
-    
-    private Mat imagen,imagenCopia;
-    private int width,height;
+    private Mat imagen,imagenCopia,imagenCopia1;
 
     public Procesar(){
-
-        imagen = Highgui.imread("C:\\Users\\Sergio\\Documents\\TT\\imagenes\\mio.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
-         imagenCopia = Highgui.imread("C:\\Users\\Sergio\\Documents\\TT\\imagenes\\mio.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagen = Highgui.imread("C:\\Users\\Sergio\\Documents\\TT\\imagenes\\adaptador2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia = Highgui.imread("C:\\Users\\Sergio\\Documents\\TT\\imagenes\\adaptador2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia1 = Highgui.imread("C:\\Users\\Sergio\\Documents\\TT\\imagenes\\adaptador2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
         if(!imagen.empty()){
-             
-             
-            Ventana v= new Ventana (convertir(dameLaDona(imagen)),0,0) ; 
-            
-            
+           //  Imgproc.resize(imagen, imagen, new Size(480,640));
+            analizarMelanoma(imagen) ;
         }else{
             System.out.println("\tImagen NO encontrada");
         }
     }
      
+   
+    private Mat analizarMelanoma(Mat img)
+    {       
+            int totalP,areaM,tamImg=img.width()*img.height() ;
+            
+            img= dameLaDona(img) ;
+            Mat img2=dameLaDona(imagenCopia) ;
+            img2=descompCanImg(img2,1) ;
+            img2=umbralizarImg(img2,254,255) ;
+            
+            img=blurearImg(img,25) ;
+            img=descompCanImg(img,1) ;
+            Ventana v= new Ventana (convertir(img2),0,0) ;
+            totalP = tamImg-countNonZero(img2);
+            
+            img=umbralizarImg(img,30,150) ;
+            img=umbralizarImg(img,0,255) ;
+            areaM = tamImg- countNonZero(img);
+            System.out.println("El area afectada por melanoma es: "+(areaM*100)/totalP+ "%");
+            System.out.println("El area de iris abarca: "+totalP);
+            System.out.println("El total de pixeles es: "+tamImg);
+            addWeighted(descompCanImg(imagenCopia1,2),1,img,0.3,0.0,img) ;
+            Ventana v1 = new Ventana(convertir(img),1,0);
+            
+            return img ;
+    }
     private Mat dameLaDona(Mat img1) {
         double [] iris= segmentarIris(img1) ;
         double [] pupila=segmentarPupila(img1) ;
@@ -71,63 +93,63 @@ class Procesar {
     }
         return max;
     }
-    
-     public double[] segmentarIris(Mat img){
+    private double[] segmentarIris(Mat img){
             /*Imagen original*/
             Image imagenMostrar = convertir(img);
-            Ventana ventana = new Ventana(imagenMostrar,0,0);
+            //Ventana ventana = new Ventana(imagenMostrar,0,0);
             /*Descomponer canales*/
             img=descompCanImg(img,1) ;
-            Ventana ventana3 = new Ventana(convertir(img),1,0);
+            //Ventana ventana3 = new Ventana(convertir(img),1,0);
             /*Filtro Gauss*/
             img=blurearImg(img,25) ;
-            Ventana ventana31 = new Ventana(convertir(img),2,0);
+            //Ventana ventana31 = new Ventana(convertir(img),2,0);
             /*Umbralizado*/
-            img=umbralizarImg(img,50,100) ;
-            Ventana ventana4 = new Ventana(convertir(img),0,1);
+           // img=umbralizarIris(img) ;
+            img=umbralizarImg(img,100,150) ;
+            //Ventana ventana4 = new Ventana(convertir(img),0,0);
             /* Erosionar*/
             img=eriosionarImg(img) ;
-            Ventana ventana5 = new Ventana(convertir(img),1,1);
+            //Ventana ventana5 = new Ventana(convertir(img),1,1);
             /* Erosionar*/
             img=dilatarImg(img) ;
-            Ventana ventana6 = new Ventana(convertir(img),2,1);
+            //Ventana ventana6 = new Ventana(convertir(img),2,1);
             /*Canny*/
             //imagen=filtroCanny(imagen) ;
             img=umbralizarImg(img,0,255) ;
-            Ventana ventana7 = new Ventana(convertir(img),0,2);
+            //Ventana ventana7 = new Ventana(convertir(img),0,2);
              /*Transformada Hough*/
             return TransfHough(img,1, 200, 1, 10, 100, 150) ;
      }
-     public double[] segmentarPupila(Mat img){
+     private double[] segmentarPupila(Mat img){
          /*Imagen original*/
             Image imagenMostrar = convertir(img);
-            Ventana ventana = new Ventana(imagenMostrar,0,0);
+            //Ventana ventana = new Ventana(imagenMostrar,0,0);
 
             img=descompCanImg(img,2) ;
-            Ventana ventana3 = new Ventana(convertir(img),1,0);
+            //Ventana ventana3 = new Ventana(convertir(img),1,0);
             
             /*Umbralizado*/
-            img=umbralizarImg(img,20,100) ;
-            Ventana ventana4 = new Ventana(convertir(img),2,0);
+            img=umbralizarImg(img,30,100) ;
+            //Ventana ventana4 = new Ventana(convertir(img),2,0);
              
             /* Erosionar*/
             img=eriosionarImg(img) ;
-            Ventana ventana5 = new Ventana(convertir(img),0,1);
+            //Ventana ventana5 = new Ventana(convertir(img),0,1);
             
-            /* Erosionar*/
+            /* Dilatar*/
             img=dilatarImg(img) ;
-            Ventana ventana6 = new Ventana(convertir(img),1,1);
+            //Ventana ventana6 = new Ventana(convertir(img),1,1);
             
             /*Canny*/
-            //imagen=filtroCanny(imagen) ;
-            img=umbralizarImg(img,0,255) ;
-            Ventana ventana7 = new Ventana(convertir(img),2,1);
+            img=filtroCanny(img) ;
+            //img=umbralizarImg(img,0,255) ;
+            //Ventana ventana7 = new Ventana(convertir(img),2,1);
             
             
              /*Transformada Hough*/
              
             //System.out.println(circlesList);
-            return TransfHough(img,1, 200, 1, 10, 20, 50)  ;
+            return TransfHough(img,1, 200, 1, 10, 30, 80)  ;
      }
      private Image convertir(Mat imagen) {
         MatOfByte matOfByte = new MatOfByte();
@@ -147,6 +169,10 @@ class Procesar {
     }
      private Mat umbralizarImg(Mat canalRojo,int min, int max) {
         Imgproc.threshold(canalRojo, canalRojo, min, max, Imgproc.THRESH_BINARY);
+        return canalRojo;
+    }
+     private Mat umbralizarIris(Mat canalRojo) {
+        Imgproc.threshold(canalRojo, canalRojo, 50, 100, Imgproc.THRESH_BINARY);
         return canalRojo;
     }
      private Mat blurearImg(Mat canalAzul,int val) {
@@ -187,7 +213,7 @@ class Procesar {
             
         return segmentada;
     } 
-     public double[] TransfHough(Mat edges,int inv, int distMinCir,int umbMin, int umbMax, int radMin, int radMax){
+     private double[] TransfHough(Mat edges,int inv, int distMinCir,int umbMin, int umbMax, int radMin, int radMax){
  
            Mat color = imagenCopia;
            Mat circles = new Mat();
@@ -217,7 +243,7 @@ class Procesar {
                 Core.circle( color, center, 1, new Scalar(0,0,0), -1);
       // circle outline
                 Core.circle( color, center, r, new Scalar(0,255,0), 1);
-                Ventana ventana8 = new Ventana(convertir((color)),0,2);
+                //Ventana ventana8 = new Ventana(convertir((color)),0,2);
 
      /*
             Rect bbox = new Rect((int)Math.abs(x-r), (int)Math.abs(y-r), (int)2*r, (int)2*r);

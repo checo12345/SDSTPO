@@ -5,6 +5,8 @@
  */
 package com.mx.util.Imagen;
 
+import Beans.Imagen;
+
 /**
  *
  * @author David Pantaleón

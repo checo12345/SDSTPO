@@ -28,6 +28,7 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 public class Captura extends JPanel {
     private EmbeddedMediaPlayerComponent player=null;
     private BufferedImage ima=null;
+    private int i = 8;
     static{
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "C:\\Program Files\\VideoLAN\\VLC");
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
@@ -39,12 +40,13 @@ public class Captura extends JPanel {
         this.video="http://"+video+":8080/video";
         //this.setBackground(new java.awt.Color(204, 204, 204));
         this.setMinimumSize(new java.awt.Dimension(100, 100));
-        this.setPreferredSize(new java.awt.Dimension(400, 300));
+        this.setPreferredSize(new java.awt.Dimension(640, 480));
         this.setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
         player=null;               
         
     }
     public void iniciar(){
+        Frame f=new Frame("Capturador V1.0");
         this.removeAll();
         player = new EmbeddedMediaPlayerComponent();        
         player.setSize(this.getSize()); 
@@ -52,6 +54,7 @@ public class Captura extends JPanel {
         this.updateUI();
         player.setVisible(true);
         player.getMediaPlayer().playMedia(video);
+        
     }
     public void parar(){
         player.setVisible(false);
@@ -67,7 +70,8 @@ public class Captura extends JPanel {
         
         ima=player.getMediaPlayer().getSnapshot();
         try{
-        ImageIO.write(ima, "jpg",new File("fotoIPWebCam.jpg"));
+        ImageIO.write(ima, "jpg",new File("fotoIPWebCam"+i+".jpg"));
+        i++;
         }catch(Exception e){}
         this.parar();
         this.removeAll();
@@ -79,7 +83,7 @@ public class Captura extends JPanel {
     }
    
     public static void main(String[] args){
-        Frame f=new Frame("Capturador V1.0");
+        //Frame f=new Frame("Capturador V1.0");
     }
 }
 class Frame extends JFrame implements ActionListener{
@@ -90,7 +94,7 @@ class Frame extends JFrame implements ActionListener{
             frame.setLocationRelativeTo(null);//centrar en pantalla
             JButton b=new JButton("captura") ;
             b.addActionListener(this);
-            c=new Captura("192.168.1.150");
+            c=new Captura("192.168.1.73");
             c.setVisible(true);
             frame.getContentPane().add(c, java.awt.BorderLayout.CENTER);        
             frame.getContentPane().add(b, java.awt.BorderLayout.SOUTH);        

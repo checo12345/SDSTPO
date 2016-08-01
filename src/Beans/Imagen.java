@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mx.util.Imagen;
+package Beans;
 
 import java.awt.image.BufferedImage;
 
