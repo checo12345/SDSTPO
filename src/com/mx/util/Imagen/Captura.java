@@ -94,7 +94,7 @@ class Frame extends JFrame implements ActionListener{
             frame.setLocationRelativeTo(null);//centrar en pantalla
             JButton b=new JButton("captura") ;
             b.addActionListener(this);
-            c=new Captura("192.168.1.73");
+            c=new Captura("192.168.1.68");
             c.setVisible(true);
             frame.getContentPane().add(c, java.awt.BorderLayout.CENTER);        
             frame.getContentPane().add(b, java.awt.BorderLayout.SOUTH);        
