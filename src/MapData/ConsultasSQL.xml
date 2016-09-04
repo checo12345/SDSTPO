@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="TbVehiculos">
+<mapper namespace="sql">
  
     <resultMap id="result" type="Beans.TbVehiculos">
         <result property="id" column="ID"/>
@@ -12,6 +12,12 @@
         <result property="idModelo" column="ID_MODELO"/>
     </resultMap>
  
+    <select id="obtenerUsuario" parameterType="Beans.Sesion" resultType="Beans.Sesion">
+	select *
+	from usuario
+	where usuario=#{usuario:VARCHAR}
+    </select>
+        
     <select id="getAll" resultMap="result">
         SELECT * FROM TB_VEHICULOS
     </select>
