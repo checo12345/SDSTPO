@@ -12,36 +12,25 @@
         <result property="idModelo" column="ID_MODELO"/>
     </resultMap>
  
+    <!-- AQUI VAN TODOS LOS SELECT-->
     <select id="obtenerUsuario" parameterType="Beans.Sesion" resultType="Beans.Sesion">
-	select *
-	from usuario
+	select * 
+	from sesion
 	where usuario=#{usuario:VARCHAR}
+        and password=#{password:VARCHAR}
     </select>
-        
-    <select id="getAll" resultMap="result">
-        SELECT * FROM TB_VEHICULOS
-    </select>
+    
+    <!-- AQUI VAN TODOS LOS INSERT-->
+   <insert id="registrarPaciente" parameterType="Beans.Paciente">
+    insert into paciente (nombre, apPaterno, apMaterno,calle,tipoSangre,sexo,fechaNac,telefono,delegacionOMunicipio,curp)
+        VALUES (#{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{calle}, #{tipoSangre}, #{sexo}, #{fechaNacimiento}, #{telefono}, #{delMun}, #{curp});
+   </insert>
  
-    <select id="getById" parameterType="int" resultMap="result">
-        SELECT * FROM TB_VEHICULOS WHERE ID = #{id}
-    </select>
  
-    <delete id="deleteById" parameterType="int">
-        DELETE from TB_VEHICULOS WHERE ID = #{id};
-    </delete>
- 
-    <insert id="insert" parameterType="Beans.TbVehiculos">
-    INSERT INTO TB_VEHICULOS (NUMERO_PLACA, FECHA_REGISTRO, ID_MODELO)
-        VALUES (#{numeroPlaca}, #{fechaRegistro}, #{idModelo});
-    </insert>
- 
-    <update id="update" parameterType="Beans.TbVehiculos">
-        UPDATE TB_VEHICULOS
-        SET
-            NUMERO_PLACA = #{numeroPlaca},
-            FECHA_REGISTRO = #{fechaRegistro},
-            ID_MODELO = #{idModelo}
-        WHERE ID = #{id};
-    </update>
+    <!-- AQUI VAN TODOS LOS UPDATE-->
+    
+    
+    
+    <!-- AQUI VAN TODOS LOS DELETE-->
  
 </mapper>

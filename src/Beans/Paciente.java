@@ -1,29 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Beans;
-
 import Beans.Persona;
 import java.util.Date;
 
-/**
- *
- * @author David Pantaleón
- */
-public class Paciente {
-    private Persona p;
-    private String alergias;
-    private String padecimientos;
+public class Paciente extends Persona{
+    private String alergias, padecimientos,tipoSangre,observaciones,curp;
     public Paciente(){}
-    public Paciente(String nom,String apeP,String apeM,Date fecNac,int Tel,String dir,boolean sex,String aler,String padecimiento){
-        p=new Persona(nom,apeP,apeM,fecNac,Tel,dir,sex){};
-        alergias=aler;
-        padecimientos=padecimiento;
-    }
+    
     public String getAlergias(){return alergias;}
-    public String getPadecimientos(){return padecimientos;}
+    public String getPadecimientos(){return tipoSangre;}
+    public String getObservaciones(){return observaciones;}
+    public String getTipoSangre(){return padecimientos;}
+    public String getCurp(){return curp;}
+    public void setCurp(String curpP){curp=curpP;};
+    public void setObservaciones(String sangre){observaciones=sangre;};
+    public void setTipoSangre(String sangre){tipoSangre=sangre;};
     public void setAlergias(String aler){alergias=aler;}
     public void setPadecimiento(String pade){padecimientos=pade;}
+    
 }

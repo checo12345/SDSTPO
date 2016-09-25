@@ -131,21 +131,15 @@ public class inicioSesion extends javax.swing.JFrame {
        ServicioRespuesta respuesta=sesion.validarIngreso() ;
 //       Sesion user = (Sesion)respuesta.getResult() ;
        if(respuesta.isSuccess()){
-                 
-        this.dispose();
-
+        this.dispose() ;
         jOptionPane1.showMessageDialog(null, "Sesion para el usuario", "Bienvenido",jOptionPane1.INFORMATION_MESSAGE);
 
         //Formulario1 formformulario1 = new Formulario1();          
         //formformulario1.setVisible(true);
 
-}else {
-                    
-        jOptionPane1.showMessageDialog(null, "Acceso denegado:\n"
-        + "Por favor ingrese un usuario y/o contraseña correctos", "Acceso denegado",
-        jOptionPane1.ERROR_MESSAGE);
-            
-}
+        }else {
+           jOptionPane1.showMessageDialog(null, "Acceso denegado:\n"+ "Por favor ingrese un usuario y/o contraseña correctos", "Acceso denegado",jOptionPane1.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {

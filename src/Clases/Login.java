@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * @author Sergio
  */
 public class Login {
-    private static final Logger logger = Logger.getLogger("Login");
+    private static final Logger logger = Logger.getLogger("Login:");
     public ServicioRespuesta validarIngreso()
     {
         ServicioRespuesta respuesta = new ServicioRespuesta();

@@ -16,10 +16,6 @@ public class MedicoAdministrador extends Medico{
     private Medico m;
     private String cargo;
     public MedicoAdministrador(){}
-    public MedicoAdministrador(String nom,String apeP,String apeM,Date fecNac,int Tel,String dir,boolean sex,String esp,int cedPro,String car){
-        m=new Medico(nom,apeP,apeM,fecNac,Tel,dir,sex,esp,cedPro){};
-        cargo=car;
-    }
     public String getCargo(){return cargo;}
     public void setCargo(String car){cargo=car;}
 }
