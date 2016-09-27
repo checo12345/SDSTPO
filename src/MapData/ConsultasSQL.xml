@@ -11,7 +11,35 @@
         <result property="fechaRegistro" column="FECHA_REGISTRO"/>
         <result property="idModelo" column="ID_MODELO"/>
     </resultMap>
- 
+    <resultMap id="resultPaciente" type="Beans.Paciente">
+        <result property="sexo" column="sexo" />
+        <result property="apellidoPaterno" column="apPaterno"/>
+        <result property="apellidoMaterno" column="apMaterno"/>
+        <result property="nombre" column="nombre"/>
+        <result property="fechaNacimiento" column="fechaNac"  />
+        <result property="telefono" column="telefono"/>
+        <result property="direccion" column="direccion"/>
+        <result property="tipoSangre" column="tipoSangre" />
+        <result property="idPaciente" column="idPaciente"/> 
+        <result property="curp" column="curp"/>
+    </resultMap>
+     <resultMap id="resultMedico" type="Beans.Medico">
+        <result property="sexo" column="sexo" />
+        <result property="apellidoPaterno" column="apPaterno"/>
+        <result property="apellidoMaterno" column="apMaterno"/>
+        <result property="nombre" column="nombre"/>
+        <result property="fechaNacimiento" column="fechaNac"  />
+        <result property="telefono" column="telefono"/>
+        <result property="direccion" column="direccion"/>
+        <result property="especialidad" column="especialidad" />
+        <result property="cedulaProfesional" column="cedulaProf"/> 
+    </resultMap>
+    <resultMap id="resultMedicamento" type="Beans.Medicamento">
+        <result property="idMedicamento" column="idMedicamento"/>
+        <result property="nombre" column="nombre"/>
+        <result property="presentacion" column="presentacion"/>
+        <result property="dosis" column="dosis"/>
+    </resultMap>
     <!-- AQUI VAN TODOS LOS SELECT-->
     <select id="obtenerUsuario" parameterType="Beans.Sesion" resultType="Beans.Sesion">
 	select * 
@@ -20,6 +48,30 @@
         and password=#{password:VARCHAR}
     </select>
     
+    
+    
+    <select id="getPaciente" resultMap="resultPaciente" parameterType="Beans.Paciente">
+        SELECT * FROM paciente WHERE idPaciente = #{idPaciente};
+    </select>
+    
+   
+    <select id="getMedico" resultMap="resultMedico" parameterType="Beans.Medico">
+        SELECT * FROM medico WHERE cedulaProf = #{cedulaProfesional};
+    </select>
+    <select id="nextConsulta" resultType="int">
+        SELECT AUTO_INCREMENT FROM information_schema.TABLES
+WHERE TABLE_SCHEMA = 'sptpo1' 
+AND TABLE_NAME = 'consultaMedica';
+    </select>
+
+    <select id="nextReceta" resultType="int">
+        SELECT AUTO_INCREMENT FROM information_schema.TABLES
+WHERE TABLE_SCHEMA = 'sptpo1' 
+AND TABLE_NAME = 'recetamedica';
+    </select>
+    <select id="getAllMedicamento" resultMap="resultMedicamento">
+        SELECT * FROM medicamento
+    </select>
     <!-- AQUI VAN TODOS LOS INSERT-->
    <insert id="registrarPaciente" parameterType="Beans.Paciente" useGeneratedKeys="true" keyColumn="idPaciente" keyProperty="idPaciente">
     insert into paciente (nombre, apPaterno, apMaterno,tipoSangre,sexo,fechaNac,telefono,curp,direccion)
@@ -38,10 +90,40 @@
         VALUES (#{idPaciente}, #{padecimientos});
    </insert>
    
+   
+   <insert id="insertMedicamento" parameterType="Beans.Medicamento" useGeneratedKeys="true" keyColumn="idMedicamento" keyProperty="idMedicamento">
+        INSERT INTO medicamento (nombre, presentacion)
+        VALUES (#{nombre}, #{presentacion});        
+    </insert>
+    <insert id="insertReceta" parameterType="Beans.RecetaMedicaBean" useGeneratedKeys="true" keyColumn="idReceta" keyProperty="idReceta">
+        INSERT INTO recetamedica (fecha, recomendaciones, idConsulta)
+        VALUES (#{fecha}, #{recomendaciones}, #{idConsulta});        
+    </insert>
+    <insert id="insertRecetaMedicamento" parameterType="Beans.RecetaMedicaMedicamento">
+        INSERT INTO recetamedicamedicamento (idReceta, idMedicamento, dosis)
+        VALUES (#{idReceta}, #{idMedicamento}, #{dosis});        
+    </insert>
+        <insert id="insertConsulta" parameterType="Beans.ConsultaMedicaBean" useGeneratedKeys="true" keyColumn="idConsulta" keyProperty="idConsulta">
+        INSERT INTO consultamedica (fecha, motivo, imgOjoIzq, imgOjoDer, cedProfMed,idPaciente)
+        VALUES (#{fechaConsulta}, #{motivoConsulta}, #{ojoIzquierdo}, #{ojoDerecho}, #{cedulaMedico}, #{idPaciente});        
+    </insert>
+    <insert id="insertManifestacion" parameterType="Beans.ManifestacionBean" >
+        INSERT INTO ManifestacionConsulta VALUES (#{idConsulta}, #{manifestacion});        
+    </insert>
     <!-- AQUI VAN TODOS LOS UPDATE-->
     
     
     
     <!-- AQUI VAN TODOS LOS DELETE-->
+ 
+ 
+ 
+ 
+    
+    
+    
+    
+ 
+ 
  
 </mapper>

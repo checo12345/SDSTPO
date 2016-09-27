@@ -10,6 +10,7 @@ package Beans;
  * @author David Pantaleón
  */
 public class Medicamento {
+    private int    idMedicamento;
     private String nombre;
     private String presentacion;
     private String dosis;
@@ -18,11 +19,24 @@ public class Medicamento {
         presentacion="default";
         dosis="default";
     }
-    public Medicamento(String nom,String pre,String dos){
-        nombre=nom;
-        presentacion=pre;
-        dosis=dos;
+
+    public Medicamento(int idMedicamento, String nombre, String presentacion, String dosis) {
+        this.idMedicamento = idMedicamento;
+        this.nombre = nombre;
+        this.presentacion = presentacion;
+        this.dosis = dosis;
     }
+    
+
+    public int getIdMedicamento() {
+        return idMedicamento;
+    }
+
+    public void setIdMedicamento(int idMedicamento) {
+        this.idMedicamento = idMedicamento;
+    }
+    
+    
     public String getNombre(){
         return nombre;
     }

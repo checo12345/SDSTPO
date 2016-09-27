@@ -15,12 +15,22 @@ public class Imagen {
     private BufferedImage fotografia;
     private int alto;
     private int ancho;
+    private String ruta;
     public Imagen(){}
     public Imagen(BufferedImage fot){
         fotografia=fot;
         alto=fot.getHeight();
         ancho=fot.getWidth();
     }
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+    
     public BufferedImage getFotografia(){return fotografia;}
     public int getAlto(){return alto;}
     public int getAncho(){return ancho;}

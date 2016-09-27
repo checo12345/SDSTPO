@@ -12,10 +12,15 @@ import java.util.Date;
  * @author David Pantaleón
  */
 public class Medico extends Persona{
-    private Persona p;
+    
     private String especialidad;
     private int cedulaProfesional;
     public Medico(){}
+   /* public Medico(String nom,String apeP,String apeM,Date fecNac,int Tel,String dir,String sex,String esp,int cedPro){
+        p=new Persona(nom,apeP,apeM,fecNac,Tel,dir,sex){};
+        especialidad=esp;
+        cedulaProfesional=cedPro;
+    }*/
     public String getEspecialidad(){return especialidad;}
     public int getCedulaProfesional(){return cedulaProfesional;}
     public void setEspecialidad(String esp){especialidad=esp;}
