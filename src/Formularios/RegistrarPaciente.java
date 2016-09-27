@@ -20,6 +20,16 @@ public class RegistrarPaciente extends javax.swing.JFrame {
      */
     public RegistrarPaciente() {
         initComponents();
+        errorNombre.setVisible(false);
+        errorNombre1.setVisible(false);
+        errorNombre2.setVisible(false);
+        errorNombre3.setVisible(false);
+        errorNombre4.setVisible(false);
+        errorNombre5.setVisible(false);
+        errorNombre6.setVisible(false);
+        errorNombre7.setVisible(false);
+        errorNombre8.setVisible(false);
+        errorNombre9.setVisible(false);
     }
 
     /**
@@ -64,12 +74,27 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         observaciones = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        errorNombre = new javax.swing.JLabel();
+        errorNombre1 = new javax.swing.JLabel();
+        errorNombre2 = new javax.swing.JLabel();
+        errorNombre3 = new javax.swing.JLabel();
+        errorNombre4 = new javax.swing.JLabel();
+        errorNombre5 = new javax.swing.JLabel();
+        errorNombre6 = new javax.swing.JLabel();
+        errorNombre7 = new javax.swing.JLabel();
+        errorNombre8 = new javax.swing.JLabel();
+        errorNombre9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreActionPerformed(evt);
+            }
+        });
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nombreKeyPressed(evt);
             }
         });
 
@@ -79,15 +104,38 @@ public class RegistrarPaciente extends javax.swing.JFrame {
 
         jLabel3.setText("Apellido Paterno:");
 
+        apellidoP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                apellidoPKeyPressed(evt);
+            }
+        });
+
         jLabel4.setText("Apellido Materno:");
 
+        apellidoM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                apellidoMKeyPressed(evt);
+            }
+        });
+
         jLabel5.setText("Fecha de Nacimiento:");
+
+        fechaNac.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fechaNacKeyPressed(evt);
+            }
+        });
 
         jLabel6.setText("Telefono:");
 
         telefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefonoActionPerformed(evt);
+            }
+        });
+        telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                telefonoKeyPressed(evt);
             }
         });
 
@@ -101,13 +149,31 @@ public class RegistrarPaciente extends javax.swing.JFrame {
 
         jLabel8.setText("Sexo:");
 
+        sexo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sexoKeyPressed(evt);
+            }
+        });
+
         jLabel9.setText("Calle:");
 
         jLabel10.setText("Numero:");
 
         jLabel11.setText("Delegación o Municipio:");
 
+        deloMun.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                deloMunKeyPressed(evt);
+            }
+        });
+
         jLabel12.setText("Alergias:");
+
+        alergias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                alergiasKeyPressed(evt);
+            }
+        });
 
         jLabel13.setText("Tipo de Sangre:");
 
@@ -116,12 +182,22 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                 tipoSangreActionPerformed(evt);
             }
         });
+        tipoSangre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tipoSangreKeyPressed(evt);
+            }
+        });
 
         jLabel14.setText("Enfermedades Hereditarias:");
 
         enfermedades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enfermedadesActionPerformed(evt);
+            }
+        });
+        enfermedades.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                enfermedadesKeyPressed(evt);
             }
         });
 
@@ -140,24 +216,50 @@ public class RegistrarPaciente extends javax.swing.JFrame {
 
         jButton2.setText("Cancelar");
 
+        errorNombre.setBackground(new java.awt.Color(255, 0, 0));
+        errorNombre.setForeground(new java.awt.Color(255, 0, 0));
+        errorNombre.setText("No se permiten numeros");
+
+        errorNombre1.setBackground(new java.awt.Color(255, 0, 0));
+        errorNombre1.setForeground(new java.awt.Color(255, 0, 0));
+        errorNombre1.setText("No se permiten numeros");
+
+        errorNombre2.setBackground(new java.awt.Color(255, 0, 0));
+        errorNombre2.setForeground(new java.awt.Color(255, 0, 0));
+        errorNombre2.setText("No se permiten numeros");
+
+        errorNombre3.setBackground(new java.awt.Color(255, 0, 0));
+        errorNombre3.setForeground(new java.awt.Color(255, 0, 0));
+        errorNombre3.setText("No se permiten letras");
+
+        errorNombre4.setBackground(new java.awt.Color(255, 0, 0));
+        errorNombre4.setForeground(new java.awt.Color(255, 0, 0));
+        errorNombre4.setText("No se permiten letras");
+
+        errorNombre5.setBackground(new java.awt.Color(255, 0, 0));
+        errorNombre5.setForeground(new java.awt.Color(255, 0, 0));
+        errorNombre5.setText("No se permiten numeros");
+
+        errorNombre6.setBackground(new java.awt.Color(255, 0, 0));
+        errorNombre6.setForeground(new java.awt.Color(255, 0, 0));
+        errorNombre6.setText("No se permiten numeros");
+
+        errorNombre7.setBackground(new java.awt.Color(255, 0, 0));
+        errorNombre7.setForeground(new java.awt.Color(255, 0, 0));
+        errorNombre7.setText("No se permiten numeros");
+
+        errorNombre8.setBackground(new java.awt.Color(255, 0, 0));
+        errorNombre8.setForeground(new java.awt.Color(255, 0, 0));
+        errorNombre8.setText("No se permiten numeros");
+
+        errorNombre9.setBackground(new java.awt.Color(255, 0, 0));
+        errorNombre9.setForeground(new java.awt.Color(255, 0, 0));
+        errorNombre9.setText("No se permiten numeros");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(342, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(320, 320, 320))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(302, 302, 302))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(69, 69, 69)
-                        .addComponent(jButton1)
-                        .addGap(368, 368, 368))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -189,6 +291,14 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tipoSangre, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(enfermedades))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
                                     .addComponent(telefono, javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,36 +310,78 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(deloMun))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(apellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(apellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel7)
                                         .addGap(27, 27, 27)
                                         .addComponent(curp, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(sexo))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tipoSangre, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(enfermedades)))))
+                                        .addComponent(sexo))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(apellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(errorNombre1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(errorNombre2)
+                                            .addComponent(apellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(errorNombre5)))
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(errorNombre4)
+                        .addGap(405, 405, 405)))
                 .addGap(56, 56, 56))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(320, 320, 320))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(302, 302, 302))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(69, 69, 69)
+                        .addComponent(jButton1)
+                        .addGap(368, 368, 368))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(errorNombre6)
+                        .addGap(119, 119, 119))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(207, 207, 207)
+                        .addComponent(errorNombre))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(errorNombre3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(207, 207, 207)
+                .addComponent(errorNombre7)
+                .addGap(133, 133, 133)
+                .addComponent(errorNombre8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(errorNombre9)
+                .addGap(105, 105, 105))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(44, 44, 44)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(errorNombre)
+                    .addComponent(errorNombre1)
+                    .addComponent(errorNombre2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,7 +389,12 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                     .addComponent(apellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(apellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(errorNombre3)
+                    .addComponent(errorNombre4)
+                    .addComponent(errorNombre5))
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
@@ -247,7 +404,9 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(errorNombre6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(calle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,7 +414,12 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                     .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(deloMun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(errorNombre7)
+                    .addComponent(errorNombre8)
+                    .addComponent(errorNombre9))
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(alergias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,6 +478,116 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void nombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyPressed
+       char c=evt.getKeyChar();
+        if (Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre.setVisible(true);
+        }
+        else
+            errorNombre.setVisible(false);
+    }//GEN-LAST:event_nombreKeyPressed
+
+    private void apellidoPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoPKeyPressed
+       char c=evt.getKeyChar();
+        if (Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre1.setVisible(true);
+        }
+        else
+            errorNombre1.setVisible(false);
+    }//GEN-LAST:event_apellidoPKeyPressed
+
+    private void apellidoMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoMKeyPressed
+       char c=evt.getKeyChar();
+        if (Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre2.setVisible(true);
+        }
+        else
+            errorNombre2.setVisible(false);
+    }//GEN-LAST:event_apellidoMKeyPressed
+
+    private void fechaNacKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaNacKeyPressed
+        char c=evt.getKeyChar();
+        if (Character.isLetter(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre3.setVisible(true);
+        }
+        else
+            errorNombre3.setVisible(false);
+    }//GEN-LAST:event_fechaNacKeyPressed
+
+    private void telefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyPressed
+       char c=evt.getKeyChar();
+        if (Character.isLetter(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre4.setVisible(true);
+        }
+        else
+            errorNombre4.setVisible(false);
+    }//GEN-LAST:event_telefonoKeyPressed
+
+    private void sexoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sexoKeyPressed
+       char c=evt.getKeyChar();
+        if (Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre5.setVisible(true);
+        }
+        else
+            errorNombre5.setVisible(false);
+    }//GEN-LAST:event_sexoKeyPressed
+
+    private void deloMunKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_deloMunKeyPressed
+      char c=evt.getKeyChar();
+        if (Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre6.setVisible(true);
+        }
+        else
+            errorNombre6.setVisible(false);
+    }//GEN-LAST:event_deloMunKeyPressed
+
+    private void alergiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_alergiasKeyPressed
+        char c=evt.getKeyChar();
+        if (Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre7.setVisible(true);
+        }
+        else
+            errorNombre7.setVisible(false);
+    }//GEN-LAST:event_alergiasKeyPressed
+
+    private void tipoSangreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tipoSangreKeyPressed
+       char c=evt.getKeyChar();
+        if (Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre8.setVisible(true);
+        }
+        else
+            errorNombre8.setVisible(false);
+    }//GEN-LAST:event_tipoSangreKeyPressed
+
+    private void enfermedadesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_enfermedadesKeyPressed
+       char c=evt.getKeyChar();
+        if (Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre9.setVisible(true);
+        }
+        else
+            errorNombre9.setVisible(false);
+    }//GEN-LAST:event_enfermedadesKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -357,6 +631,16 @@ public class RegistrarPaciente extends javax.swing.JFrame {
     public static javax.swing.JTextField curp;
     public static javax.swing.JTextField deloMun;
     public static javax.swing.JTextField enfermedades;
+    private javax.swing.JLabel errorNombre;
+    private javax.swing.JLabel errorNombre1;
+    private javax.swing.JLabel errorNombre2;
+    private javax.swing.JLabel errorNombre3;
+    private javax.swing.JLabel errorNombre4;
+    private javax.swing.JLabel errorNombre5;
+    private javax.swing.JLabel errorNombre6;
+    private javax.swing.JLabel errorNombre7;
+    private javax.swing.JLabel errorNombre8;
+    private javax.swing.JLabel errorNombre9;
     public static javax.swing.JTextField fechaNac;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

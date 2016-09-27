@@ -21,12 +21,23 @@
     </select>
     
     <!-- AQUI VAN TODOS LOS INSERT-->
-   <insert id="registrarPaciente" parameterType="Beans.Paciente">
-    insert into paciente (nombre, apPaterno, apMaterno,calle,tipoSangre,sexo,fechaNac,telefono,delegacionOMunicipio,curp)
-        VALUES (#{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{calle}, #{tipoSangre}, #{sexo}, #{fechaNacimiento}, #{telefono}, #{delMun}, #{curp});
+   <insert id="registrarPaciente" parameterType="Beans.Paciente" useGeneratedKeys="true" keyColumn="idPaciente" keyProperty="idPaciente">
+    insert into paciente (nombre, apPaterno, apMaterno,tipoSangre,sexo,fechaNac,telefono,curp,direccion)
+        VALUES (#{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{tipoSangre}, #{sexo}, #{fechaNacimiento}, #{telefono}, #{curp},#{direccion});
    </insert>
- 
- 
+   <insert id="registrarObservacionesPaciente" parameterType="Beans.Paciente">
+    insert into observaciones (idPaciente,observacion)
+        VALUES (#{idPaciente}, #{observacion});
+   </insert>
+    <insert id="registrarAlergiasPaciente" parameterType="Beans.Paciente">
+    insert into alergiapaciente (idPaciente,alergia)
+        VALUES (#{idPaciente}, #{alergia});
+   </insert>
+    <insert id="registrarPadecimientosPaciente" parameterType="Beans.Paciente">
+    insert into padecimientocrondeg (idPaciente,enfermedad)
+        VALUES (#{idPaciente}, #{padecimientos});
+   </insert>
+   
     <!-- AQUI VAN TODOS LOS UPDATE-->
     
     

@@ -25,9 +25,7 @@ public class PacienteClass {
              regPaciente.setApellidoMaterno(RegistrarPaciente.apellidoM.getText());
              regPaciente.setFechaNacimiento(RegistrarPaciente.fechaNac.getText());
              regPaciente.setAlergias(RegistrarPaciente.alergias.getText());
-             regPaciente.setCalle(RegistrarPaciente.calle.getText());
-             regPaciente.setDeloMun(RegistrarPaciente.deloMun.getText());
-             regPaciente.setNumero(RegistrarPaciente.numero.getText());
+             regPaciente.setDireccion(RegistrarPaciente.calle.getText()+" "+RegistrarPaciente.numero.getText()+" "+RegistrarPaciente.deloMun.getText());
              regPaciente.setTelefono(RegistrarPaciente.telefono.getText());
              regPaciente.setSexo(RegistrarPaciente.sexo.getText());
              regPaciente.setPadecimiento(RegistrarPaciente.enfermedades.getText());
@@ -36,10 +34,19 @@ public class PacienteClass {
             
              respuesta= servicio.registrarPaciente(regPaciente) ;
              if ((!respuesta.isSuccess())) {throw new SDTPOException(respuesta.getMensaje());}
+             logger.info("Se registro el paciente con ID: "+ regPaciente.getIdPaciente());
+             respuesta= servicio.registrarObservacionesPaciente(regPaciente) ;
+             if ((!respuesta.isSuccess())) {throw new SDTPOException(respuesta.getMensaje());}
+            
+              respuesta= servicio.registrarAlergiasPaciente(regPaciente) ;
+             if ((!respuesta.isSuccess())) {throw new SDTPOException(respuesta.getMensaje());}
+             
+             respuesta= servicio.registrarPadecimientosPaciente(regPaciente) ;
+             if ((!respuesta.isSuccess())) {throw new SDTPOException(respuesta.getMensaje());}
              
              respuesta.setSuccess(true);
              respuesta.setResult(respuesta);
-             respuesta.setMensaje(respuesta.getMensaje());
+             respuesta.setMensaje("Se registraron todos los datos del Paciente "+ regPaciente.getNombre()+" Correctamente");
              
         } catch (SDTPOException e) {
 	  logger.info("" + e.getMessage());
