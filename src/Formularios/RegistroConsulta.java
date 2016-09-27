@@ -409,8 +409,8 @@ public class RegistroConsulta extends javax.swing.JFrame {
             direcc.setText(p.getDireccion());
             sexo.setText(p.getSexo());
             sangre.setText(p.getTipoSangre());
-            //fechanac.setText(new SimpleDateFormat("yyyy-MM-dd").format(p.getFechaNacimiento()));            
-            fechanac.setText(p.getFechaNacimiento());            
+            fechanac.setText(new SimpleDateFormat("yyyy-MM-dd").format(p.getFechaNacimiento()));            
+            //fechanac.setText(p.getFechaNacimiento());            
         } else {
             JOptionPane.showMessageDialog(null, "Paciente No Existe:\n"
                     + "Por favor ingrese un Paciente valido", "Paciente No Encontrado",
@@ -516,7 +516,7 @@ private void recetaActionPerformed(java.awt.event.ActionEvent evt) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Medico m = new Medico();
-                m.setCedulaPrfesional(0);
+                m.setCedulaPrfesional(2013630333);
                 new RegistroConsulta(m).setVisible(true);
             }
         });

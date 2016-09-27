@@ -134,9 +134,14 @@ public class inicioSesion extends javax.swing.JFrame {
         this.dispose() ;
         jOptionPane1.showMessageDialog(null, "Sesion para el usuario", "Bienvenido",jOptionPane1.INFORMATION_MESSAGE);
 
-        //Formulario1 formformulario1 = new Formulario1();          
-        //formformulario1.setVisible(true);
-
+        this.hide();
+        Sesion s=new Sesion();
+        s.setUsuario("Admin");
+        s.setPassword("admin");
+        s.setAdmin(true);
+        s.setCedProf(2013630333);
+        MenuPrincipal mp=new MenuPrincipal(s);
+        mp.show();
         }else {
            jOptionPane1.showMessageDialog(null, "Acceso denegado:\n"+ "Por favor ingrese un usuario y/o contraseña correctos", "Acceso denegado",jOptionPane1.ERROR_MESSAGE);
         }

@@ -60,17 +60,42 @@
     </select>
     <select id="nextConsulta" resultType="int">
         SELECT AUTO_INCREMENT FROM information_schema.TABLES
-WHERE TABLE_SCHEMA = 'sptpo1' 
-AND TABLE_NAME = 'consultaMedica';
+            WHERE TABLE_SCHEMA = 'sdstpobd' 
+            AND TABLE_NAME = 'consultaMedica';
     </select>
 
     <select id="nextReceta" resultType="int">
         SELECT AUTO_INCREMENT FROM information_schema.TABLES
-WHERE TABLE_SCHEMA = 'sptpo1' 
-AND TABLE_NAME = 'recetamedica';
+            WHERE TABLE_SCHEMA = 'sdstpobd' 
+            AND TABLE_NAME = 'recetamedica';
     </select>
     <select id="getAllMedicamento" resultMap="resultMedicamento">
         SELECT * FROM medicamento
+    </select>
+    <select id="getUsuario" parameterType="Beans.Sesion" resultType="Beans.Sesion">
+        select * from sesion where usuario=#{usuario:VARCHAR} and password=#{password:VARCHAR}
+    </select>
+    <select id="selMedico" parameterType="Beans.Medico" resultType="Beans.Medico">
+        select 
+            m.cedulaProf as cedulaProfesional,
+            m.nombre,
+            m.apPaterno as apellidoPaterno,
+            m.apMaterno as apellidoMaterno,
+            m.especialidad,
+            m.telefono,
+            m.fechaNac as fechaNacimiento,
+            m.direccion,
+            m.sexo
+        from medico m 
+        where m.cedulaProf=#{cedulaProfesional}
+    </select>
+    <select id="selSesion" parameterType="Beans.Sesion" resultType="Beans.Sesion">
+        select 
+            usuario,
+            password,
+            rol as admin,
+            cedulaProfMedico as ced_prof
+        from sesion where cedulaProfMedico=#{ced_prof}
     </select>
     <!-- AQUI VAN TODOS LOS INSERT-->
    <insert id="registrarPaciente" parameterType="Beans.Paciente" useGeneratedKeys="true" keyColumn="idPaciente" keyProperty="idPaciente">
@@ -89,8 +114,6 @@ AND TABLE_NAME = 'recetamedica';
     insert into padecimientocrondeg (idPaciente,enfermedad)
         VALUES (#{idPaciente}, #{padecimientos});
    </insert>
-   
-   
    <insert id="insertMedicamento" parameterType="Beans.Medicamento" useGeneratedKeys="true" keyColumn="idMedicamento" keyProperty="idMedicamento">
         INSERT INTO medicamento (nombre, presentacion)
         VALUES (#{nombre}, #{presentacion});        
@@ -110,8 +133,39 @@ AND TABLE_NAME = 'recetamedica';
     <insert id="insertManifestacion" parameterType="Beans.ManifestacionBean" >
         INSERT INTO ManifestacionConsulta VALUES (#{idConsulta}, #{manifestacion});        
     </insert>
+    <insert id="insertSesion" parameterType="Beans.Sesion">
+        INSERT INTO sesion(usuario,password,rol,cedulaProfmedico)
+        VALUES (#{usuario}, #{password}, #{admin}, #{ced_prof})
+    </insert>
+    <insert id="insertMedico" parameterType="Beans.Medico">
+        INSERT INTO medico(cedulaProf,nombre,apPaterno,apMaterno,especialidad,telefono,fechaNac,direccion,sexo)
+        VALUES(#{cedulaProfesional}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{especialidad}, #{telefono}, #{fechaNacimiento}, #{direccion}, #{sexo})
+    </insert>
     <!-- AQUI VAN TODOS LOS UPDATE-->
-    
+    <update id="actMed" parameterType="Beans.Medico">
+        update medico set
+            especialidad='prueba'
+        where cedulaProf=#{cedulaProfesional};
+    </update>
+    <update id="updateMedico" parameterType="Beans.Medico">
+        update medico set
+            nombre=#{nombre},
+            apPaterno=#{apellidoPaterno},
+            apMaterno=#{apellidoMaterno},
+            especialidad=#{especialidad},
+            telefono=#{telefono},
+            fechaNac=#{fechaNacimiento},
+            direccion=#{direccion},
+            sexo=#{sexo}
+        where cedulaProf=#{cedulaProfesional}
+    </update>
+    <update id="updateSesion" parameterType="Beans.Sesion">
+        update sesion set
+            usuario=#{usuario},
+            password=#{password},
+            rol=#{admin}
+        where cedulaProfmedico=#{ced_prof}
+    </update>
     
     
     <!-- AQUI VAN TODOS LOS DELETE-->

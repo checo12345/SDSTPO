@@ -4,6 +4,8 @@ import Beans.Paciente;
 import DAO.ServicioDAO;
 import Excepciones.SDTPOException;
 import Formularios.RegistrarPaciente;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 /**
  *
@@ -19,11 +21,12 @@ public class PacienteClass {
         try {
              ServicioDAO servicio = new ServicioDAO();
              Paciente regPaciente= new Paciente() ;
-        
+             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+             Date fechaNac=formatter.parse(RegistrarPaciente.fechaNac.getText());
              regPaciente.setNombre(RegistrarPaciente.nombre.getText());
              regPaciente.setApellidoPaterno(RegistrarPaciente.apellidoP.getText());
              regPaciente.setApellidoMaterno(RegistrarPaciente.apellidoM.getText());
-             regPaciente.setFechaNacimiento(RegistrarPaciente.fechaNac.getText());
+             regPaciente.setFechaNacimiento(fechaNac);
              regPaciente.setAlergias(RegistrarPaciente.alergias.getText());
              regPaciente.setDireccion(RegistrarPaciente.calle.getText()+" "+RegistrarPaciente.numero.getText()+" "+RegistrarPaciente.deloMun.getText());
              regPaciente.setTelefono(RegistrarPaciente.telefono.getText());

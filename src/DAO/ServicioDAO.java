@@ -10,10 +10,12 @@ import Beans.RecetaMedicaMedicamento;
 import Beans.Sesion;
 import Clases.ServicioRespuesta;
 import Excepciones.SDTPOException;
+import java.io.IOException;
 import java.util.logging.Logger;
 import org.apache.ibatis.session.SqlSession;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  *
@@ -630,6 +632,150 @@ public class ServicioDAO extends MyBatisConnectionFactory {
             if (sqlSession != null) {
                 sqlSession.close();
             }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
+    public String insertarMedico(Medico med,Sesion s){
+        int val1=0,val2=0;
+        logger.info("*********************** PROCESO GUARDAR NUEVO MEDICO ***********************");
+        SqlSession sqlSession = null;
+        String respuesta="";            
+        try {
+            sqlSession = getSQLSession();
+            val1=sqlSession.insert("sql.insertMedico",med);
+            val2=sqlSession.insert("sql.insertSesion",s);
+            sqlSession.commit();
+            logger.info("Valor_1:"+val1+"\t"+"Valor_2:"+val2);
+            if (val1>0 && val2>0){
+                respuesta="OK";
+            }else
+                respuesta="Error desconocido";
+        } catch (IOException ex) {
+            Logger.getLogger(ServicioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            logger.info("/tERROR FATAL: " + ex.getMessage());
+            respuesta=ex.getMessage();
+        }finally{
+            logger.info("sqlSession.close();");
+            if(sqlSession!=null)sqlSession.close();
+        }
+        return respuesta;
+    }
+    public ServicioRespuesta seleccionarMedico(Medico med) {
+        logger.info("*********************** PROCESO ACTUALIZAR MEDICO (" + med + ") ***********************");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        Medico med_sel=new Medico();
+        respuesta.setMensaje("NOT EXECUTED");
+        respuesta.setSuccess(false);
+        try {
+            sqlSession = getSQLSession();
+            med_sel=(Medico)sqlSession.selectOne("sql.selMedico",med);
+            
+            if (med_sel!= null) {
+                logger.info(med_sel.getCedulaProfesional()+"|"+med_sel.getNombre()+"|"+med_sel.getApellidoPaterno()+"|"+med_sel.getApellidoMaterno()+"|"+med_sel.getEspecialidad()+"|"+med_sel.getTelefono()+"|"+med_sel.getFechaNacimiento()+"|"+med_sel.getDireccion());
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Medico Seleccionado con exito");
+                respuesta.setResult(med_sel);
+            }else{
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("Medico No Encontrado");
+                //respuesta.setResult(respuesta);
+            }
+            
+        } catch (IOException ex) {
+            logger.info(ex.getMessage());
+        }finally{
+            logger.info("sqlSession.close();");
+            if(sqlSession!=null)sqlSession.close();            
+        }
+        return respuesta;
+    }
+
+    public ServicioRespuesta getMedico(int cedulaProf) {
+        logger.info("*********************** PROCESO OBTENER MEDICO (" + cedulaProf + ") ***********************");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        Medico med_sel=new Medico(cedulaProf);
+        respuesta.setMensaje("NOT EXECUTED");
+        respuesta.setSuccess(false);
+        try {
+            sqlSession = getSQLSession();
+            med_sel=(Medico)sqlSession.selectOne("sql.selMedico",med_sel);
+            
+            if (med_sel!= null) {
+                logger.info("Medico Seleccionado.");
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Medico Seleccionado con exito");
+                respuesta.setResult(med_sel);
+            }else{
+                logger.info("Medico NO Seleccionado.");
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("Medico No Encontrado");
+                //respuesta.setResult(respuesta);
+            }
+            
+        } catch (IOException ex) {
+            logger.info(ex.getMessage());
+        }finally{
+            logger.info("sqlSession.close();");
+            if(sqlSession!=null)sqlSession.close();            
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
+    public String actualizarMedico(Medico m, Sesion s) {
+        logger.info("*********************** PROCESO ACTUALIZAR MEDICO () ***********************");
+        String respuesta="";
+        int val1=0,val2=0;
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = getSQLSession();
+            val1=sqlSession.update("sql.updateMedico", m);
+            val2=sqlSession.update("sql.updateSesion", s);
+            sqlSession.commit();
+            logger.info("Valor_1:"+val1+"\t"+"Valor_2:"+val2);
+            if (val1>0 && val2>0){
+                respuesta="OK";
+            }else
+                respuesta="Error desconocido.";
+        }catch(Exception e){
+            respuesta=e.getMessage();
+        }finally{
+            logger.info("sqlSession.close();");
+            if(sqlSession!=null)sqlSession.close();            
+        }
+        return respuesta;
+    }
+    public ServicioRespuesta getSesion(int cedulaProf) {
+        logger.info("*********************** PROCESO OBTENER SESION (" + cedulaProf + ") ***********************");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        //Medico med_sel=new Medico(cedulaProf);
+        Sesion ses=new Sesion(cedulaProf);
+        respuesta.setMensaje("NOT EXECUTED");
+        respuesta.setSuccess(false);
+        try {
+            sqlSession = getSQLSession();
+            ses=(Sesion)sqlSession.selectOne("sql.selSesion",ses);
+            
+            if (ses!= null) {
+                logger.info("Sesion Seleccionada.");
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Sesion Seleccionada con exito");
+                respuesta.setResult(ses);
+            }else{
+                logger.info("Sesion NO Seleccionada.");
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("Sesion No Encontrada");
+                //respuesta.setResult(respuesta);
+            }
+            
+        } catch (IOException ex) {
+            logger.info(ex.getMessage());
+        }finally{
+            logger.info("sqlSession.close();");
+            if(sqlSession!=null)sqlSession.close();            
         }
         logger.info("************************" + respuesta + "************************");
         return respuesta;

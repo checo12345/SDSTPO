@@ -15,14 +15,19 @@ public class Medico extends Persona{
     
     private String especialidad;
     private int cedulaProfesional;
+    
     public Medico(){}
-   /* public Medico(String nom,String apeP,String apeM,Date fecNac,int Tel,String dir,String sex,String esp,int cedPro){
-        p=new Persona(nom,apeP,apeM,fecNac,Tel,dir,sex){};
+    public Medico(int ced_prof){
+        cedulaProfesional=ced_prof;
+    }
+    public Medico(String esp,int cedPro){
         especialidad=esp;
         cedulaProfesional=cedPro;
-    }*/
+    }
+    
     public String getEspecialidad(){return especialidad;}
     public int getCedulaProfesional(){return cedulaProfesional;}
+    
     public void setEspecialidad(String esp){especialidad=esp;}
-    public void setCedulaPrfesional(int cedPro){cedulaProfesional=cedPro;}
+    public void setCedulaPrfesional(int cedPro){cedulaProfesional=cedPro;}    
 }
