@@ -79,6 +79,7 @@ public class ConsultaMedica {
             }
 
             paciente = (Paciente) respuesta.getResult();
+            System.out.println("SANGRE: "+paciente.getTipoSangre());
         } catch (SDTPOException e) {
             logger.info("" + e.getMessage());
             respuesta.setSuccess(false);
@@ -121,10 +122,10 @@ public class ConsultaMedica {
         String expediente = "/" + paciente.getIdPaciente() + "_" + paciente.getNombre().replace(" ", "_") + "_" + paciente.getApellidoPaterno().replaceAll(" ", "_") + "_" + paciente.getApellidoMaterno().replaceAll(" ", "_") + "/Consulta_" + id + "_" + new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         File directorio = null;
         try {
-            File archivo = Resources.getResourceAsFile("configuracion.properties");
-            Properties properties = new Properties();
+            
+            Properties properties = Resources.getResourceAsProperties("configuracion.properties");
             // Cargar las propiedades del archivo
-            properties.load(new FileInputStream(archivo));
+            
             directorio = new File(properties.getProperty("directorio") + expediente);
             logger.info(directorio.toString());
             if (!directorio.exists()) {
@@ -184,6 +185,14 @@ public boolean CrearReceta(JFrame frame){
     return true;
 }
     public static void main(String[] args) {
-
+        try {
+            File archivo = Resources.getResourceAsFile("configuracion.properties");
+            System.out.println(archivo.toString());
+            Properties properties = Resources.getResourceAsProperties("configuracion.properties");
+            System.out.println(properties.getProperty("directorio"));
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ConsultaMedica.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

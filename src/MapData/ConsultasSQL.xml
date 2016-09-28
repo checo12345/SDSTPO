@@ -12,16 +12,19 @@
         <result property="idModelo" column="ID_MODELO"/>
     </resultMap>
     <resultMap id="resultPaciente" type="Beans.Paciente">
-        <result property="sexo" column="sexo" />
-        <result property="apellidoPaterno" column="apPaterno"/>
-        <result property="apellidoMaterno" column="apMaterno"/>
-        <result property="nombre" column="nombre"/>
-        <result property="fechaNacimiento" column="fechaNac"  />
-        <result property="telefono" column="telefono"/>
-        <result property="direccion" column="direccion"/>
-        <result property="tipoSangre" column="tipoSangre" />
         <result property="idPaciente" column="idPaciente"/> 
         <result property="curp" column="curp"/>
+        
+        <result property="nombre" column="nombre"/>
+        <result property="apellidoPaterno" column="apPaterno"/>
+        <result property="apellidoMaterno" column="apMaterno"/>
+        <result property="direccion" column="direccion"/>
+        <result property="tipoSangre" column="tipoSangre"/>
+        <result property="sexo" column="sexo" />
+        <result property="fechaNacimiento" column="fechaNac"  />
+        <result property="telefono" column="telefono"/>
+        
+        
     </resultMap>
      <resultMap id="resultMedico" type="Beans.Medico">
         <result property="sexo" column="sexo" />

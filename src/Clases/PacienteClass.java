@@ -21,19 +21,19 @@ public class PacienteClass {
         try {
              ServicioDAO servicio = new ServicioDAO();
              Paciente regPaciente= new Paciente() ;
-             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
              Date fechaNac=formatter.parse(RegistrarPaciente.fechaNac.getText());
              regPaciente.setNombre(RegistrarPaciente.nombre.getText());
              regPaciente.setApellidoPaterno(RegistrarPaciente.apellidoP.getText());
              regPaciente.setApellidoMaterno(RegistrarPaciente.apellidoM.getText());
              regPaciente.setFechaNacimiento(fechaNac);
-             regPaciente.setAlergias(RegistrarPaciente.alergias.getText());
+             regPaciente.setAlergia(RegistrarPaciente.alergias.getText());
              regPaciente.setDireccion(RegistrarPaciente.calle.getText()+" "+RegistrarPaciente.numero.getText()+" "+RegistrarPaciente.deloMun.getText());
              regPaciente.setTelefono(RegistrarPaciente.telefono.getText());
              regPaciente.setSexo(RegistrarPaciente.sexo.getText());
-             regPaciente.setPadecimiento(RegistrarPaciente.enfermedades.getText());
+             regPaciente.setPadecimientos(RegistrarPaciente.enfermedades.getText());
              regPaciente.setTipoSangre(RegistrarPaciente.tipoSangre.getText());
-             regPaciente.setObservaciones(RegistrarPaciente.observaciones.getText());
+             regPaciente.setObservacion(RegistrarPaciente.observaciones.getText());
             
              respuesta= servicio.registrarPaciente(regPaciente) ;
              if ((!respuesta.isSuccess())) {throw new SDTPOException(respuesta.getMensaje());}

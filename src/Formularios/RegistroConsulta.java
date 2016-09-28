@@ -516,7 +516,7 @@ private void recetaActionPerformed(java.awt.event.ActionEvent evt) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Medico m = new Medico();
-                m.setCedulaPrfesional(0);
+                m.setCedulaPrfesional(2013630337);
                 new RegistroConsulta(m).setVisible(true);
             }
         });
