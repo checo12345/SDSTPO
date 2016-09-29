@@ -11,16 +11,16 @@ import java.util.Date;
  *
  * @author David Pantaleón
  */
-public class Medico extends Persona{
+public class MedicoBean extends Persona{
     
     private String especialidad;
     private int cedulaProfesional;
     
-    public Medico(){}
-    public Medico(int ced_prof){
+    public MedicoBean(){}
+    public MedicoBean(int ced_prof){
         cedulaProfesional=ced_prof;
     }
-    public Medico(String esp,int cedPro){
+    public MedicoBean(String esp,int cedPro){
         especialidad=esp;
         cedulaProfesional=cedPro;
     }

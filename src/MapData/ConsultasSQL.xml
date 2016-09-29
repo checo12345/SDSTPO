@@ -26,7 +26,7 @@
         
         
     </resultMap>
-     <resultMap id="resultMedico" type="Beans.Medico">
+     <resultMap id="resultMedico" type="Beans.MedicoBean">
         <result property="sexo" column="sexo" />
         <result property="apellidoPaterno" column="apPaterno"/>
         <result property="apellidoMaterno" column="apMaterno"/>
@@ -43,6 +43,12 @@
         <result property="presentacion" column="presentacion"/>
         <result property="dosis" column="dosis"/>
     </resultMap>
+    <resultMap id="resultSesion" type="Beans.Sesion">
+        <result property="usuario" column="usuario"/>
+        <result property="password" column="password"/>
+        <result property="rol" column="rol"/>
+        <result property="cedulaProfMedico" column="cedulaProfMedico"/>
+    </resultMap>
     <!-- AQUI VAN TODOS LOS SELECT-->
     <select id="obtenerUsuario" parameterType="Beans.Sesion" resultType="Beans.Sesion">
 	select * 
@@ -58,7 +64,7 @@
     </select>
     
    
-    <select id="getMedico" resultMap="resultMedico" parameterType="Beans.Medico">
+    <select id="getMedico" resultMap="resultMedico" parameterType="Beans.MedicoBean">
         SELECT * FROM medico WHERE cedulaProf = #{cedulaProfesional};
     </select>
     <select id="nextConsulta" resultType="int">
@@ -78,7 +84,7 @@
     <select id="getUsuario" parameterType="Beans.Sesion" resultType="Beans.Sesion">
         select * from sesion where usuario=#{usuario:VARCHAR} and password=#{password:VARCHAR}
     </select>
-    <select id="selMedico" parameterType="Beans.Medico" resultType="Beans.Medico">
+    <select id="selMedico" parameterType="Beans.MedicoBean" resultType="Beans.MedicoBean">
         select 
             m.cedulaProf as cedulaProfesional,
             m.nombre,
@@ -96,9 +102,9 @@
         select 
             usuario,
             password,
-            rol as admin,
-            cedulaProfMedico as ced_prof
-        from sesion where cedulaProfMedico=#{ced_prof}
+            rol as rol,
+            cedulaProfMedico as cedulaProfMedico
+        from sesion where cedulaProfMedico=#{cedulaProfMedico}
     </select>
     <!-- AQUI VAN TODOS LOS INSERT-->
    <insert id="registrarPaciente" parameterType="Beans.Paciente" useGeneratedKeys="true" keyColumn="idPaciente" keyProperty="idPaciente">
@@ -137,20 +143,20 @@
         INSERT INTO ManifestacionConsulta VALUES (#{idConsulta}, #{manifestacion});        
     </insert>
     <insert id="insertSesion" parameterType="Beans.Sesion">
-        INSERT INTO sesion(usuario,password,rol,cedulaProfmedico)
-        VALUES (#{usuario}, #{password}, #{admin}, #{ced_prof})
+        INSERT INTO sesion(usuario,password,rol,cedulaProfMedico)
+        VALUES (#{usuario}, #{password}, #{rol}, #{cedulaProfMedico})
     </insert>
-    <insert id="insertMedico" parameterType="Beans.Medico">
+    <insert id="insertMedico" parameterType="Beans.MedicoBean">
         INSERT INTO medico(cedulaProf,nombre,apPaterno,apMaterno,especialidad,telefono,fechaNac,direccion,sexo)
         VALUES(#{cedulaProfesional}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{especialidad}, #{telefono}, #{fechaNacimiento}, #{direccion}, #{sexo})
     </insert>
     <!-- AQUI VAN TODOS LOS UPDATE-->
-    <update id="actMed" parameterType="Beans.Medico">
+    <update id="actMed" parameterType="Beans.MedicoBean">
         update medico set
             especialidad='prueba'
         where cedulaProf=#{cedulaProfesional};
     </update>
-    <update id="updateMedico" parameterType="Beans.Medico">
+    <update id="updateMedico" parameterType="Beans.MedicoBean">
         update medico set
             nombre=#{nombre},
             apPaterno=#{apellidoPaterno},
@@ -166,8 +172,8 @@
         update sesion set
             usuario=#{usuario},
             password=#{password},
-            rol=#{admin}
-        where cedulaProfmedico=#{ced_prof}
+            rol=#{rol}
+        where cedulaProfmedico=#{cedulaProfMedico}
     </update>
     
     

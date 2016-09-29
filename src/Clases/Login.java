@@ -27,7 +27,7 @@ public class Login {
              if ((!respuesta.isSuccess()) || respuesta.getResult() == null) {throw new SDTPOException("Ocurrio un error al iniciar Sesion");}
              
              respuesta.setSuccess(true);
-             respuesta.setResult(respuesta);
+             
              respuesta.setMensaje(respuesta.getMensaje());
              
         } catch (SDTPOException e) {

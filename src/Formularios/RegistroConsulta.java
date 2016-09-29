@@ -6,13 +6,14 @@
 package Formularios;
 
 import Beans.Imagen;
-import Beans.Medico;
+import Beans.MedicoBean;
 import Beans.Paciente;
 import Beans.Sesion;
 import Clases.CapturadorImagen;
 import Clases.ConsultaMedica;
 import Clases.ServicioRespuesta;
 import UpperEssential.UpperEssentialLookAndFeel;
+import java.awt.Frame;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
@@ -26,17 +27,18 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author laloe
  */
-public class RegistroConsulta extends javax.swing.JFrame {
+public class RegistroConsulta extends javax.swing.JDialog {
 
     /**
      * Creates new form RegistroConsulta3
      */
     private ConsultaMedica consulta = null;
     private Paciente paciente = null;
-    private Medico medico;
+    private MedicoBean medico;
     private DefaultListModel modelo = new DefaultListModel();
     private String ip;
-    public RegistroConsulta(Medico m) {
+    public RegistroConsulta(java.awt.Frame parent, boolean modal,MedicoBean m) {
+        super(parent, modal);
         ip = JOptionPane.showInputDialog("Ingrese direccion IP: ");
         if(ip==null)
             ip="";
@@ -44,14 +46,10 @@ public class RegistroConsulta extends javax.swing.JFrame {
         
         fecha.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         medico = m;
-        consulta = new ConsultaMedica();
-        ServicioRespuesta respuesta = consulta.validarMedico(medico);
-        if (respuesta.isSuccess()) {
-            medico = (Medico) respuesta.getResult();
+        consulta = new ConsultaMedica(medico);
+        
             doctor.setText(medico.getNombre() + " " + medico.getApellidoPaterno() + " " + medico.getApellidoMaterno());
-        } else {
-            JOptionPane.showMessageDialog(null, "Medico No Existe:\n", "Medico No Encontrado", JOptionPane.ERROR_MESSAGE);
-        }
+        
         consulta.obtenerSiguienteIdCosnulta();
         
         
@@ -107,7 +105,8 @@ public class RegistroConsulta extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout capturador1Layout = new javax.swing.GroupLayout(capturador1);
         capturador1.setLayout(capturador1Layout);
@@ -515,9 +514,9 @@ private void recetaActionPerformed(java.awt.event.ActionEvent evt) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Medico m = new Medico();
+                MedicoBean m = new MedicoBean();
                 m.setCedulaPrfesional(2013630337);
-                new RegistroConsulta(m).setVisible(true);
+//                new RegistroConsulta(m).setVisible(true);
             }
         });
     }

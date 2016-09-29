@@ -3,7 +3,7 @@ package DAO;
 import Beans.ConsultaMedicaBean;
 import Beans.ManifestacionBean;
 import Beans.Medicamento;
-import Beans.Medico;
+import Beans.MedicoBean;
 import Beans.Paciente;
 import Beans.RecetaMedicaBean;
 import Beans.RecetaMedicaMedicamento;
@@ -291,7 +291,7 @@ public class ServicioDAO extends MyBatisConnectionFactory {
         return respuesta;
     }
 
-    public ServicioRespuesta buscaMedico(Medico medico) {
+    public ServicioRespuesta buscaMedico(MedicoBean medico) {
         logger.info("**********  SERVICIO METODO: buscaMedico(" + medico + ")**********");
         ServicioRespuesta respuesta = new ServicioRespuesta();
         SqlSession sqlSession = null;
@@ -303,7 +303,7 @@ public class ServicioDAO extends MyBatisConnectionFactory {
             respuesta.setMensaje("NOT EXECUTED");
             respuesta.setSuccess(false);
             sqlSession = getSQLSession();
-            Medico encontrado = (Medico) sqlSession.selectOne("sql.getMedico", medico);
+            MedicoBean encontrado = (MedicoBean) sqlSession.selectOne("sql.getMedico", medico);
 
             if (encontrado != null) {
                 logger.info("Usuario " + medico.getCedulaProfesional() + " autenticado correctamente");
@@ -636,7 +636,7 @@ public class ServicioDAO extends MyBatisConnectionFactory {
         logger.info("************************" + respuesta + "************************");
         return respuesta;
     }
-    public String insertarMedico(Medico med,Sesion s){
+    public String insertarMedico(MedicoBean med,Sesion s){
         int val1=0,val2=0;
         logger.info("*********************** PROCESO GUARDAR NUEVO MEDICO ***********************");
         SqlSession sqlSession = null;
@@ -661,16 +661,16 @@ public class ServicioDAO extends MyBatisConnectionFactory {
         }
         return respuesta;
     }
-    public ServicioRespuesta seleccionarMedico(Medico med) {
+    public ServicioRespuesta seleccionarMedico(MedicoBean med) {
         logger.info("*********************** PROCESO ACTUALIZAR MEDICO (" + med + ") ***********************");
         ServicioRespuesta respuesta = new ServicioRespuesta();
         SqlSession sqlSession = null;
-        Medico med_sel=new Medico();
+        MedicoBean med_sel=new MedicoBean();
         respuesta.setMensaje("NOT EXECUTED");
         respuesta.setSuccess(false);
         try {
             sqlSession = getSQLSession();
-            med_sel=(Medico)sqlSession.selectOne("sql.selMedico",med);
+            med_sel=(MedicoBean)sqlSession.selectOne("sql.selMedico",med);
             
             if (med_sel!= null) {
                 logger.info(med_sel.getCedulaProfesional()+"|"+med_sel.getNombre()+"|"+med_sel.getApellidoPaterno()+"|"+med_sel.getApellidoMaterno()+"|"+med_sel.getEspecialidad()+"|"+med_sel.getTelefono()+"|"+med_sel.getFechaNacimiento()+"|"+med_sel.getDireccion());
@@ -696,12 +696,12 @@ public class ServicioDAO extends MyBatisConnectionFactory {
         logger.info("*********************** PROCESO OBTENER MEDICO (" + cedulaProf + ") ***********************");
         ServicioRespuesta respuesta = new ServicioRespuesta();
         SqlSession sqlSession = null;
-        Medico med_sel=new Medico(cedulaProf);
+        MedicoBean med_sel=new MedicoBean(cedulaProf);
         respuesta.setMensaje("NOT EXECUTED");
         respuesta.setSuccess(false);
         try {
             sqlSession = getSQLSession();
-            med_sel=(Medico)sqlSession.selectOne("sql.selMedico",med_sel);
+            med_sel=(MedicoBean)sqlSession.selectOne("sql.selMedico",med_sel);
             
             if (med_sel!= null) {
                 logger.info("Medico Seleccionado.");
@@ -724,7 +724,7 @@ public class ServicioDAO extends MyBatisConnectionFactory {
         logger.info("************************" + respuesta + "************************");
         return respuesta;
     }
-    public String actualizarMedico(Medico m, Sesion s) {
+    public String actualizarMedico(MedicoBean m, Sesion s) {
         logger.info("*********************** PROCESO ACTUALIZAR MEDICO () ***********************");
         String respuesta="";
         int val1=0,val2=0;
@@ -751,7 +751,7 @@ public class ServicioDAO extends MyBatisConnectionFactory {
         logger.info("*********************** PROCESO OBTENER SESION (" + cedulaProf + ") ***********************");
         ServicioRespuesta respuesta = new ServicioRespuesta();
         SqlSession sqlSession = null;
-        //Medico med_sel=new Medico(cedulaProf);
+        //Medico med_sel=new MedicoBean(cedulaProf);
         Sesion ses=new Sesion(cedulaProf);
         respuesta.setMensaje("NOT EXECUTED");
         respuesta.setSuccess(false);

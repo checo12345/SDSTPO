@@ -33,7 +33,7 @@ RecetaMedica receta = null;
     /**
      * Creates new form RecetaMedica2
      */
-    public RegistroReceta(java.awt.Frame parent, boolean modal, int idConsulta) {
+    public RegistroReceta(javax.swing.JDialog parent, boolean modal, int idConsulta) {
         super(parent, modal);
         initComponents();
         listaMedicamentosSel = new ArrayList<>();
@@ -284,7 +284,7 @@ private void llenarTabla() {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RegistroReceta dialog = new RegistroReceta(new javax.swing.JFrame(), true,3);
+              /*  RegistroReceta dialog = new RegistroReceta(new javax.swing.JFrame(), true,3);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -292,7 +292,7 @@ private void llenarTabla() {
                     }
                 });
                 dialog.setVisible(true);
-                
+                */
             }
         });
     }

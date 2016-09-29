@@ -5,17 +5,17 @@
  */
 package Beans;
 
-import Beans.Medico;
+import Beans.MedicoBean;
 import java.util.Date;
 
 /**
  *
  * @author David Pantaleón
  */
-public class MedicoAdministrador extends Medico{
-    private Medico m;
+public class MedicoAdministradorBean extends MedicoBean{
+    private MedicoBean m;
     private String cargo;
-    public MedicoAdministrador(){}
+    public MedicoAdministradorBean(){}
     public String getCargo(){return cargo;}
     public void setCargo(String car){cargo=car;}
 }

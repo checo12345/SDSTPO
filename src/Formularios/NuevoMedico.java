@@ -5,7 +5,7 @@
  */
 package Formularios;
 
-import Clases.MedicoAdmin;
+import Clases.MedicoAdministrador;
 import java.awt.Color;
 import java.awt.Window;
 import java.text.ParseException;
@@ -21,14 +21,14 @@ import javax.swing.SwingUtilities;
  * @author David Pantaleón
  */
 public class NuevoMedico extends javax.swing.JInternalFrame {
-    MedicoAdmin med_adm;
+    MedicoAdministrador med_adm;
     String nombre,apeP,apeM,dir,espe,tel,usuario,password,sexo;
     Date f_nac=new Date(1,1,1900);
     Boolean admin=false;
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     int cedula_prof;
     
-    public NuevoMedico(MedicoAdmin me_ad) {
+    public NuevoMedico(MedicoAdministrador me_ad) {
         initComponents();
         limpiarLeyendasError();
         med_adm=me_ad;
@@ -430,9 +430,12 @@ public class NuevoMedico extends javax.swing.JInternalFrame {
         }
         
         if (validarContenidoCampos()){
-            //MedicoAdmin ma=new MedicoAdmin();
+            //MedicoAdmin ma=new MedicoAdministrador();
             String estatus="";
-            med_adm.cargarInfoMedico(nombre,apeP,apeM,f_nac,tel,dir,sexo,espe,cedula_prof,usuario,password,admin);
+            if(admin==true)
+                med_adm.cargarInfoMedico(nombre,apeP,apeM,f_nac,tel,dir,sexo,espe,cedula_prof,usuario,password,"Administrador");
+            else
+                med_adm.cargarInfoMedico(nombre,apeP,apeM,f_nac,tel,dir,sexo,espe,cedula_prof,usuario,password,"Usuario");
             estatus=med_adm.insertNuevoMedico();
             if (estatus.equals("OK")){
                 JOptionPane.showMessageDialog(null, "El medico fue registrado exitosamente.", "Registrar Medico.", JOptionPane.INFORMATION_MESSAGE);

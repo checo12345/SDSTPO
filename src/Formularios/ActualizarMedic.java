@@ -5,9 +5,9 @@
  */
 package Formularios;
 
-import Beans.Medico;
+import Beans.MedicoBean;
 import Beans.Sesion;
-import Clases.MedicoAdmin;
+import Clases.MedicoAdministrador;
 import Clases.ServicioRespuesta;
 import DAO.ServicioDAO;
 import java.awt.Color;
@@ -26,14 +26,14 @@ import javax.swing.SwingUtilities;
  * @author David Pantaleón
  */
 public class ActualizarMedic extends javax.swing.JInternalFrame {
-    MedicoAdmin med_adm;
+    MedicoAdministrador med_adm;
     String nombre,apeP,apeM,dir,espe,tel,usuario,password,sexo;
     Date f_nac=new Date(1,1,1900);
     Boolean admin=false;
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     int cedula_prof;
     
-    public ActualizarMedic(MedicoAdmin me_ad) {
+    public ActualizarMedic(MedicoAdministrador me_ad) {
         med_adm=me_ad;
         initComponents();
         limpiarLeyendasError();
@@ -431,6 +431,7 @@ public class ActualizarMedic extends javax.swing.JInternalFrame {
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
         nombre=jtf_nombre.getText();
         apeP=jtf_apep.getText();
+        System.out.println(apeP);
         apeM=jtf_apem.getText();
         try {
             f_nac=formatter.parse(jtf_fecha.getText());
@@ -458,10 +459,16 @@ public class ActualizarMedic extends javax.swing.JInternalFrame {
         }
         
         if (validarContenidoCampos()){
-            MedicoAdmin ma=new MedicoAdmin();
+            MedicoAdministrador ma=new MedicoAdministrador();
             String estatus="";
-            ma.cargarInfoMedico(nombre,apeP,apeM,f_nac,tel,dir,sexo,espe,cedula_prof,usuario,password,admin);
-            estatus=ma.updateNuevoMedico();
+            
+            if(admin==true){
+                
+                med_adm.cargarInfoMedico(nombre,apeP,apeM,f_nac,tel,dir,sexo,espe,cedula_prof,usuario,password, "Administrador");
+            }
+            else
+                med_adm.cargarInfoMedico(nombre,apeP,apeM,f_nac,tel,dir,sexo,espe,cedula_prof,usuario,password,"Usuario");
+            estatus=med_adm.updateNuevoMedico();
             if (estatus.equals("OK")){
                 JOptionPane.showMessageDialog(null, "El medico fue actualizado exitosamente.", "Actulizar Medico.", JOptionPane.INFORMATION_MESSAGE);
             }else{
@@ -579,16 +586,16 @@ public class ActualizarMedic extends javax.swing.JInternalFrame {
             cedula_prof=Integer.parseInt(jtf_cedPro.getText());
             ServicioDAO servicio=new ServicioDAO();
             ServicioRespuesta respuesta=new ServicioRespuesta();
-            Medico m=new Medico();
+            MedicoBean m=new MedicoBean();
             Sesion s=new Sesion();
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         
             respuesta=servicio.getMedico(cedula_prof);
             if (respuesta.isSuccess()){
-                m=(Medico)respuesta.getResult();
+                m=(MedicoBean)respuesta.getResult();
                 jtf_nombre.setText(m.getNombre());
                 jtf_apep.setText(m.getApellidoPaterno());
-                jtf_apem.setText(m.getApellidoPaterno());
+                jtf_apem.setText(m.getApellidoMaterno());
                 jtf_fecha.setText(formatter.format(m.getFechaNacimiento()));
                 jtf_tel.setText(m.getTelefono());
                 jtf_dir.setText(m.getDireccion());
@@ -608,7 +615,7 @@ public class ActualizarMedic extends javax.swing.JInternalFrame {
                     s=(Sesion)respuesta.getResult();
                     jtf_usu.setText(s.getUsuario());
                     jtf_pass.setText(s.getPassword());
-                    if (s.getAdmin())
+                    if (s.getRol().equals("Administrador"))
                         s_admin.setSelected(true);
                 }else{
                     JOptionPane.showMessageDialog(null, "No se encontro ningun medico con la cedula profesional ingresada.\n\tVerifique y vuelva a intentarlo.", "Error en la consulta.", JOptionPane.ERROR_MESSAGE);

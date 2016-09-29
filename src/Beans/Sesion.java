@@ -12,45 +12,56 @@ package Beans;
 public class Sesion {
     private String usuario;
     private String password;
-    private boolean admin;
-    private int ced_prof;
+    private String rol;
+    private int cedulaProfMedico;
     public Sesion(){
         usuario="default";
         password="default";
-        admin=false;
-        ced_prof=0000000;
+        rol="Usuario";
+        cedulaProfMedico=0000000;
     }
-    public Sesion(int ced_pro){
-        ced_prof=ced_pro;
+
+    public Sesion(int cedulaProfMedico) {
+        this.cedulaProfMedico = cedulaProfMedico;
     }
-    public Sesion(String usu,String pas,Boolean adm,int ced_p){
-        usuario=usu;
-        password=pas;
-        admin=adm;
-        ced_prof=ced_p;
+
+    public Sesion(String usuario, String password, String rol, int cedulaProfMedico) {
+        this.usuario = usuario;
+        this.password = password;
+        this.rol = rol;
+        this.cedulaProfMedico = cedulaProfMedico;
     }
-    public String getUsuario(){
+
+    public String getUsuario() {
         return usuario;
     }
-    public String getPassword(){
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPassword() {
         return password;
     }
-    public boolean getAdmin(){
-        return admin;
+
+    public void setPassword(String password) {
+        this.password = password;
     }
-    public int getCedProf(){
-        return ced_prof;
+
+    public String getRol() {
+        return rol;
     }
-    public void setUsuario(String usu){
-        usuario=usu;
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
-    public void setPassword(String pas){
-        password=pas;
+
+    public int getCedulaProfMedico() {
+        return cedulaProfMedico;
     }
-    public void setAdmin(boolean adm){
-        admin=adm;
+
+    public void setCedulaProfMedico(int cedulaProfMedico) {
+        this.cedulaProfMedico = cedulaProfMedico;
     }
-    public void setCedProf(int ced){
-        ced_prof=ced;
-    }
+    
 }

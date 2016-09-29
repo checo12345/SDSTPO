@@ -8,12 +8,13 @@ package Clases;
 import Beans.ConsultaMedicaBean;
 import Beans.Imagen;
 import Beans.ManifestacionBean;
-import Beans.Medico;
+import Beans.MedicoBean;
 import Beans.Paciente;
 import DAO.ServicioDAO;
 import Excepciones.SDTPOException;
 import Formularios.RegistroReceta;
 import Formularios.RegistroReceta;
+import java.awt.Frame;
 import java.util.logging.Logger;
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,6 +26,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import org.apache.ibatis.io.Resources;
 
@@ -36,10 +38,10 @@ public class ConsultaMedica {
 
     private static final Logger logger = Logger.getLogger("ConsultaMedica");
     private Paciente paciente = null;
-    private Medico medico = null;
+    private MedicoBean medico = null;
     private int id = 0;
     private Imagen ojoDer=null,ojoIzq=null;
-    public ServicioRespuesta validarMedico(Medico medico) {
+    public ServicioRespuesta validarMedico(MedicoBean medico) {
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: validarMedico() ============");
         try {
@@ -52,7 +54,7 @@ public class ConsultaMedica {
                 throw new SDTPOException("Ocurrio un error al Buscar al Medico");
             }
 
-            this.medico = (Medico) respuesta.getResult();
+            this.medico = (MedicoBean) respuesta.getResult();
         } catch (SDTPOException e) {
             logger.info("" + e.getMessage());
             respuesta.setSuccess(false);
@@ -64,7 +66,9 @@ public class ConsultaMedica {
         }
         return respuesta;
     }
-
+    public ConsultaMedica(MedicoBean medico){
+        this.medico=medico;
+    }
     public ServicioRespuesta validarPaciente(int id) {
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: validarPaciente() ============");
@@ -175,7 +179,7 @@ public class ConsultaMedica {
         }
         return respuesta.isSuccess();
     }
-public boolean CrearReceta(JFrame frame){
+public boolean CrearReceta(JDialog frame){
      RegistroReceta r=new RegistroReceta(frame,true,id);
     
                  

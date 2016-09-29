@@ -1,9 +1,9 @@
 package Formularios;
 
 //import Beans.Sesion;
-import Beans.Medico;
+import Beans.MedicoBean;
 import Beans.Sesion;
-import Clases.MedicoAdmin;
+import Clases.MedicoAdministrador;
 import UpperEssential.UpperEssentialLookAndFeel;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -19,19 +19,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * Creates new form MenuPrincipal
      */
     Sesion s;
-    MedicoAdmin ma;
-    Medico m;
+    MedicoAdministrador ma;
+    MedicoBean m;
     private static final Logger logger = Logger.getLogger("MenuPrincipal");
     public MenuPrincipal(Sesion ps) {
         initComponents();
         s=ps;
-        logger.info("Ced_prof:" + s.getCedProf());
-        if (ps.getAdmin()){
-            ma=new MedicoAdmin(s.getCedProf());   
+        logger.info("Ced_prof:" + s.getCedulaProfMedico());
+        if (ps.getRol().equals("Administrador")){
+            ma=new MedicoAdministrador(s.getCedulaProfMedico());   
         }else{
-            m=new Medico(s.getCedProf());
+            m=new MedicoBean(s.getCedulaProfMedico());
             ocultarComponentes();
         }
+        
     }
 
     /**
