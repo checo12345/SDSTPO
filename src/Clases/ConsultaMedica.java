@@ -69,13 +69,13 @@ public class ConsultaMedica {
     public ConsultaMedica(MedicoBean medico){
         this.medico=medico;
     }
-    public ServicioRespuesta validarPaciente(int id) {
+    public ServicioRespuesta validarPaciente(String curp) {
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: validarPaciente() ============");
         try {
             ServicioDAO servicio = new ServicioDAO();
             paciente = new Paciente();
-            paciente.setIdPaciente(id);
+            paciente.setCurp(curp);
 
             respuesta = servicio.buscaPaciente(paciente);
             if ((!respuesta.isSuccess()) || respuesta.getResult() == null) {

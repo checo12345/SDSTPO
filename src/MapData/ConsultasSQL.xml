@@ -5,12 +5,6 @@
  
 <mapper namespace="sql">
  
-    <resultMap id="result" type="Beans.TbVehiculos">
-        <result property="id" column="ID"/>
-        <result property="numeroPlaca" column="NUMERO_PLACA"/>
-        <result property="fechaRegistro" column="FECHA_REGISTRO"/>
-        <result property="idModelo" column="ID_MODELO"/>
-    </resultMap>
     <resultMap id="resultPaciente" type="Beans.Paciente">
         <result property="idPaciente" column="idPaciente"/> 
         <result property="curp" column="curp"/>
@@ -56,13 +50,18 @@
 	where usuario=#{usuario:VARCHAR}
         and password=#{password:VARCHAR}
     </select>
-    
-    
-    
     <select id="getPaciente" resultMap="resultPaciente" parameterType="Beans.Paciente">
-        SELECT * FROM paciente WHERE idPaciente = #{idPaciente};
+        SELECT * FROM paciente WHERE curp = #{curp};
     </select>
-    
+     <select id="getObservaciones" resultType="java.lang.String" parameterType="java.lang.Integer">
+        SELECT observacion FROM observaciones WHERE idPaciente = #{value};
+    </select>
+    <select id="getAlergias" resultType="java.lang.String" parameterType="java.lang.Integer">
+        SELECT alergia FROM alergiapaciente WHERE idPaciente = #{value};
+    </select>
+    <select id="getPadecimientos" resultType="java.lang.String" parameterType="java.lang.Integer">
+        SELECT enfermedad FROM padecimientocrondeg WHERE idPaciente = #{value};
+    </select>
    
     <select id="getMedico" resultMap="resultMedico" parameterType="Beans.MedicoBean">
         SELECT * FROM medico WHERE cedulaProf = #{cedulaProfesional};
@@ -174,6 +173,34 @@
             password=#{password},
             rol=#{rol}
         where cedulaProfmedico=#{cedulaProfMedico}
+    </update>
+    <update id="actualizarPaciente" parameterType="Beans.Paciente">
+        update paciente set
+            nombre=#{nombre},
+            apPaterno=#{apellidoPaterno},
+            apMaterno=#{apellidoMaterno},
+            telefono=#{telefono},
+            fechaNac=#{fechaNacimiento},
+            direccion=#{direccion},
+            curp=#{curp},
+            tipoSangre=#{tipoSangre},
+            sexo=#{sexo}
+        where idPaciente=#{idPaciente}
+    </update>
+    <update id="actualizarObservacionesPaciente" parameterType="Beans.Paciente">
+        update observaciones set
+            observacion=#{observacion}
+        where idPaciente=#{idPaciente}
+    </update>
+    <update id="actualizarAlergiasPaciente" parameterType="Beans.Paciente">
+        update alergiapaciente set
+            alergia=#{alergia}
+        where idPaciente=#{idPaciente}
+    </update>
+    <update id="actualizarPadecimientosPaciente" parameterType="Beans.Paciente">
+        update padecimientocrondeg set
+            enfermedad=#{padecimientos}
+        where idPaciente=#{idPaciente}
     </update>
     
     

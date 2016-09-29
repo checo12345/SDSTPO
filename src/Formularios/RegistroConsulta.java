@@ -396,7 +396,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
 
     private void consultaPacienteActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
-        ServicioRespuesta respuesta = consulta.validarPaciente(Integer.parseInt(idPaciente.getText()));
+        ServicioRespuesta respuesta = consulta.validarPaciente(idPaciente.getText());
         if (respuesta.isSuccess()) {
             Paciente p = (Paciente) respuesta.getResult();
             nombreP.setVisible(true);
