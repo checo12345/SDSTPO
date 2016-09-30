@@ -8,6 +8,7 @@ package Clases;
 import Beans.MedicoBean;
 import DAO.ServicioDAO;
 import Excepciones.SDTPOException;
+import Formularios.RegistrarPaciente;
 import Formularios.RegistroConsulta;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -28,6 +29,11 @@ public class Medico {
     
                  
                 r.setVisible(true);
+        return true;
+    }
+    public boolean registrarPaciente(JFrame frame) {
+        RegistrarPaciente rp=new RegistrarPaciente(frame, true, 1);
+        rp.setVisible(true);
         return true;
     }
     public ServicioRespuesta validarMedico() {

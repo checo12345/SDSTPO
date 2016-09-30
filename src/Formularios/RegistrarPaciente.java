@@ -6,18 +6,21 @@
 package Formularios;
 
 import Beans.Paciente;
-import Clases.Login;
 import Clases.PacienteClass;
 import Clases.ServicioRespuesta;
 
 /**
  *
- * @author Sergio
+ * @author laloe
  */
-public class RegistrarPaciente extends javax.swing.JFrame {
+public class RegistrarPaciente extends javax.swing.JDialog {
 
+    /**
+     * Creates new form RegistrarPaciente
+     */
     int idPaciente;
-    public RegistrarPaciente(int opcion) {
+    public RegistrarPaciente(java.awt.Frame parent, boolean modal,int opcion) {
+        super(parent, modal);
         initComponents();
         
          if (opcion == 1)
@@ -48,133 +51,53 @@ public class RegistrarPaciente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jOptionPane1 = new javax.swing.JOptionPane();
-        nombre = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        apellidoP = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        apellidoM = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        fechaNac = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        telefono = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        curp = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        sexo = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        deloMun = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        tipoSangre = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        observaciones = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        errorNombre = new javax.swing.JLabel();
-        errorNombre1 = new javax.swing.JLabel();
-        errorNombre2 = new javax.swing.JLabel();
-        errorNombre3 = new javax.swing.JLabel();
-        errorNombre4 = new javax.swing.JLabel();
-        errorNombre5 = new javax.swing.JLabel();
-        errorNombre6 = new javax.swing.JLabel();
-        errorNombre7 = new javax.swing.JLabel();
-        errorNombre8 = new javax.swing.JLabel();
-        errorNombre9 = new javax.swing.JLabel();
-        pacienteLabel = new javax.swing.JLabel();
-        curpPaciente = new javax.swing.JTextField();
-        buscarPaciente = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         enfermedades = new javax.swing.JTextPane();
+        tipoSangre = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         alergias = new javax.swing.JTextPane();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        nombre = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        observaciones = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        apellidoP = new javax.swing.JTextField();
+        errorNombre = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        errorNombre1 = new javax.swing.JLabel();
+        apellidoM = new javax.swing.JTextField();
+        errorNombre2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        fechaNac = new javax.swing.JTextField();
+        errorNombre3 = new javax.swing.JLabel();
+        errorNombre4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        errorNombre5 = new javax.swing.JLabel();
+        telefono = new javax.swing.JTextField();
+        errorNombre6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        errorNombre7 = new javax.swing.JLabel();
+        curp = new javax.swing.JTextField();
+        errorNombre8 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        errorNombre9 = new javax.swing.JLabel();
+        sexo = new javax.swing.JTextField();
+        pacienteLabel = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        curpPaciente = new javax.swing.JTextField();
+        deloMun = new javax.swing.JTextField();
+        buscarPaciente = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 650));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        nombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreActionPerformed(evt);
-            }
-        });
-        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                nombreKeyPressed(evt);
-            }
-        });
-
-        jLabel1.setText("INGRESE LOS DATOS GENERALES DEL PACIENTE A REGISTRAR");
-
-        jLabel2.setText("Nombre Completo:");
-
-        jLabel3.setText("Apellido Paterno:");
-
-        apellidoP.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                apellidoPKeyPressed(evt);
-            }
-        });
-
-        jLabel4.setText("Apellido Materno:");
-
-        apellidoM.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                apellidoMKeyPressed(evt);
-            }
-        });
-
-        jLabel5.setText("Fecha de Nacimiento:");
-
-        fechaNac.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                fechaNacKeyPressed(evt);
-            }
-        });
-
-        jLabel6.setText("Telefono:");
-
-        telefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefonoActionPerformed(evt);
-            }
-        });
-        telefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                telefonoKeyPressed(evt);
-            }
-        });
-
-        jLabel7.setText("CURP:");
-
-        curp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                curpActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("Sexo:");
-
-        sexo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                sexoKeyPressed(evt);
-            }
-        });
-
-        jLabel11.setText("Dirección:");
-
-        deloMun.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                deloMunKeyPressed(evt);
-            }
-        });
-
-        jLabel12.setText("Alergias:");
-
-        jLabel13.setText("Tipo de Sangre:");
+        jScrollPane2.setViewportView(enfermedades);
 
         tipoSangre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,13 +110,30 @@ public class RegistrarPaciente extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane3.setViewportView(alergias);
+
         jLabel14.setText("Enfermedades Hereditarias:");
 
         jLabel15.setText("Ingrese comentarios y observaciones importantes sobre el paciente:");
 
+        nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreActionPerformed(evt);
+            }
+        });
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nombreKeyPressed(evt);
+            }
+        });
+
         observaciones.setColumns(20);
         observaciones.setRows(5);
         jScrollPane1.setViewportView(observaciones);
+
+        jLabel1.setText("INGRESE LOS DATOS GENERALES DEL PACIENTE A REGISTRAR");
+
+        jLabel2.setText("Nombre Completo:");
 
         jButton1.setText("Modificar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -202,19 +142,43 @@ public class RegistrarPaciente extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Apellido Paterno:");
+
         jButton2.setText("Cancelar");
+
+        apellidoP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                apellidoPKeyPressed(evt);
+            }
+        });
 
         errorNombre.setBackground(new java.awt.Color(255, 0, 0));
         errorNombre.setForeground(new java.awt.Color(255, 0, 0));
         errorNombre.setText("No se permiten numeros");
 
+        jLabel4.setText("Apellido Materno:");
+
         errorNombre1.setBackground(new java.awt.Color(255, 0, 0));
         errorNombre1.setForeground(new java.awt.Color(255, 0, 0));
         errorNombre1.setText("No se permiten numeros");
 
+        apellidoM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                apellidoMKeyPressed(evt);
+            }
+        });
+
         errorNombre2.setBackground(new java.awt.Color(255, 0, 0));
         errorNombre2.setForeground(new java.awt.Color(255, 0, 0));
         errorNombre2.setText("No se permiten numeros");
+
+        jLabel5.setText("Fecha de Nacimiento:");
+
+        fechaNac.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fechaNacKeyPressed(evt);
+            }
+        });
 
         errorNombre3.setBackground(new java.awt.Color(255, 0, 0));
         errorNombre3.setForeground(new java.awt.Color(255, 0, 0));
@@ -224,27 +188,64 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         errorNombre4.setForeground(new java.awt.Color(255, 0, 0));
         errorNombre4.setText("No se permiten letras");
 
+        jLabel6.setText("Telefono:");
+
         errorNombre5.setBackground(new java.awt.Color(255, 0, 0));
         errorNombre5.setForeground(new java.awt.Color(255, 0, 0));
         errorNombre5.setText("No se permiten numeros");
+
+        telefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telefonoActionPerformed(evt);
+            }
+        });
+        telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                telefonoKeyPressed(evt);
+            }
+        });
 
         errorNombre6.setBackground(new java.awt.Color(255, 0, 0));
         errorNombre6.setForeground(new java.awt.Color(255, 0, 0));
         errorNombre6.setText("No se permiten numeros");
 
+        jLabel7.setText("CURP:");
+
         errorNombre7.setBackground(new java.awt.Color(255, 0, 0));
         errorNombre7.setForeground(new java.awt.Color(255, 0, 0));
         errorNombre7.setText("No se permiten numeros");
+
+        curp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                curpActionPerformed(evt);
+            }
+        });
 
         errorNombre8.setBackground(new java.awt.Color(255, 0, 0));
         errorNombre8.setForeground(new java.awt.Color(255, 0, 0));
         errorNombre8.setText("No se permiten numeros");
 
+        jLabel8.setText("Sexo:");
+
         errorNombre9.setBackground(new java.awt.Color(255, 0, 0));
         errorNombre9.setForeground(new java.awt.Color(255, 0, 0));
         errorNombre9.setText("No se permiten numeros");
 
+        sexo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sexoKeyPressed(evt);
+            }
+        });
+
         pacienteLabel.setText("INGRESAR CURP DEL PACIENTE A MODIFICAR:");
+
+        jLabel11.setText("Dirección:");
+
+        deloMun.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                deloMunKeyPressed(evt);
+            }
+        });
 
         buscarPaciente.setText("Buscar");
         buscarPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -253,9 +254,9 @@ public class RegistrarPaciente extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane2.setViewportView(enfermedades);
+        jLabel12.setText("Alergias:");
 
-        jScrollPane3.setViewportView(alergias);
+        jLabel13.setText("Tipo de Sangre:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -451,37 +452,51 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreActionPerformed
-
-    private void telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefonoActionPerformed
-
-    private void curpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_curpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_curpActionPerformed
-
     private void tipoSangreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoSangreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoSangreActionPerformed
 
+    private void tipoSangreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tipoSangreKeyPressed
+        char c=evt.getKeyChar();
+        if (Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre8.setVisible(true);
+        }
+        else
+        errorNombre8.setVisible(false);
+    }//GEN-LAST:event_tipoSangreKeyPressed
+
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreActionPerformed
+
+    private void nombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyPressed
+        char c=evt.getKeyChar();
+        if (Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();
+            errorNombre.setVisible(true);
+        }
+        else
+        errorNombre.setVisible(false);
+    }//GEN-LAST:event_nombreKeyPressed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                
+
         PacienteClass paciente = new PacienteClass() ;
         ServicioRespuesta respuesta ;
         if (jButton1.getText().contains("Registrar"))
         {
-           respuesta=paciente.registrarPaciente() ;
+            respuesta=paciente.registrarPaciente() ;
             if(respuesta.isSuccess()){
                 this.dispose() ;
                 jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
             }else {
                 jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.ERROR_MESSAGE);
-            }   
+            }
         }
-       else
+        else
         {
             respuesta=paciente.actualizarPaciente(idPaciente) ;
             if(respuesta.isSuccess()){
@@ -489,49 +504,36 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                 jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "ACTUALIZACIÓN DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
             }else {
                 jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "ACTUALIZACIÓN DE PACIENTES",jOptionPane1.ERROR_MESSAGE);
-            } 
+            }
         }
-        
-//       Sesion user = (Sesion)respuesta.getResult() ;
-       
 
-        //Formulario1 formformulario1 = new Formulario1();          
+        //       Sesion user = (Sesion)respuesta.getResult() ;
+
+        //Formulario1 formformulario1 = new Formulario1();
         //formformulario1.setVisible(true);
 
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void nombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyPressed
-       char c=evt.getKeyChar();
-        if (Character.isDigit(c)){
-            getToolkit().beep();
-            evt.consume();
-            errorNombre.setVisible(true);
-        }
-        else
-            errorNombre.setVisible(false);
-    }//GEN-LAST:event_nombreKeyPressed
-
     private void apellidoPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoPKeyPressed
-       char c=evt.getKeyChar();
+        char c=evt.getKeyChar();
         if (Character.isDigit(c)){
             getToolkit().beep();
             evt.consume();
             errorNombre1.setVisible(true);
         }
         else
-            errorNombre1.setVisible(false);
+        errorNombre1.setVisible(false);
     }//GEN-LAST:event_apellidoPKeyPressed
 
     private void apellidoMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoMKeyPressed
-       char c=evt.getKeyChar();
+        char c=evt.getKeyChar();
         if (Character.isDigit(c)){
             getToolkit().beep();
             evt.consume();
             errorNombre2.setVisible(true);
         }
         else
-            errorNombre2.setVisible(false);
+        errorNombre2.setVisible(false);
     }//GEN-LAST:event_apellidoMKeyPressed
 
     private void fechaNacKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaNacKeyPressed
@@ -542,78 +544,75 @@ public class RegistrarPaciente extends javax.swing.JFrame {
             errorNombre3.setVisible(true);
         }
         else
-            errorNombre3.setVisible(false);
+        errorNombre3.setVisible(false);
     }//GEN-LAST:event_fechaNacKeyPressed
 
+    private void telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefonoActionPerformed
+
     private void telefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyPressed
-       char c=evt.getKeyChar();
+        char c=evt.getKeyChar();
         if (Character.isLetter(c)){
             getToolkit().beep();
             evt.consume();
             errorNombre4.setVisible(true);
         }
         else
-            errorNombre4.setVisible(false);
+        errorNombre4.setVisible(false);
     }//GEN-LAST:event_telefonoKeyPressed
 
+    private void curpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_curpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_curpActionPerformed
+
     private void sexoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sexoKeyPressed
-       char c=evt.getKeyChar();
+        char c=evt.getKeyChar();
         if (Character.isDigit(c)){
             getToolkit().beep();
             evt.consume();
             errorNombre5.setVisible(true);
         }
         else
-            errorNombre5.setVisible(false);
+        errorNombre5.setVisible(false);
     }//GEN-LAST:event_sexoKeyPressed
 
     private void deloMunKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_deloMunKeyPressed
-      char c=evt.getKeyChar();
+        char c=evt.getKeyChar();
         if (Character.isDigit(c)){
             getToolkit().beep();
             evt.consume();
             errorNombre6.setVisible(true);
         }
         else
-            errorNombre6.setVisible(false);
+        errorNombre6.setVisible(false);
     }//GEN-LAST:event_deloMunKeyPressed
-
-    private void tipoSangreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tipoSangreKeyPressed
-       char c=evt.getKeyChar();
-        if (Character.isDigit(c)){
-            getToolkit().beep();
-            evt.consume();
-            errorNombre8.setVisible(true);
-        }
-        else
-            errorNombre8.setVisible(false);
-    }//GEN-LAST:event_tipoSangreKeyPressed
 
     private void buscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPacienteActionPerformed
         PacienteClass paciente = new PacienteClass() ;
         ServicioRespuesta respuesta=paciente.buscarPaciente();
-       if(respuesta.isSuccess()){
-         Paciente p =(Paciente) respuesta.getResult() ;
-         nombre.setText(p.getNombre());
-         observaciones.setText(p.getObservacion());
-         sexo.setText(p.getSexo());
-         telefono.setText(p.getTelefono());
-         tipoSangre.setText(p.getTipoSangre()); ;
-         alergias.setText(p.getAlergia());
-         apellidoM.setText(p.getApellidoMaterno());
-         apellidoP.setText(p.getApellidoPaterno());
-         curp.setText(p.getCurp());
-         enfermedades.setText(p.getPadecimientos());
-         deloMun.setText(p.getDireccion());
-         idPaciente=p.getIdPaciente() ;
-        //this.dispose() ;
-        jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
+        if(respuesta.isSuccess()){
+            Paciente p =(Paciente) respuesta.getResult() ;
+            nombre.setText(p.getNombre());
+            observaciones.setText(p.getObservacion());
+            sexo.setText(p.getSexo());
+            telefono.setText(p.getTelefono());
+            tipoSangre.setText(p.getTipoSangre()); ;
+            alergias.setText(p.getAlergia());
+            apellidoM.setText(p.getApellidoMaterno());
+            apellidoP.setText(p.getApellidoPaterno());
+            curp.setText(p.getCurp());
+            enfermedades.setText(p.getPadecimientos());
+            deloMun.setText(p.getDireccion());
+            idPaciente=p.getIdPaciente() ;
+            //this.dispose() ;
+            jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
 
-        //Formulario1 formformulario1 = new Formulario1();          
-        //formformulario1.setVisible(true);
+            //Formulario1 formformulario1 = new Formulario1();
+            //formformulario1.setVisible(true);
 
         }else {
-           jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.ERROR_MESSAGE);
+            jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_buscarPacienteActionPerformed
 
@@ -644,14 +643,21 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /* Create and display the dialog */
+       /* java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistrarPaciente(2).setVisible(true);
+                RegistrarPaciente dialog = new RegistrarPaciente(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
-        });
+        });*/
     }
-
+private javax.swing.JOptionPane jOptionPane1;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextPane alergias;
     public static javax.swing.JTextField apellidoM;
@@ -687,7 +693,6 @@ public class RegistrarPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

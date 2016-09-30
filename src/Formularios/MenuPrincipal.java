@@ -152,9 +152,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void SubMenu1MedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenu1MedicoActionPerformed
         // TODO add your handling code here:
-        NuevoMedico nm=new NuevoMedico(ma);
-        escritorio.add(nm);
-        nm.show();
+        //NuevoMedico2 nm=new NuevoMedico2(ma);
+        //escritorio.add(nm);
+        //nm.show();
     }//GEN-LAST:event_SubMenu1MedicoActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -166,9 +166,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void SubMenu2MedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubMenu2MedicoActionPerformed
         //this.hide();
-        ActualizarMedic am=new ActualizarMedic(ma);
-        escritorio.add(am);
-        am.show();
+        //ActualizarMedic2 am=new ActualizarMedic2(ma);
+        //escritorio.add(am);
+        //am.show();
     }//GEN-LAST:event_SubMenu2MedicoActionPerformed
 
     /**
