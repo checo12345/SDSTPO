@@ -146,12 +146,12 @@ public class inicioSesion extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         
-        try {
+       /* try {
             UIManager.setLookAndFeel(new UpperEssentialLookAndFeel("C:\\Users\\Sergio\\Desktop\\LibreriaUpperEssential\\Librerias\\Chocolate.theme"));
         }catch (UnsupportedLookAndFeelException e )
         {
             
-        }
+        }*/
         //UIManager.setLookAndFeel(new UpperEssential());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -5,6 +5,7 @@
  */
 package Formularios;
 
+import Beans.Paciente;
 import Clases.Login;
 import Clases.PacienteClass;
 import Clases.ServicioRespuesta;
@@ -15,11 +16,17 @@ import Clases.ServicioRespuesta;
  */
 public class RegistrarPaciente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RegistrarPaciente
-     */
-    public RegistrarPaciente() {
+    int idPaciente;
+    public RegistrarPaciente(int opcion) {
         initComponents();
+        
+         if (opcion == 1)
+        {
+            curpPaciente.setVisible(false);
+            pacienteLabel.setVisible(false);
+            buscarPaciente.setVisible(false);
+            jButton1.setText("Registrar");
+        }
         errorNombre.setVisible(false);
         errorNombre1.setVisible(false);
         errorNombre2.setVisible(false);
@@ -57,18 +64,12 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         curp = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         sexo = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        calle = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        numero = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         deloMun = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        alergias = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         tipoSangre = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        enfermedades = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         observaciones = new javax.swing.JTextArea();
@@ -84,8 +85,16 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         errorNombre7 = new javax.swing.JLabel();
         errorNombre8 = new javax.swing.JLabel();
         errorNombre9 = new javax.swing.JLabel();
+        pacienteLabel = new javax.swing.JLabel();
+        curpPaciente = new javax.swing.JTextField();
+        buscarPaciente = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        enfermedades = new javax.swing.JTextPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        alergias = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 650));
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,11 +164,7 @@ public class RegistrarPaciente extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("Calle:");
-
-        jLabel10.setText("Numero:");
-
-        jLabel11.setText("Delegación o Municipio:");
+        jLabel11.setText("Dirección:");
 
         deloMun.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -168,12 +173,6 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         });
 
         jLabel12.setText("Alergias:");
-
-        alergias.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                alergiasKeyPressed(evt);
-            }
-        });
 
         jLabel13.setText("Tipo de Sangre:");
 
@@ -190,24 +189,13 @@ public class RegistrarPaciente extends javax.swing.JFrame {
 
         jLabel14.setText("Enfermedades Hereditarias:");
 
-        enfermedades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enfermedadesActionPerformed(evt);
-            }
-        });
-        enfermedades.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                enfermedadesKeyPressed(evt);
-            }
-        });
-
-        jLabel15.setText("INGRESE COMENTARIOS Y OBSERVACIONES SOBRE EL PACIENTE");
+        jLabel15.setText("Ingrese comentarios y observaciones importantes sobre el paciente:");
 
         observaciones.setColumns(20);
         observaciones.setRows(5);
         jScrollPane1.setViewportView(observaciones);
 
-        jButton1.setText("Registrar");
+        jButton1.setText("Modificar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -256,125 +244,150 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         errorNombre9.setForeground(new java.awt.Color(255, 0, 0));
         errorNombre9.setText("No se permiten numeros");
 
+        pacienteLabel.setText("INGRESAR CURP DEL PACIENTE A MODIFICAR:");
+
+        buscarPaciente.setText("Buscar");
+        buscarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarPacienteActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(enfermedades);
+
+        jScrollPane3.setViewportView(alergias);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(202, 202, 202)
+                        .addComponent(errorNombre))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(errorNombre3)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addComponent(pacienteLabel)
+                        .addGap(27, 27, 27)
+                        .addComponent(curpPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(306, 306, 306)
+                        .addComponent(errorNombre6)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(errorNombre4)
+                        .addGap(466, 466, 466))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(325, 325, 325))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(18, 18, 18)
-                                .addComponent(alergias))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
+                                        .addComponent(jLabel2)
                                         .addGap(18, 18, 18)
-                                        .addComponent(calle))
+                                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel6)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel10))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tipoSangre, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(enfermedades))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                                    .addComponent(telefono, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(numero, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(telefono, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(deloMun))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(curp, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(sexo))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(apellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(errorNombre1))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(buscarPaciente)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(apellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(errorNombre1)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(errorNombre2)
                                             .addComponent(apellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(10, 10, 10)
-                                                .addComponent(errorNombre5)))
-                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                                                .addComponent(errorNombre5))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel13)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel7)
+                                                .addGap(27, 27, 27)
+                                                .addComponent(curp, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel8)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(errorNombre8)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(sexo)
+                                            .addComponent(tipoSangre)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(deloMun, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(281, 281, 281))
+                            .addComponent(jScrollPane1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(errorNombre4)
-                        .addGap(405, 405, 405)))
-                .addGap(56, 56, 56))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(320, 320, 320))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(302, 302, 302))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(69, 69, 69)
-                        .addComponent(jButton1)
-                        .addGap(368, 368, 368))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(errorNombre6)
-                        .addGap(119, 119, 119))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
-                        .addComponent(errorNombre))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(errorNombre3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(207, 207, 207)
-                .addComponent(errorNombre7)
-                .addGap(133, 133, 133)
-                .addComponent(errorNombre8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(errorNombre9)
-                .addGap(105, 105, 105))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(69, 69, 69)
+                                .addComponent(jButton1)
+                                .addGap(312, 312, 312))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(249, 249, 249))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(222, 222, 222)
+                                .addComponent(errorNombre7)
+                                .addGap(94, 94, 94)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel14)
+                                        .addGap(69, 69, 69)
+                                        .addComponent(errorNombre9)
+                                        .addGap(29, 29, 29)))))))
+                .addGap(61, 61, 61))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pacienteLabel)
+                    .addComponent(curpPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarPaciente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -404,38 +417,35 @@ public class RegistrarPaciente extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(errorNombre6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(calle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(deloMun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(errorNombre7)
-                    .addComponent(errorNombre8)
-                    .addComponent(errorNombre9))
+                    .addComponent(errorNombre6)
+                    .addComponent(errorNombre8))
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(alergias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(deloMun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(tipoSangre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tipoSangre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(enfermedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(jLabel12)
+                    .addComponent(errorNombre9)
+                    .addComponent(errorNombre7))
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -457,25 +467,38 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoSangreActionPerformed
 
-    private void enfermedadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enfermedadesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enfermedadesActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                 
         PacienteClass paciente = new PacienteClass() ;
-        ServicioRespuesta respuesta=paciente.registrarPaciente() ;
+        ServicioRespuesta respuesta ;
+        if (jButton1.getText().contains("Registrar"))
+        {
+           respuesta=paciente.registrarPaciente() ;
+            if(respuesta.isSuccess()){
+                this.dispose() ;
+                jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
+            }else {
+                jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.ERROR_MESSAGE);
+            }   
+        }
+       else
+        {
+            respuesta=paciente.actualizarPaciente(idPaciente) ;
+            if(respuesta.isSuccess()){
+                this.dispose() ;
+                jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "ACTUALIZACIÓN DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
+            }else {
+                jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "ACTUALIZACIÓN DE PACIENTES",jOptionPane1.ERROR_MESSAGE);
+            } 
+        }
+        
 //       Sesion user = (Sesion)respuesta.getResult() ;
-       if(respuesta.isSuccess()){
-        this.dispose() ;
-        jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
+       
 
         //Formulario1 formformulario1 = new Formulario1();          
         //formformulario1.setVisible(true);
 
-        }else {
-           jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.ERROR_MESSAGE);
-        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyPressed
@@ -555,17 +578,6 @@ public class RegistrarPaciente extends javax.swing.JFrame {
             errorNombre6.setVisible(false);
     }//GEN-LAST:event_deloMunKeyPressed
 
-    private void alergiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_alergiasKeyPressed
-        char c=evt.getKeyChar();
-        if (Character.isDigit(c)){
-            getToolkit().beep();
-            evt.consume();
-            errorNombre7.setVisible(true);
-        }
-        else
-            errorNombre7.setVisible(false);
-    }//GEN-LAST:event_alergiasKeyPressed
-
     private void tipoSangreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tipoSangreKeyPressed
        char c=evt.getKeyChar();
         if (Character.isDigit(c)){
@@ -577,16 +589,33 @@ public class RegistrarPaciente extends javax.swing.JFrame {
             errorNombre8.setVisible(false);
     }//GEN-LAST:event_tipoSangreKeyPressed
 
-    private void enfermedadesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_enfermedadesKeyPressed
-       char c=evt.getKeyChar();
-        if (Character.isDigit(c)){
-            getToolkit().beep();
-            evt.consume();
-            errorNombre9.setVisible(true);
+    private void buscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPacienteActionPerformed
+        PacienteClass paciente = new PacienteClass() ;
+        ServicioRespuesta respuesta=paciente.buscarPaciente();
+       if(respuesta.isSuccess()){
+         Paciente p =(Paciente) respuesta.getResult() ;
+         nombre.setText(p.getNombre());
+         observaciones.setText(p.getObservacion());
+         sexo.setText(p.getSexo());
+         telefono.setText(p.getTelefono());
+         tipoSangre.setText(p.getTipoSangre()); ;
+         alergias.setText(p.getAlergia());
+         apellidoM.setText(p.getApellidoMaterno());
+         apellidoP.setText(p.getApellidoPaterno());
+         curp.setText(p.getCurp());
+         enfermedades.setText(p.getPadecimientos());
+         deloMun.setText(p.getDireccion());
+         idPaciente=p.getIdPaciente() ;
+        //this.dispose() ;
+        jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
+
+        //Formulario1 formformulario1 = new Formulario1();          
+        //formformulario1.setVisible(true);
+
+        }else {
+           jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.ERROR_MESSAGE);
         }
-        else
-            errorNombre9.setVisible(false);
-    }//GEN-LAST:event_enfermedadesKeyPressed
+    }//GEN-LAST:event_buscarPacienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -618,19 +647,20 @@ public class RegistrarPaciente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistrarPaciente().setVisible(true);
+                new RegistrarPaciente(2).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JTextField alergias;
+    public static javax.swing.JTextPane alergias;
     public static javax.swing.JTextField apellidoM;
     public static javax.swing.JTextField apellidoP;
-    public static javax.swing.JTextField calle;
+    public static javax.swing.JButton buscarPaciente;
     public static javax.swing.JTextField curp;
+    public static javax.swing.JTextField curpPaciente;
     public static javax.swing.JTextField deloMun;
-    public static javax.swing.JTextField enfermedades;
+    public static javax.swing.JTextPane enfermedades;
     private javax.swing.JLabel errorNombre;
     private javax.swing.JLabel errorNombre1;
     private javax.swing.JLabel errorNombre2;
@@ -645,7 +675,6 @@ public class RegistrarPaciente extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -658,12 +687,13 @@ public class RegistrarPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTextField nombre;
-    public static javax.swing.JTextField numero;
     public static javax.swing.JTextArea observaciones;
+    public static javax.swing.JLabel pacienteLabel;
     public static javax.swing.JTextField sexo;
     public static javax.swing.JTextField telefono;
     public static javax.swing.JTextField tipoSangre;

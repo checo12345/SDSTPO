@@ -113,7 +113,183 @@ public class ServicioDAO extends MyBatisConnectionFactory {
         logger.info("************************" + respuesta + "************************");
         return respuesta;
     }
+    
+    
+    public ServicioRespuesta actualizarPaciente(Paciente paciente) {
+        logger.info("**********  SERVICIO METODO: actualizarPaciente(" + paciente.getNombre() + "**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+            if (!(paciente != null && paciente.getNombre() != null)) {
+                throw new SDTPOException("Petición Inválida");
+            }
 
+            respuesta.setMensaje("NOT EXECUTED");
+            respuesta.setSuccess(false);
+            sqlSession = getSQLSession();
+            int afectados = sqlSession.update("sql.actualizarPaciente", paciente);
+
+            if (afectados > 0) {
+                logger.info("Se Actualizo el paciente " + paciente.getNombre() + " correctamente");
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Se Actualizo el paciente " + paciente.getNombre() + " correctamente");
+            } else {
+                logger.info("No se puede Actualizar al pacienter: " + paciente.getNombre());
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("No se puede Actualizar al pacienter: " + paciente.getNombre());
+            }
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
+ 
+    public ServicioRespuesta actualizarObservacionesPaciente(Paciente paciente) {
+        logger.info("**********  SERVICIO METODO: actualizarObservacionesPaciente(" + paciente.getNombre() + "**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+            if (!(paciente != null && paciente.getNombre() != null)) {
+                throw new SDTPOException("Petición Inválida");
+            }
+
+            respuesta.setMensaje("NOT EXECUTED");
+            respuesta.setSuccess(false);
+            sqlSession = getSQLSession();
+            int afectados = sqlSession.update("sql.actualizarObservacionesPaciente", paciente);
+
+            if (afectados > 0) {
+                logger.info("Se Actualizo Observaciones del paciente " + paciente.getNombre() + " correctamente");
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Se Actualizo Observaciones del paciente " + paciente.getNombre() + " correctamente");
+            } else {
+                logger.info("No se puede Actualizar Observaciones del pacienter: " + paciente.getNombre());
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("No se puede Actualizar Observaciones del pacienter: " + paciente.getNombre());
+            }
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
+    public ServicioRespuesta actualizarAlergiasPaciente(Paciente paciente) {
+        logger.info("**********  SERVICIO METODO: actualizarAlergiasPaciente(" + paciente.getNombre() + "**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+            if (!(paciente != null && paciente.getNombre() != null)) {
+                throw new SDTPOException("Petición Inválida");
+            }
+
+            respuesta.setMensaje("NOT EXECUTED");
+            respuesta.setSuccess(false);
+            sqlSession = getSQLSession();
+            int afectados = sqlSession.update("sql.actualizarAlergiasPaciente", paciente);
+
+            if (afectados > 0) {
+                logger.info("Se Actualizo Alergias del paciente " + paciente.getNombre() + " correctamente");
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Se Actualizo Alergias del paciente " + paciente.getNombre() + " correctamente");
+            } else {
+                logger.info("No se puede Actualizar Alergias del pacienter: " + paciente.getNombre());
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("No se puede Actualizar Alergias del pacienter: " + paciente.getNombre());
+            }
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
+    
+    
+        public ServicioRespuesta actualizarPadecimientosPaciente(Paciente paciente) {
+        logger.info("**********  SERVICIO METODO: actualizarPadecimientosPaciente(" + paciente.getNombre() + "**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+            if (!(paciente != null && paciente.getNombre() != null)) {
+                throw new SDTPOException("Petición Inválida");
+            }
+
+            respuesta.setMensaje("NOT EXECUTED");
+            respuesta.setSuccess(false);
+            sqlSession = getSQLSession();
+            int afectados = sqlSession.update("sql.actualizarPadecimientosPaciente", paciente);
+
+            if (afectados > 0) {
+                logger.info("Se Actualizo Padecimientos del paciente " + paciente.getNombre() + " correctamente");
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Se Actualizo Padecimientos del paciente " + paciente.getNombre() + " correctamente");
+            } else {
+                logger.info("No se puede Actualizar Padecimientos del paciente: " + paciente.getNombre());
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("No se puede Actualizar Padecimientos del paciente: " + paciente.getNombre());
+            }
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
     public ServicioRespuesta registrarObservacionesPaciente(Paciente paciente) {
         logger.info("**********  SERVICIO METODO: registrarObservacionesPaciente(" + paciente.getNombre() + "**********");
         ServicioRespuesta respuesta = new ServicioRespuesta();
@@ -247,7 +423,7 @@ public class ServicioDAO extends MyBatisConnectionFactory {
     }
     
     public ServicioRespuesta buscaPaciente(Paciente paciente) {
-        logger.info("**********  SERVICIO METODO: buscaPaciente(" + paciente.getIdPaciente() + ")**********");
+        logger.info("**********  SERVICIO METODO: buscaPaciente(" + paciente.getCurp()+ ")**********");
         ServicioRespuesta respuesta = new ServicioRespuesta();
         SqlSession sqlSession = null;
         try {
@@ -290,7 +466,139 @@ public class ServicioDAO extends MyBatisConnectionFactory {
         logger.info("************************" + respuesta + "************************");
         return respuesta;
     }
+     public ServicioRespuesta buscarObservacionesPaciente(int idPaciente) {
+        logger.info("**********  SERVICIO METODO: buscarObservacionesPaciente(" + idPaciente+ ")**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+            if ((idPaciente == 0)) {
+                throw new SDTPOException("Petición Inválida");
+            }
 
+            respuesta.setMensaje("NOT EXECUTED");
+            respuesta.setSuccess(false);
+            sqlSession = getSQLSession();
+            String observaciones = sqlSession.selectOne("sql.getObservaciones", idPaciente);
+
+            if (observaciones != null) {
+                logger.info("Observaciones del paciente" + idPaciente + " encontradas");
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Observaciones del paciente" + idPaciente + " encontradas");
+                respuesta.setResult(observaciones);
+            } else {
+                logger.info("Observaciones no encontradas");
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("Observaciones no encontradas");
+            }
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
+     public ServicioRespuesta buscarAlergiasPaciente(int idPaciente) {
+        logger.info("**********  SERVICIO METODO: buscarAlergiasPaciente(" + idPaciente+ ")**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+            if ((idPaciente == 0)) {
+                throw new SDTPOException("Petición Inválida");
+            }
+
+            respuesta.setMensaje("NOT EXECUTED");
+            respuesta.setSuccess(false);
+            sqlSession = getSQLSession();
+            String observaciones = sqlSession.selectOne("sql.getAlergias", idPaciente);
+
+            if (observaciones != null) {
+                logger.info("Alergias del paciente" + idPaciente + " encontradas");
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Alergias del paciente" + idPaciente + " encontradas");
+                respuesta.setResult(observaciones);
+            } else {
+                logger.info("Alergias no encontradas");
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("Alergias no encontradas");
+            }
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
+     
+        public ServicioRespuesta buscarPadecimientosPaciente(int idPaciente) {
+        logger.info("**********  SERVICIO METODO: buscarPadecimientosPaciente(" + idPaciente+ ")**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+            if ((idPaciente == 0)) {
+                throw new SDTPOException("Petición Inválida");
+            }
+
+            respuesta.setMensaje("NOT EXECUTED");
+            respuesta.setSuccess(false);
+            sqlSession = getSQLSession();
+            String observaciones = sqlSession.selectOne("sql.getPadecimientos", idPaciente);
+
+            if (observaciones != null) {
+                logger.info("Padecimientos del paciente" + idPaciente + " encontradas");
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Padecimientos del paciente" + idPaciente + " encontradas");
+                respuesta.setResult(observaciones);
+            } else {
+                logger.info("Padecimientos no encontradas");
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("Padecimientos no encontradas");
+            }
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
     public ServicioRespuesta buscaMedico(MedicoBean medico) {
         logger.info("**********  SERVICIO METODO: buscaMedico(" + medico + ")**********");
         ServicioRespuesta respuesta = new ServicioRespuesta();
