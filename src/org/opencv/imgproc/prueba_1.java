@@ -3,50 +3,67 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.net.URL;
-import java.math.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.imageio.ImageIO;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.core.CvType;
 import org.opencv.core.MatOfByte;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.highgui.Highgui;
-import Imagenes.* ;
-import static org.opencv.core.Core.addWeighted;
 import static org.opencv.core.Core.addWeighted;
 import static org.opencv.core.Core.countNonZero;
-import org.opencv.core.Rect;
 
-public class prueba {
+public class prueba_1 {
     //static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME);}
     public static void main(String args[]){
         System.out.println("Cargar y Mostrar una Imagen con OpenCV en Java y Netbeans");
         System.loadLibrary("opencv_java2413");
-        Procesar procesar = new Procesar();
+        Procesar_1 procesar = new Procesar_1();
     }
 }
-class Procesar {
+class Procesar_1 {
     private Mat imagen,imagenCopia,imagenCopia1;
 
-    public Procesar(){
-        imagen = Highgui.imread("C:\\Users\\laloe\\Documents\\TT\\imagenes\\checo2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
-        imagenCopia = Highgui.imread("C:\\Users\\laloe\\Documents\\TT\\imagenes\\checo2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
-        imagenCopia1 = Highgui.imread("C:\\Users\\laloe\\Documents\\TT\\imagenes\\checo2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+    public Procesar_1(){
+        imagen = Highgui.imread("C:/prueba4.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia = Highgui.imread("C:/Users/David Pantaleón/Pictures/Saved Pictures/prueba.JPG",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia1 = Highgui.imread("C:/Users/David Pantaleón/Pictures/Saved Pictures/IMG_0169.JPG",Highgui.CV_LOAD_IMAGE_COLOR);
         if(!imagen.empty()){
-           //  Imgproc.resize(imagen, imagen, new Size(480,640));
-            analizarMelanoma(imagen) ;
+            Imgproc.resize(imagen, imagen, new Size(648,423));
+            analizarPterigion(imagen);
+        }else if (!imagenCopia.empty()){
+            analizarPterigion(imagen);
         }else{
             System.out.println("\tImagen NO encontrada");
         }
     }
      
-   
+    private Mat analizarPterigion(Mat img){
+        Ventana v2 = new Ventana(convertir(img),1,0);
+        img = detectaPterigion(img,30,30,0,0);
+        Ventana v1 = new Ventana(convertir(img),1,0);
+        return img;
+    }
+    private Mat detectaPterigion(Mat img_ana,int val1,int val2,int val3,int val4){
+        for (int y=0;y<img_ana.rows();y++){
+            for(int x=0;x<img_ana.cols();x++){
+                double[] color=img_ana.get(y, x);
+                /*color[0]=color[0]/2;
+                color[1]=color[1]/2;
+                color[2]=color[2]/2;*/
+                if(color[2]>=150 && color[2]<=255 && color[1]>=40 && color[1]<=200 && color[0]>=0 && color[0]<=160){
+                color[0]=0;
+                color[1]=255;
+                color[2]=255;    
+                }
+                img_ana.put(y, x, color);
+            }
+        }
+        return img_ana;
+    }
     private Mat analizarMelanoma(Mat img)
     {       
             int totalP,areaM,tamImg=img.width()*img.height() ;
