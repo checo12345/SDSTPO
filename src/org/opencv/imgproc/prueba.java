@@ -35,9 +35,9 @@ class Procesar {
     private Mat imagen,imagenCopia,imagenCopia1;
 
     public Procesar(){
-        imagen = Highgui.imread("C:\\Users\\laloe\\Documents\\TT\\imagenes\\checo2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
-        imagenCopia = Highgui.imread("C:\\Users\\laloe\\Documents\\TT\\imagenes\\checo2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
-        imagenCopia1 = Highgui.imread("C:\\Users\\laloe\\Documents\\TT\\imagenes\\checo2.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagen = Highgui.imread("C:\\Users\\Sergio\\Desktop\\adaptador1.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia = Highgui.imread("C:\\Users\\Sergio\\Desktop\\adaptador1.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia1 = Highgui.imread("C:\\Users\\Sergio\\Desktop\\adaptador1.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
         if(!imagen.empty()){
            //  Imgproc.resize(imagen, imagen, new Size(480,640));
             analizarMelanoma(imagen) ;
@@ -58,7 +58,7 @@ class Procesar {
             
             img=blurearImg(img,25) ;
             img=descompCanImg(img,1) ;
-            Ventana v= new Ventana (convertir(img2),0,0) ;
+           // Ventana v= new Ventana (convertir(img2),0,0) ;
             totalP = tamImg-countNonZero(img2);
             
             img=umbralizarImg(img,30,150) ;

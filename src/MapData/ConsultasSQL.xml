@@ -51,7 +51,8 @@
         and password=#{password:VARCHAR}
     </select>
     <select id="getPaciente" resultMap="resultPaciente" parameterType="Beans.Paciente">
-        SELECT * FROM paciente WHERE curp = #{curp};
+        SELECT idPaciente,curp,nombre,apPaterno,apMaterno,direccion,tipoSangre,sexo,fechaNac as fechaNacimiento, telefono
+        FROM paciente WHERE curp = #{curp};
     </select>
      <select id="getObservaciones" resultType="java.lang.String" parameterType="java.lang.Integer">
         SELECT observacion FROM observaciones WHERE idPaciente = #{value};

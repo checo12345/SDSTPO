@@ -516,7 +516,7 @@ private void recetaActionPerformed(java.awt.event.ActionEvent evt) {
             public void run() {
                 MedicoBean m = new MedicoBean();
                 m.setCedulaPrfesional(2013630337);
-//                new RegistroConsulta(m).setVisible(true);
+             // new RegistroConsulta(m).setVisible(true);
             }
         });
     }

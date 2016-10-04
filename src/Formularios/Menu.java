@@ -12,7 +12,10 @@ import Clases.Medico;
 import Clases.MedicoAdministrador;
 import Clases.ServicioRespuesta;
 import java.awt.GridLayout;
+import java.net.URL;
+import static javafx.scene.input.DataFormat.URL;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,6 +37,9 @@ public class Menu extends javax.swing.JFrame {
     public Menu(Sesion s) {
         this.sesion = s;
         initComponents();
+        
+
+
         if (sesion.getRol().equals("Administrador")) {
             medico = new MedicoAdministrador(s.getCedulaProfMedico());
         } else {
@@ -67,22 +73,36 @@ public class Menu extends javax.swing.JFrame {
         cerrarSes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1366, 800));
 
-        consulta.setText("Registrar Consulta");
+        consulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/consultaM.jpg"))); // NOI18N
+        consulta.setToolTipText("");
         consulta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 consultaMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                consultaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                consultaMouseExited(evt);
+            }
         });
 
-        gestionMed.setText("Gestionar Medicos");
+        gestionMed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/registrarPac.jpg"))); // NOI18N
         gestionMed.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 gestionMedMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                gestionMedMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                gestionMedMouseExited(evt);
+            }
         });
 
-        gestionarPac.setText("Gestionar Pacientes");
+        gestionarPac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/registroP.jpg"))); // NOI18N
         gestionarPac.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 gestionarPacMouseClicked(evt);
@@ -100,32 +120,34 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gestionarPac)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(consulta)
-                        .addGap(90, 90, 90)
-                        .addComponent(gestionMed)))
-                .addContainerGap(65, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cerrarSes)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(158, 158, 158)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gestionMed)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(consulta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1409, Short.MAX_VALUE)
+                        .addComponent(gestionarPac)
+                        .addGap(296, 296, 296))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cerrarSes)
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(consulta)
-                    .addComponent(gestionMed))
-                .addGap(41, 41, 41)
-                .addComponent(gestionarPac)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gestionarPac)
+                    .addComponent(consulta))
+                .addGap(183, 183, 183)
+                .addComponent(gestionMed)
+                .addContainerGap(1093, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,6 +225,34 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
         new inicioSesion().setVisible(true);
     }//GEN-LAST:event_cerrarSesMouseClicked
+
+    private void gestionMedMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionMedMouseEntered
+          String path = "/Imagenes/registrarPac1.jpg";  
+          URL url = this.getClass().getResource(path);  
+          ImageIcon icon = new ImageIcon(url);     
+          gestionMed.setIcon(icon);  
+    }//GEN-LAST:event_gestionMedMouseEntered
+
+    private void gestionMedMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionMedMouseExited
+        String path = "/Imagenes/registrarPac.jpg";  
+          URL url = this.getClass().getResource(path);  
+          ImageIcon icon = new ImageIcon(url);     
+          gestionMed.setIcon(icon);  
+    }//GEN-LAST:event_gestionMedMouseExited
+
+    private void consultaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultaMouseEntered
+          String path = "/Imagenes/consultaM1.jpg";  
+          URL url = this.getClass().getResource(path);  
+          ImageIcon icon = new ImageIcon(url);     
+          consulta.setIcon(icon); 
+    }//GEN-LAST:event_consultaMouseEntered
+
+    private void consultaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultaMouseExited
+        String path = "/Imagenes/consultaM.jpg";  
+          URL url = this.getClass().getResource(path);  
+          ImageIcon icon = new ImageIcon(url);     
+          consulta.setIcon(icon); 
+    }//GEN-LAST:event_consultaMouseExited
 
     /**
      * @param args the command line arguments

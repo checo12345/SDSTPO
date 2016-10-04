@@ -8,6 +8,8 @@ package Formularios;
 import Beans.Paciente;
 import Clases.PacienteClass;
 import Clases.ServicioRespuesta;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -36,10 +38,7 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         errorNombre3.setVisible(false);
         errorNombre4.setVisible(false);
         errorNombre5.setVisible(false);
-        errorNombre6.setVisible(false);
-        errorNombre7.setVisible(false);
         errorNombre8.setVisible(false);
-        errorNombre9.setVisible(false);
     }
 
     /**
@@ -79,13 +78,10 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         errorNombre5 = new javax.swing.JLabel();
         telefono = new javax.swing.JTextField();
-        errorNombre6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        errorNombre7 = new javax.swing.JLabel();
         curp = new javax.swing.JTextField();
         errorNombre8 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        errorNombre9 = new javax.swing.JLabel();
         sexo = new javax.swing.JTextField();
         pacienteLabel = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -96,6 +92,7 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 625));
 
         jScrollPane2.setViewportView(enfermedades);
 
@@ -205,15 +202,7 @@ public class RegistrarPaciente extends javax.swing.JDialog {
             }
         });
 
-        errorNombre6.setBackground(new java.awt.Color(255, 0, 0));
-        errorNombre6.setForeground(new java.awt.Color(255, 0, 0));
-        errorNombre6.setText("No se permiten numeros");
-
         jLabel7.setText("CURP:");
-
-        errorNombre7.setBackground(new java.awt.Color(255, 0, 0));
-        errorNombre7.setForeground(new java.awt.Color(255, 0, 0));
-        errorNombre7.setText("No se permiten numeros");
 
         curp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,10 +215,6 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         errorNombre8.setText("No se permiten numeros");
 
         jLabel8.setText("Sexo:");
-
-        errorNombre9.setBackground(new java.awt.Color(255, 0, 0));
-        errorNombre9.setForeground(new java.awt.Color(255, 0, 0));
-        errorNombre9.setText("No se permiten numeros");
 
         sexo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -272,15 +257,10 @@ public class RegistrarPaciente extends javax.swing.JDialog {
                         .addComponent(errorNombre3)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(pacienteLabel)
-                        .addGap(27, 27, 27)
-                        .addComponent(curpPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(306, 306, 306)
-                        .addComponent(errorNombre6)))
+                .addGap(191, 191, 191)
+                .addComponent(pacienteLabel)
+                .addGap(27, 27, 27)
+                .addComponent(curpPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -293,13 +273,21 @@ public class RegistrarPaciente extends javax.swing.JDialog {
                         .addGap(325, 325, 325))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(69, 69, 69)
+                                .addComponent(jButton1)
+                                .addGap(312, 312, 312))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(249, 249, 249))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
@@ -346,38 +334,27 @@ public class RegistrarPaciente extends javax.swing.JDialog {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(errorNombre8)
-                                                .addGap(0, 0, Short.MAX_VALUE))
+                                                .addGap(0, 46, Short.MAX_VALUE))
                                             .addComponent(sexo)
                                             .addComponent(tipoSangre)))))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(deloMun, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(281, 281, 281))
-                            .addComponent(jScrollPane1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(69, 69, 69)
-                                .addComponent(jButton1)
-                                .addGap(312, 312, 312))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addGap(249, 249, 249))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(222, 222, 222)
-                                .addComponent(errorNombre7)
-                                .addGap(94, 94, 94)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(187, 187, 187)
+                                        .addComponent(jLabel12)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel14)
-                                        .addGap(69, 69, 69)
-                                        .addComponent(errorNombre9)
-                                        .addGap(29, 29, 29)))))))
+                                        .addGap(137, 137, 137)))))))
                 .addGap(61, 61, 61))
         );
         layout.setVerticalGroup(
@@ -419,9 +396,7 @@ public class RegistrarPaciente extends javax.swing.JDialog {
                     .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(errorNombre6)
-                    .addComponent(errorNombre8))
+                .addComponent(errorNombre8)
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -431,9 +406,7 @@ public class RegistrarPaciente extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel12)
-                    .addComponent(errorNombre9)
-                    .addComponent(errorNombre7))
+                    .addComponent(jLabel12))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
@@ -578,14 +551,14 @@ public class RegistrarPaciente extends javax.swing.JDialog {
     }//GEN-LAST:event_sexoKeyPressed
 
     private void deloMunKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_deloMunKeyPressed
-        char c=evt.getKeyChar();
+        /*char c=evt.getKeyChar();
         if (Character.isDigit(c)){
             getToolkit().beep();
             evt.consume();
             errorNombre6.setVisible(true);
         }
         else
-        errorNombre6.setVisible(false);
+        errorNombre6.setVisible(false);*/
     }//GEN-LAST:event_deloMunKeyPressed
 
     private void buscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPacienteActionPerformed
@@ -605,6 +578,9 @@ public class RegistrarPaciente extends javax.swing.JDialog {
             enfermedades.setText(p.getPadecimientos());
             deloMun.setText(p.getDireccion());
             idPaciente=p.getIdPaciente() ;
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String convertido = formatter.format(p.getFechaNacimiento());
+            fechaNac.setText(convertido);
             //this.dispose() ;
             jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
 
@@ -643,10 +619,10 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
-       /* java.awt.EventQueue.invokeLater(new Runnable() {
+        /* Create and display the dialog 
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RegistrarPaciente dialog = new RegistrarPaciente(new javax.swing.JFrame(), true);
+                RegistrarPaciente dialog = new RegistrarPaciente(new javax.swing.JFrame(), true,2);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -673,10 +649,7 @@ private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JLabel errorNombre3;
     private javax.swing.JLabel errorNombre4;
     private javax.swing.JLabel errorNombre5;
-    private javax.swing.JLabel errorNombre6;
-    private javax.swing.JLabel errorNombre7;
     private javax.swing.JLabel errorNombre8;
-    private javax.swing.JLabel errorNombre9;
     public static javax.swing.JTextField fechaNac;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
