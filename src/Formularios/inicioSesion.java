@@ -27,8 +27,8 @@ public class inicioSesion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -43,7 +43,7 @@ public class inicioSesion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setToolTipText("hola");
+        jPanel1.setToolTipText("");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Inicio de Sesión");
@@ -79,9 +79,9 @@ public class inicioSesion extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(13, 13, 13)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(jPasswordField1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(62, 62, 62)))
@@ -99,7 +99,7 @@ public class inicioSesion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -146,16 +146,18 @@ public class inicioSesion extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         
-       /* try {
-            UIManager.setLookAndFeel(new UpperEssentialLookAndFeel("C:\\Users\\Sergio\\Desktop\\LibreriaUpperEssential\\Librerias\\Chocolate.theme"));
+        try {
+           UIManager.setLookAndFeel(new UpperEssentialLookAndFeel("C:\\Users\\Sergio\\Desktop\\LibreriaUpperEssential\\Librerias\\Checo.theme"));
         }catch (UnsupportedLookAndFeelException e )
         {
             
-        }*/
+        }
         //UIManager.setLookAndFeel(new UpperEssential());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new inicioSesion().setVisible(true);
+                inicioSesion sesion=  new inicioSesion();
+                sesion.setVisible(true);
+                sesion.setLocationRelativeTo(null);
             }
         });
     }
@@ -168,7 +170,7 @@ public class inicioSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JPanel jPanel1;
+    public static javax.swing.JPasswordField jPasswordField1;
     public static javax.swing.JTextField jTextField1;
-    public static javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

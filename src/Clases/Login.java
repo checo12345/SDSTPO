@@ -21,7 +21,7 @@ public class Login {
              ServicioDAO servicio = new ServicioDAO();
              Sesion user= new Sesion() ;
         
-             user.setPassword(inicioSesion.jTextField2.getText());
+             user.setPassword(inicioSesion.jPasswordField1.getText());
              user.setUsuario(inicioSesion.jTextField1.getText() );
              respuesta= servicio.autenticaUsuario(user) ;
              if ((!respuesta.isSuccess()) || respuesta.getResult() == null) {throw new SDTPOException("Ocurrio un error al iniciar Sesion");}

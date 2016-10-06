@@ -32,27 +32,20 @@
                   <Group type="102" attributes="0">
                       <Component id="gestionMed" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="historial" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="consulta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="1409" max="32767" attributes="0"/>
+                      <EmptySpace pref="1399" max="32767" attributes="0"/>
                       <Component id="gestionarPac" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="296" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="296" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="cerrarSes" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="historial" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="881" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <EmptySpace pref="2043" max="32767" attributes="0"/>
+              <Component id="cerrarSes" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -66,11 +59,12 @@
                   <Component id="gestionarPac" min="-2" max="-2" attributes="0"/>
                   <Component id="consulta" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
-              <Component id="historial" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-              <Component id="gestionMed" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="1093" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="gestionMed" min="-2" max="-2" attributes="0"/>
+                  <Component id="historial" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="1043" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,7 +73,7 @@
     <Component class="javax.swing.JLabel" name="consulta">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Imagenes/consultaM.jpg"/>
+          <Image iconType="3" name="/Imagenes/iconoConsulta.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
@@ -92,7 +86,7 @@
     <Component class="javax.swing.JLabel" name="gestionMed">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Imagenes/registrarPac.jpg"/>
+          <Image iconType="3" name="/Imagenes/iconoMedicos.png"/>
         </Property>
       </Properties>
       <Events>
@@ -104,27 +98,37 @@
     <Component class="javax.swing.JLabel" name="gestionarPac">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Imagenes/registroP.jpg"/>
+          <Image iconType="3" name="/Imagenes/RegPaciente.png"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="gestionarPacMouseClicked"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="gestionarPacMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="gestionarPacMouseExited"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="cerrarSes">
       <Properties>
-        <Property name="text" type="java.lang.String" value="cerrar sesion"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Imagenes/botonSesion.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cerrarSesMouseClicked"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cerrarSesMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cerrarSesMouseExited"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="historial">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Historial Clinico"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Imagenes/iconoHistorial.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="historialMouseClicked"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="historialMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="historialMouseExited"/>
       </Events>
     </Component>
   </SubComponents>
