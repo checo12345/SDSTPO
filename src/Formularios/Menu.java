@@ -71,6 +71,7 @@ public class Menu extends javax.swing.JFrame {
         gestionMed = new javax.swing.JLabel();
         gestionarPac = new javax.swing.JLabel();
         cerrarSes = new javax.swing.JLabel();
+        historial = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1366, 800));
@@ -116,14 +117,17 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        historial.setText("Historial Clinico");
+        historial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                historialMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cerrarSes)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(158, 158, 158)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,6 +139,15 @@ public class Menu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1409, Short.MAX_VALUE)
                         .addComponent(gestionarPac)
                         .addGap(296, 296, 296))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(cerrarSes)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(historial)
+                        .addGap(881, 881, 881))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +158,9 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(gestionarPac)
                     .addComponent(consulta))
-                .addGap(183, 183, 183)
+                .addGap(167, 167, 167)
+                .addComponent(historial)
+                .addGap(2, 2, 2)
                 .addComponent(gestionMed)
                 .addContainerGap(1093, Short.MAX_VALUE))
         );
@@ -254,6 +269,12 @@ public class Menu extends javax.swing.JFrame {
           consulta.setIcon(icon); 
     }//GEN-LAST:event_consultaMouseExited
 
+    private void historialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historialMouseClicked
+        this.setVisible(false);
+        ((Medico)medico).generarHistorial(this);
+        this.setVisible(true);
+    }//GEN-LAST:event_historialMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -294,5 +315,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel consulta;
     private javax.swing.JLabel gestionMed;
     private javax.swing.JLabel gestionarPac;
+    private javax.swing.JLabel historial;
     // End of variables declaration//GEN-END:variables
 }

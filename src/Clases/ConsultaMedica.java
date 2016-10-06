@@ -14,6 +14,7 @@ import DAO.ServicioDAO;
 import Excepciones.SDTPOException;
 import Formularios.RegistroReceta;
 import Formularios.RegistroReceta;
+import Formularios.VerReceta;
 import java.awt.Frame;
 import java.util.logging.Logger;
 import java.io.File;
@@ -40,7 +41,8 @@ public class ConsultaMedica {
     private Paciente paciente = null;
     private MedicoBean medico = null;
     private int id = 0;
-    private Imagen ojoDer=null,ojoIzq=null;
+    private Imagen ojoDer = null, ojoIzq = null;
+    
     public ServicioRespuesta validarMedico(MedicoBean medico) {
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: validarMedico() ============");
@@ -66,9 +68,18 @@ public class ConsultaMedica {
         }
         return respuesta;
     }
-    public ConsultaMedica(MedicoBean medico){
-        this.medico=medico;
+
+    public ConsultaMedica(MedicoBean medico) {
+        this.medico = medico;
     }
+    public ConsultaMedica(){
+        
+    }
+public boolean MostrarReceta(JDialog frame,int idConsulta){
+    VerReceta vr=new VerReceta(frame,true,idConsulta);
+    vr.setVisible(true);
+    return true;
+}
     public ServicioRespuesta validarPaciente(String curp) {
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: validarPaciente() ============");
@@ -83,7 +94,7 @@ public class ConsultaMedica {
             }
 
             paciente = (Paciente) respuesta.getResult();
-            System.out.println("SANGRE: "+paciente.getTipoSangre());
+            System.out.println("SANGRE: " + paciente.getTipoSangre());
         } catch (SDTPOException e) {
             logger.info("" + e.getMessage());
             respuesta.setSuccess(false);
@@ -126,10 +137,10 @@ public class ConsultaMedica {
         String expediente = "/" + paciente.getIdPaciente() + "_" + paciente.getNombre().replace(" ", "_") + "_" + paciente.getApellidoPaterno().replaceAll(" ", "_") + "_" + paciente.getApellidoMaterno().replaceAll(" ", "_") + "/Consulta_" + id + "_" + new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         File directorio = null;
         try {
-            
+
             Properties properties = Resources.getResourceAsProperties("configuracion.properties");
             // Cargar las propiedades del archivo
-            
+
             directorio = new File(properties.getProperty("directorio") + expediente);
             logger.info(directorio.toString());
             if (!directorio.exists()) {
@@ -154,23 +165,27 @@ public class ConsultaMedica {
         File Izquierdo = new File(ruta + "OjoIzquierdo.jpg");
         ojoDer.setRuta(Derecho.toString());
         ojoIzq.setRuta(Izquierdo.toString());
-        this.ojoDer=ojoDer;
-        this.ojoIzq=ojoIzq;
+        this.ojoDer = ojoDer;
+        this.ojoIzq = ojoIzq;
         try {
             ImageIO.write(ojoDer.getFotografia(), "jpg", Derecho);
             ImageIO.write(ojoIzq.getFotografia(), "jpg", Izquierdo);
             ServicioDAO servicio = new ServicioDAO();
-            ConsultaMedicaBean cmb=new ConsultaMedicaBean(new SimpleDateFormat("yyyy-MM-dd").format(new Date()),motivo,Izquierdo.toString(),Derecho.toString(),medico.getCedulaProfesional(),paciente.getIdPaciente());
-            respuesta=servicio.insertarConsulta(cmb);
-            logger.info("Se registro la consulta con el id: "+cmb.getIdConsulta());
-            id=cmb.getIdConsulta();
-            if((int)respuesta.getResult()==0){throw new SDTPOException("Ocurrio un error al insertar consulta");}
-            for(int i=0;i<manifestaciones.size();i++){
-                respuesta=servicio.insertarManifestacion(new ManifestacionBean((String)manifestaciones.getElementAt(i),id));
-                 if((int)respuesta.getResult()==0){throw new SDTPOException("Ocurrio un error al insertar una manifestacion");}
+            ConsultaMedicaBean cmb = new ConsultaMedicaBean(new SimpleDateFormat("yyyy-MM-dd").format(new Date()), motivo, Izquierdo.toString(), Derecho.toString(), medico.getCedulaProfesional(), paciente.getIdPaciente());
+            respuesta = servicio.insertarConsulta(cmb);
+            logger.info("Se registro la consulta con el id: " + cmb.getIdConsulta());
+            id = cmb.getIdConsulta();
+            if ((int) respuesta.getResult() == 0) {
+                throw new SDTPOException("Ocurrio un error al insertar consulta");
+            }
+            for (int i = 0; i < manifestaciones.size(); i++) {
+                respuesta = servicio.insertarManifestacion(new ManifestacionBean((String) manifestaciones.getElementAt(i), id));
+                if ((int) respuesta.getResult() == 0) {
+                    throw new SDTPOException("Ocurrio un error al insertar una manifestacion");
+                }
             }
         } catch (IOException e) {
-            
+
             logger.info("Error de escritura en las imagenes");
             respuesta.setSuccess(false);
         } catch (SDTPOException ex) {
@@ -179,22 +194,22 @@ public class ConsultaMedica {
         }
         return respuesta.isSuccess();
     }
-public boolean CrearReceta(JDialog frame){
-     RegistroReceta r=new RegistroReceta(frame,true,id);
-    
-                 
-                r.setVisible(true);
-        
-    
-    return true;
-}
+
+    public boolean CrearReceta(JDialog frame) {
+        RegistroReceta r = new RegistroReceta(frame, true, id);
+
+        r.setVisible(true);
+
+        return true;
+    }
+
     public static void main(String[] args) {
         try {
             File archivo = Resources.getResourceAsFile("configuracion.properties");
             System.out.println(archivo.toString());
             Properties properties = Resources.getResourceAsProperties("configuracion.properties");
             System.out.println(properties.getProperty("directorio"));
-            
+
         } catch (IOException ex) {
             Logger.getLogger(ConsultaMedica.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -6,6 +6,7 @@
 package Beans;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -25,9 +26,9 @@ public class ConsultaMedicaBean {
     private String motivoConsulta;
     private String ojoIzquierdo;
     private String ojoDerecho;
-    private String manifestaciones;
-    private int cedulaMedico;
-    private int idPaciente;
+    private List<String> manifestaciones;
+    private int    cedulaMedico;
+    private int    idPaciente;
 
     public int getCedulaMedico() {
         return cedulaMedico;
@@ -49,9 +50,9 @@ public class ConsultaMedicaBean {
         motivoConsulta="";
         ojoIzquierdo="";
         ojoDerecho="";
-        manifestaciones="";
+        manifestaciones=null;
     }
-    public ConsultaMedicaBean(String feCon,String motCon,String oIzq,String oDer,String man){
+    public ConsultaMedicaBean(String feCon,String motCon,String oIzq,String oDer,List<String> man){
         fechaConsulta=feCon;
         motivoConsulta=motCon;
         ojoIzquierdo=oIzq;
@@ -72,10 +73,10 @@ public class ConsultaMedicaBean {
     public String getMotivoConsulta(){return motivoConsulta;}
     public String getOjoIzquierdo(){return ojoIzquierdo;}
     public String getOjoDerecho(){return ojoDerecho;}
-    public String getManifestaciones(){return manifestaciones;}
+    public List<String> getManifestaciones(){return manifestaciones;}
     public void setFechaConsulta(String fec){fechaConsulta=fec;}
     public void setMotivoConsulta(String mot){motivoConsulta=mot;}
     public void setOjoIzquierdo(String oIzq){ojoIzquierdo=oIzq;}
     public void setOjoDerecho(String oDer){ojoDerecho=oDer;}
-    public void setManifestaciones(String man){manifestaciones=man;}
+    public void setManifestaciones(List<String> man){manifestaciones=man;}
 }

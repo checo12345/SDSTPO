@@ -37,6 +37,30 @@ public class RecetaMedica {
         this.idConsulta=idConsulta;
         
     }
+    public ServicioRespuesta obtenerReceta(){
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: obtenerReceta() ============");
+        try {
+            ServicioDAO servicio = new ServicioDAO();
+
+            respuesta = servicio.getReceta(idConsulta);
+            if ((!respuesta.isSuccess()) || respuesta.getResult() == null) {
+                throw new SDTPOException("Ocurrio un error al Buscar la Receta");
+            }
+
+            
+            logger.info("Receta Encontrada: "+((RecetaMedicaBean)respuesta.getResult()).getIdReceta());
+        } catch (SDTPOException e) {
+            logger.info("" + e.getMessage());
+            respuesta.setSuccess(false);
+            respuesta.setMensaje(e.getMessage());
+        } catch (Exception e) {
+            logger.info("###ERROR### " + e.getMessage());
+            respuesta.setSuccess(false);
+            respuesta.setMensaje(e.getMessage());
+        }
+        return respuesta;
+    }
     public ServicioRespuesta obtenerSiguienteIdReceta(){
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: obtenerSiguienteIdReceta() ============");

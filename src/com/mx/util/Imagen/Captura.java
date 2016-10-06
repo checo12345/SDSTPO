@@ -28,7 +28,7 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 public class Captura extends JPanel {
     private EmbeddedMediaPlayerComponent player=null;
     private BufferedImage ima=null;
-    private int i = 1;
+    private int i = 87;
     static{
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "C:\\Program Files\\VideoLAN\\VLC");
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
@@ -70,7 +70,7 @@ public class Captura extends JPanel {
         
         ima=player.getMediaPlayer().getSnapshot();
         try{
-        ImageIO.write(ima, "jpg",new File("C:\\Users\\Sergio\\Desktop\\Capturas\\fotoIPWebCam"+i+".jpg"));
+        ImageIO.write(ima, "jpg",new File("C:\\Users\\laloe\\Desktop\\Capturas\\fotoIPWebCam"+i+".jpg"));
         i++;
         }catch(Exception e){}
         this.parar();
@@ -94,7 +94,7 @@ class Frame extends JFrame implements ActionListener{
             frame.setLocationRelativeTo(null);//centrar en pantalla
             JButton b=new JButton("captura") ;
             b.addActionListener(this);
-            c=new Captura("192.168.43.51");
+            c=new Captura("192.168.43.7");
             c.setVisible(true);
             frame.getContentPane().add(c, java.awt.BorderLayout.CENTER);        
             frame.getContentPane().add(b, java.awt.BorderLayout.SOUTH);        

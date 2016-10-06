@@ -1088,4 +1088,96 @@ public class ServicioDAO extends MyBatisConnectionFactory {
         logger.info("************************" + respuesta + "************************");
         return respuesta;
     }
+    
+    public ServicioRespuesta getConsultas(String curp) {
+        logger.info("**********  SERVICIO METODO: getConsultas()**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+
+            respuesta.setMensaje("NOT EXECUTED");
+            respuesta.setSuccess(false);
+            sqlSession = getSQLSession();
+
+            List<ConsultaMedicaBean> list = sqlSession.selectList("sql.getAllConsultas",curp);
+            if (list != null) {
+                logger.info("Consultas encontradas: " + list.size());
+                for(ConsultaMedicaBean c:list){
+                    c.setManifestaciones(sqlSession.selectList("sql.getAllManifestaciones",c.getIdConsulta()));
+                    logger.info("Manifestaciones: "+c.getManifestaciones().size());
+                }
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Consultas encontrados: " + list.size());
+                respuesta.setResult(list);
+            } else {
+                logger.info("No se obtuvo respuesta de Consultas");
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("No se obtuvo respuesta de Consultas");
+            }
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
+
+    public ServicioRespuesta getReceta(int idConsulta) {
+        logger.info("**********  SERVICIO METODO: getReceta()**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+
+            respuesta.setMensaje("NOT EXECUTED");
+            respuesta.setSuccess(false);
+            sqlSession = getSQLSession();
+logger.info("buscando receta con idConsulta="+idConsulta);
+            RecetaMedicaBean receta  = sqlSession.selectOne("sql.selReceta",idConsulta);
+            if (receta != null) {
+                logger.info("Receta Encontrada: "+receta.getIdReceta());
+                
+                    receta.setMedicamentos(sqlSession.selectList("sql.getAllMedicamentosReceta",receta.getIdReceta()));
+                    logger.info("Medicamentos: "+receta.getMedicamentos().size());
+                
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Receta Encontrada: "+receta.getIdReceta());
+                respuesta.setResult(receta);
+            } else {
+                logger.info("No se obtuvo respuesta de Receta");
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("No se obtuvo respuesta de Receta");
+            }
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
 }

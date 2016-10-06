@@ -1,6 +1,6 @@
 package PDF;
 
-import com.itextpdf.text.Chunk;
+/*import com.itextpdf.text.Chunk;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -11,9 +11,9 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
 
-
+*/
 public class Informe {
-    public static void main(String[] a3d) throws FileNotFoundException, DocumentException
+  /*  public static void main(String[] a3d) throws FileNotFoundException, DocumentException
 	{
 		FileOutputStream archivo = new FileOutputStream("C:\\Users\\Sergio\\Desktop\\hola.pdf");
 		Document documento = new Document();
@@ -34,5 +34,5 @@ public class Informe {
                 }
                // documento.add(new Image("C:\\Users\\Sergio\\Desktop\\adaptador1.jpg"));
 		documento.close();
-	}
+	}*/
 }

@@ -6,17 +6,19 @@
 package Beans;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author David Pantaleón
  */
 public class RecetaMedicaBean {
-    private int idReceta;
+    private int    idReceta;
     private String recomendaciones;
     private String fecha;
-    private int idConsulta;
-
+    private int    idConsulta;
+    private List<Medicamento> medicamentos;
+    
     public RecetaMedicaBean() {
     }
 
@@ -25,6 +27,14 @@ public class RecetaMedicaBean {
         this.recomendaciones = recomendaciones;
         this.fecha = fecha;
         this.idConsulta = idConsulta;
+    }
+
+    public List<Medicamento> getMedicamentos() {
+        return medicamentos;
+    }
+
+    public void setMedicamentos(List<Medicamento> medicamentos) {
+        this.medicamentos = medicamentos;
     }
 
     public RecetaMedicaBean(String recomendaciones, String fecha, int idConsulta) {

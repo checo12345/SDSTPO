@@ -134,11 +134,11 @@ public class inicioSesion extends javax.swing.JFrame {
         this.dispose() ;
         jOptionPane1.showMessageDialog(null, "Sesion para el usuario", "Bienvenido",jOptionPane1.INFORMATION_MESSAGE);
 
-        this.hide();
+        
         Sesion s=(Sesion)respuesta.getResult();
         
         Menu mp=new Menu(s);
-        mp.show();
+        mp.setVisible(true);
         }else {
            jOptionPane1.showMessageDialog(null, "Acceso denegado:\n"+ "Por favor ingrese un usuario y/o contraseña correctos", "Acceso denegado",jOptionPane1.ERROR_MESSAGE);
         }

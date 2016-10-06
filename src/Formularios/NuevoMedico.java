@@ -638,9 +638,9 @@ private void limpiarCampos(){
         //</editor-fold>
 
         /* Create and display the dialog */
-      /*  java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NuevoMedico dialog = new NuevoMedico(new javax.swing.JFrame(), true);
+                NuevoMedico dialog = new NuevoMedico(new javax.swing.JFrame(), true,new MedicoAdministrador());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -649,7 +649,7 @@ private void limpiarCampos(){
                 });
                 dialog.setVisible(true);
             }
-        });*/
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

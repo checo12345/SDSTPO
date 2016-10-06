@@ -43,7 +43,37 @@
         <result property="rol" column="rol"/>
         <result property="cedulaProfMedico" column="cedulaProfMedico"/>
     </resultMap>
+    <resultMap id="resultConsulta" type="Beans.ConsultaMedicaBean">
+        <result property="fechaConsulta" column="fecha"/>
+        <result property="motivoConsulta" column="motivo"/>
+        <result property="ojoIzquierdo" column="imgOjoIzq"/>
+        <result property="ojoDerecho" column="imgOjoDer"/>
+        <result property="idConsulta" column="idConsulta"/>
+        <result property="cedulaMedico" column="cedProfMed"/>
+        <result property="idPaciente" column="idPaciente"/>
+    </resultMap>
+    <resultMap id="resultReceta" type="Beans.RecetaMedicaBean">
+        <result property="idReceta" column="idReceta"/>
+        <result property="recomendaciones" column="recomendaciones"/>
+        <result property="fecha" column="fecha"/>
+        <result property="idConsulta" column="idConsulta"/>
+       
+       
+       
+    </resultMap>
     <!-- AQUI VAN TODOS LOS SELECT-->
+    <select id="selReceta" parameterType="java.lang.Integer" resultMap="resultReceta">
+	select * 
+	from recetamedica
+	where idConsulta=#{value};
+        
+    </select>
+    <select id="sql.getAllMedicamentosReceta" resultMap="resultMedicamento" parameterType="java.lang.Integer">
+        select medicamento.idMedicamento,nombre,presentacion,recetamedicamedicamento.dosis 
+        from recetamedicamedicamento, medicamento 
+        where recetamedicamedicamento.idMedicamento=medicamento.idMedicamento and 
+        recetamedicamedicamento.idReceta=#{value};
+    </select>
     <select id="obtenerUsuario" parameterType="Beans.Sesion" resultType="Beans.Sesion">
 	select * 
 	from sesion
@@ -80,6 +110,12 @@
     </select>
     <select id="getAllMedicamento" resultMap="resultMedicamento">
         SELECT * FROM medicamento
+    </select>
+    <select id="getAllConsultas" resultMap="resultConsulta" parameterType="java.lang.String">
+        select * from consultamedica where idPaciente=(select idPaciente from paciente where curp=#{value});
+    </select>
+    <select id="getAllManifestaciones" resultType="java.lang.String" parameterType="java.lang.Integer">
+        select manifestacion from manifestacionconsulta where idConsulta=#{value};
     </select>
     <select id="getUsuario" parameterType="Beans.Sesion" resultType="Beans.Sesion">
         select * from sesion where usuario=#{usuario:VARCHAR} and password=#{password:VARCHAR}
