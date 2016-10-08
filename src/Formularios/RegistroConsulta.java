@@ -190,7 +190,7 @@ private int opcioncapturador2=0;
         });
 
         receta.setText("Crear Receta");
-        receta.setEnabled(false);
+        //receta.setEnabled(false);
         receta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 recetaActionPerformed(evt);

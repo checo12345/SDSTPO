@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class RecetaMedicaBean {
     private int    idReceta;
-    private String recomendaciones;
+    private String recomendaciones,nombrePaciente,proximaCita,nombreResponsable,especialidadResp,cedulaResp;
     private String fecha;
     private int    idConsulta;
     private List<Medicamento> medicamentos;
@@ -32,7 +32,7 @@ public class RecetaMedicaBean {
     public List<Medicamento> getMedicamentos() {
         return medicamentos;
     }
-
+    
     public void setMedicamentos(List<Medicamento> medicamentos) {
         this.medicamentos = medicamentos;
     }
@@ -74,5 +74,46 @@ public class RecetaMedicaBean {
     public void setIdConsulta(int idConsulta) {
         this.idConsulta = idConsulta;
     }
+    
+    public void setNombrePaciente(String NombrePaciente) {
+        this.nombrePaciente = NombrePaciente;
+    }
+
+    public String getNombrePaciente() {
+        return nombrePaciente;
+    }
+
+    public String getProximaCita() {
+        return proximaCita;
+    }
+
+    public void setProximaCita(String proximaCita) {
+        this.proximaCita = proximaCita;
+    }
+
+    public String getNombreResponsable() {
+        return nombreResponsable;
+    }
+
+    public void setNombreResponsable(String nombreResponsable) {
+        this.nombreResponsable = nombreResponsable;
+    }
+
+    public String getEspecialidadResp() {
+        return especialidadResp;
+    }
+
+    public void setEspecialidadResp(String especialidadResp) {
+        this.especialidadResp = especialidadResp;
+    }
+
+    public String getCedulaResp() {
+        return cedulaResp;
+    }
+
+    public void setCedulaResp(String cedulaResp) {
+        this.cedulaResp = cedulaResp;
+    }
+    
     
 }
