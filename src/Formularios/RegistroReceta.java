@@ -25,11 +25,13 @@ import javax.swing.table.DefaultTableModel;
  * @author laloe
  */
 public class RegistroReceta extends javax.swing.JDialog {
-RecetaMedica receta = null;
+
+    RecetaMedica receta = null;
     List<Medicamento> listaMedicamentos = null;
     ArrayList<Medicamento> listaMedicamentosSel;
     Vector columnas = null;
-    boolean completado=false;
+    boolean completado = false;
+
     /**
      * Creates new form RecetaMedica2
      */
@@ -39,7 +41,7 @@ RecetaMedica receta = null;
         listaMedicamentosSel = new ArrayList<>();
         receta = new RecetaMedica(idConsulta);
         fecha.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        
+        this.setTitle("Registro de Receta de la consulta: " + idConsulta);
         cargarMedicamentos();
         columnas = new Vector();
         columnas.add("Id");
@@ -47,7 +49,7 @@ RecetaMedica receta = null;
         columnas.add("Presentacion");
         columnas.add("dosis");
         llenarTabla();
-        
+
     }
 
     /**
@@ -197,23 +199,32 @@ RecetaMedica receta = null;
     }// </editor-fold>//GEN-END:initComponents
 
     private void registrarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarRecetaActionPerformed
-        boolean respuesta=receta.registrarReceta(recomendaciones.getText(),listaMedicamentosSel);
-        if(respuesta==true){
-            JOptionPane.showMessageDialog(null, "Registro de la Receta exitoso", "Registro Completado",
-                JOptionPane.INFORMATION_MESSAGE);
-            completado=true;
-            this.dispose();
+
+        if (listaMedicamentosSel.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se ha introducido ningun medicamento", "Registro No Completado",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (recomendaciones.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "No se ha introducido alguna recomendacion", "Registro No Completado",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            boolean respuesta = receta.registrarReceta(recomendaciones.getText(), listaMedicamentosSel);
+            if (respuesta == true) {
+                JOptionPane.showMessageDialog(null, "Registro de la Receta exitoso", "Registro Completado",
+                        JOptionPane.INFORMATION_MESSAGE);
+                completado = true;
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_registrarRecetaActionPerformed
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        
+
         if (dosis.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingresar dosis para el medicamento seleccionado", "Dosis no introducida",
-                JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
         } else if (comboMedicamentos.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Seleccionar un Medicamento", "Medicamento no Seleccionado",
-                JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
         } else {
             Medicamento m = listaMedicamentos.get(comboMedicamentos.getSelectedIndex());
             Medicamento mnuevo = new Medicamento(m.getIdMedicamento(), m.getNombre(), m.getPresentacion(), dosis.getText());
@@ -224,7 +235,7 @@ RecetaMedica receta = null;
             dosis.setText("");
         }
     }//GEN-LAST:event_agregarActionPerformed
-private void cargarMedicamentos() {
+    private void cargarMedicamentos() {
         comboMedicamentos.removeAllItems();
         ServicioRespuesta respuesta = receta.obtenerMedicamentos();
         if (respuesta.isSuccess()) {
@@ -235,7 +246,8 @@ private void cargarMedicamentos() {
             comboMedicamentos.setSelectedIndex(-1);
         }
     }
-private void llenarTabla() {
+
+    private void llenarTabla() {
         DefaultTableModel datos = new DefaultTableModel();
         for (int i = 0; i < columnas.size(); i++) {
             datos.addColumn(columnas.get(i));
@@ -255,30 +267,30 @@ private void llenarTabla() {
         JPanel panel = new JPanel();
         JTextField nombre = new JTextField();
         JTextField presentacion = new JTextField();
-        JLabel name=new JLabel("Nombre: ");
-        JLabel present=new JLabel("Presentación: ");
+        JLabel name = new JLabel("Nombre: ");
+        JLabel present = new JLabel("Presentación: ");
 
         panel.setLayout(new GridLayout(2, 2));
         panel.add(name);
         panel.add(nombre);
         panel.add(present);
         panel.add(presentacion);
-        int desicion=JOptionPane.showOptionDialog(null, panel,"Crear Medicamento", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE, null, null, null);
-        if(desicion==0){
-            if(nombre.getText().equals("")&&presentacion.getText().equals("")){
+        int desicion = JOptionPane.showOptionDialog(null, panel, "Crear Medicamento", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+        if (desicion == 0) {
+            if (nombre.getText().equals("") && presentacion.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos Los campos deben estar llenos ", "No se realizo el registro",
-                    JOptionPane.ERROR_MESSAGE);
-            }
-            else{
-                Medicamento medic=new Medicamento();
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                Medicamento medic = new Medicamento();
                 medic.setNombre(nombre.getText());
                 System.out.println(nombre.getText());
                 medic.setPresentacion(presentacion.getText());
                 System.out.println(presentacion.getText());
-                ServicioRespuesta respuesta=receta.crearMedicamento(medic);
-                if(respuesta.isSuccess()){
-                JOptionPane.showMessageDialog(null, "El medicamento se registro exitosamente", "Registro Completado",
-                    JOptionPane.INFORMATION_MESSAGE);}
+                ServicioRespuesta respuesta = receta.crearMedicamento(medic);
+                if (respuesta.isSuccess()) {
+                    JOptionPane.showMessageDialog(null, "El medicamento se registro exitosamente", "Registro Completado",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
                 cargarMedicamentos();
             }
         }
@@ -316,15 +328,15 @@ private void llenarTabla() {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-              /*  RegistroReceta dialog = new RegistroReceta(new javax.swing.JFrame(), true,3);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-                */
+                /*  RegistroReceta dialog = new RegistroReceta(new javax.swing.JFrame(), true,3);
+                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                 @Override
+                 public void windowClosing(java.awt.event.WindowEvent e) {
+                 System.exit(0);
+                 }
+                 });
+                 dialog.setVisible(true);
+                 */
             }
         });
     }

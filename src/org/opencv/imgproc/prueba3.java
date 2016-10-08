@@ -42,7 +42,7 @@ class Procesar3 {
     private Mat imagen, imagenCopia, imagenCopia1;
 
     public Procesar3() {
-        for(int i=1;i<=28;i++){
+        for(int i=1;i<=71;i++){
         imagen = Highgui.imread("C:\\Users\\laloe\\Desktop\\Probar\\fotoIPWebCam"+i+".jpg", Highgui.CV_LOAD_IMAGE_COLOR);
         //imagenCopia = Highgui.imread("C:\\Users\\laloe\\Desktop\\Probar\\fotoIPWebCam1.jpg", Highgui.CV_LOAD_IMAGE_COLOR);
         
@@ -57,7 +57,7 @@ class Procesar3 {
                 if (pupila!=null)
                     Core.circle(imagen, new Point(pupila[0], pupila[1]), (int) pupila[2], new Scalar(255, 0, 0), 3);
                 new Ventana(convertir(imagen),0,0);
-                sleep(100);
+                sleep(500);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Procesar3.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -201,7 +201,7 @@ class Procesar3 {
 
         /*Transformada Hough*/
         //System.out.println(circlesList);
-        return TransfHough(img, 1, 200, 1, 10, 30, 45);
+        return TransfHough(img, 1, 200, 1, 10, 30, 70);
     }
     private Image convertir(Mat imagen) {
         MatOfByte matOfByte = new MatOfByte();
