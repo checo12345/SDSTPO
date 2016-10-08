@@ -6,13 +6,62 @@ import Excepciones.SDTPOException;
 import Formularios.RegistrarPaciente;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
 /**
  *
  * @author Sergio
  */
 public class PacienteClass {
     private static final Logger logger = Logger.getLogger("PacienteClass:");
+    
+    public ServicioRespuesta validarPaciente()
+    {
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: validarPaciente() ============");
+        try {
+                String cadena="" ;
+                boolean estaVacio=false ;
+                
+             if (RegistrarPaciente.nombre.getText().length()==0)
+                  estaVacio=true;
+             if (RegistrarPaciente.apellidoP.getText().length()==0)
+                  estaVacio=true;
+             if (RegistrarPaciente.apellidoM.getText().length()==0)
+                  estaVacio=true;
+             if (RegistrarPaciente.fechaNac.getText().length()==0)
+                  estaVacio=true;
+             if (RegistrarPaciente.alergias.getText().length()==0)
+                  estaVacio=true;
+             if (RegistrarPaciente.deloMun.getText().length()==0)
+                  estaVacio=true;
+             if (RegistrarPaciente.telefono.getText().length()==0)
+                  estaVacio=true;
+             if (RegistrarPaciente.enfermedades.getText().length()==0)
+                  estaVacio=true;
+             if (RegistrarPaciente.observaciones.getText().length()==0)
+                  estaVacio=true;
+             if (RegistrarPaciente.curp.getText().length()==0)
+                  estaVacio=true;
+             
+             
+             cadena=(String)RegistrarPaciente.sexo.getSelectedItem();
+             if (cadena.length()==0)
+                  estaVacio=true;
+
+             cadena=(String)RegistrarPaciente.tipoSangre.getSelectedItem();
+             if (cadena.length()==0)
+                  estaVacio=true;;
+             
+             respuesta.setSuccess(estaVacio);
+        } catch (Exception e) {
+	  logger.info("###ERROR### " + e.getMessage());
+	  respuesta.setSuccess(false);
+	  respuesta.setMensaje(e.getMessage());
+	}
+        return respuesta;
+    }
     
     public ServicioRespuesta registrarPaciente()
     {
@@ -21,18 +70,19 @@ public class PacienteClass {
         try {
              ServicioDAO servicio = new ServicioDAO();
              Paciente regPaciente= new Paciente() ;
-             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-             Date fechaNac=formatter.parse(RegistrarPaciente.fechaNac.getText());
+             /*SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yy");
+             logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============FECHA: "+RegistrarPaciente.fechaNac.getText());
+             Date fechaNac=formatter.parse(RegistrarPaciente.fechaNac.getText());*/
              regPaciente.setNombre(RegistrarPaciente.nombre.getText());
              regPaciente.setApellidoPaterno(RegistrarPaciente.apellidoP.getText());
              regPaciente.setApellidoMaterno(RegistrarPaciente.apellidoM.getText());
-             regPaciente.setFechaNacimiento(fechaNac);
+             regPaciente.setFechaNacimiento(RegistrarPaciente.fechaNac.getText());
              regPaciente.setAlergia(RegistrarPaciente.alergias.getText());
              regPaciente.setDireccion(RegistrarPaciente.deloMun.getText());
              regPaciente.setTelefono(RegistrarPaciente.telefono.getText());
-             regPaciente.setSexo(RegistrarPaciente.sexo.getText());
+             regPaciente.setSexo((String)RegistrarPaciente.sexo.getSelectedItem());
              regPaciente.setPadecimientos(RegistrarPaciente.enfermedades.getText());
-             regPaciente.setTipoSangre(RegistrarPaciente.tipoSangre.getText());
+             regPaciente.setTipoSangre((String)RegistrarPaciente.tipoSangre.getSelectedItem());
              regPaciente.setObservacion(RegistrarPaciente.observaciones.getText());
              regPaciente.setCurp(RegistrarPaciente.curp.getText());
              
@@ -110,18 +160,19 @@ public class PacienteClass {
              ServicioDAO servicio = new ServicioDAO();
              Paciente regPaciente= new Paciente() ;
              regPaciente.setIdPaciente(idPaciente);
-             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-             Date fechaNac=formatter.parse(RegistrarPaciente.fechaNac.getText());
+            /* SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yy");
+             Date fechaNac=formatter.parse(RegistrarPaciente.fechaNac.getText());*/
              regPaciente.setNombre(RegistrarPaciente.nombre.getText());
              regPaciente.setApellidoPaterno(RegistrarPaciente.apellidoP.getText());
              regPaciente.setApellidoMaterno(RegistrarPaciente.apellidoM.getText());
-             regPaciente.setFechaNacimiento(fechaNac);
+             regPaciente.setFechaNacimiento(RegistrarPaciente.fechaNac.getText());
+             
              regPaciente.setAlergia(RegistrarPaciente.alergias.getText());
              regPaciente.setDireccion(RegistrarPaciente.deloMun.getText());
              regPaciente.setTelefono(RegistrarPaciente.telefono.getText());
-             regPaciente.setSexo(RegistrarPaciente.sexo.getText());
+             regPaciente.setSexo((String)RegistrarPaciente.sexo.getSelectedItem());
              regPaciente.setPadecimientos(RegistrarPaciente.enfermedades.getText());
-             regPaciente.setTipoSangre(RegistrarPaciente.tipoSangre.getText());
+             regPaciente.setTipoSangre((String)RegistrarPaciente.tipoSangre.getSelectedItem());
              regPaciente.setObservacion(RegistrarPaciente.observaciones.getText());
              regPaciente.setCurp(RegistrarPaciente.curp.getText());
              

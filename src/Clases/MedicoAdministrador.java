@@ -35,7 +35,7 @@ public class MedicoAdministrador extends Medico {
         super();
     }
 
-    public void cargarInfoMedico(String nombre, String apeP, String apeM, Date f_nac, String tel, String dir, String sex, String espe, int cedula_prof, String usuario, String password, String Rol) {
+    public void cargarInfoMedico(String nombre, String apeP, String apeM, String f_nac, String tel, String dir, String sex, String espe, int cedula_prof, String usuario, String password, String Rol) {
         m = new MedicoBean();
         m.setNombre(nombre);
         m.setApellidoPaterno(apeP);
@@ -75,7 +75,10 @@ public class MedicoAdministrador extends Medico {
 
     public boolean actualizarPaciente(JFrame frame) {
         RegistrarPaciente rp=new RegistrarPaciente(frame, true, 2);
+        rp.setLocationRelativeTo(null);
+        rp.setSize(1100, 750);
         rp.setVisible(true);
+       
         return true;
     }
 }

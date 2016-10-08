@@ -39,15 +39,16 @@ public boolean mostrarConsulta(JDialog frame,ConsultaMedicaBean consulta,String 
     public Medico(){}
     public boolean GenerarConsulta(JFrame frame){
         RegistroConsulta r=new RegistroConsulta(frame,true,medico);
-    
-                 
-                r.setVisible(true);
+        r.setVisible(true);
         return true;
     }
     
     public boolean registrarPaciente(JFrame frame) {
         RegistrarPaciente rp=new RegistrarPaciente(frame, true, 1);
+        rp.setSize(1100, 700);
+        rp.setLocationRelativeTo(null);
         rp.setVisible(true);
+        
         return true;
     }
     public static void main(String[] args){

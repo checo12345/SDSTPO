@@ -147,7 +147,7 @@ public class inicioSesion extends javax.swing.JFrame {
     public static void main(String args[]) {
         
         try {
-           UIManager.setLookAndFeel(new UpperEssentialLookAndFeel("C:\\Users\\Sergio\\Desktop\\LibreriaUpperEssential\\Librerias\\Checo.theme"));
+           UIManager.setLookAndFeel(new UpperEssentialLookAndFeel("C:\\Users\\Sergio\\Desktop\\Checo1.theme"));
         }catch (UnsupportedLookAndFeelException e )
         {
             

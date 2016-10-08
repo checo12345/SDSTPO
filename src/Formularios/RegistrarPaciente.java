@@ -31,14 +31,13 @@ public class RegistrarPaciente extends javax.swing.JDialog {
             pacienteLabel.setVisible(false);
             buscarPaciente.setVisible(false);
             jButton1.setText("Registrar");
+            jButton1.setEnabled(true);
+            titulo.setText("RESGISTRAR PACIENTE");
         }
         errorNombre.setVisible(false);
         errorNombre1.setVisible(false);
         errorNombre2.setVisible(false);
-        errorNombre3.setVisible(false);
-        errorNombre4.setVisible(false);
-        errorNombre5.setVisible(false);
-        errorNombre8.setVisible(false);
+//        errorNombre4.setVisible(false);
     }
 
     /**
@@ -52,7 +51,6 @@ public class RegistrarPaciente extends javax.swing.JDialog {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         enfermedades = new javax.swing.JTextPane();
-        tipoSangre = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         alergias = new javax.swing.JTextPane();
         jLabel14 = new javax.swing.JLabel();
@@ -60,7 +58,6 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         nombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         observaciones = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -72,17 +69,11 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         apellidoM = new javax.swing.JTextField();
         errorNombre2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        fechaNac = new javax.swing.JTextField();
-        errorNombre3 = new javax.swing.JLabel();
-        errorNombre4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        errorNombre5 = new javax.swing.JLabel();
         telefono = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         curp = new javax.swing.JTextField();
-        errorNombre8 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        sexo = new javax.swing.JTextField();
         pacienteLabel = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         curpPaciente = new javax.swing.JTextField();
@@ -90,22 +81,15 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         buscarPaciente = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        sexo = new javax.swing.JComboBox();
+        tipoSangre = new javax.swing.JComboBox();
+        titulo = new javax.swing.JLabel();
+        fechaNac = new datechooser.beans.DateChooserCombo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 625));
+        setPreferredSize(new java.awt.Dimension(1100, 630));
 
         jScrollPane2.setViewportView(enfermedades);
-
-        tipoSangre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoSangreActionPerformed(evt);
-            }
-        });
-        tipoSangre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tipoSangreKeyPressed(evt);
-            }
-        });
 
         jScrollPane3.setViewportView(alergias);
 
@@ -128,11 +112,10 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         observaciones.setRows(5);
         jScrollPane1.setViewportView(observaciones);
 
-        jLabel1.setText("INGRESE LOS DATOS GENERALES DEL PACIENTE A REGISTRAR");
-
         jLabel2.setText("Nombre Completo:");
 
         jButton1.setText("Modificar");
+        jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -142,6 +125,11 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         jLabel3.setText("Apellido Paterno:");
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         apellidoP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -171,25 +159,7 @@ public class RegistrarPaciente extends javax.swing.JDialog {
 
         jLabel5.setText("Fecha de Nacimiento:");
 
-        fechaNac.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                fechaNacKeyPressed(evt);
-            }
-        });
-
-        errorNombre3.setBackground(new java.awt.Color(255, 0, 0));
-        errorNombre3.setForeground(new java.awt.Color(255, 0, 0));
-        errorNombre3.setText("No se permiten letras");
-
-        errorNombre4.setBackground(new java.awt.Color(255, 0, 0));
-        errorNombre4.setForeground(new java.awt.Color(255, 0, 0));
-        errorNombre4.setText("No se permiten letras");
-
         jLabel6.setText("Telefono:");
-
-        errorNombre5.setBackground(new java.awt.Color(255, 0, 0));
-        errorNombre5.setForeground(new java.awt.Color(255, 0, 0));
-        errorNombre5.setText("No se permiten numeros");
 
         telefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,17 +180,7 @@ public class RegistrarPaciente extends javax.swing.JDialog {
             }
         });
 
-        errorNombre8.setBackground(new java.awt.Color(255, 0, 0));
-        errorNombre8.setForeground(new java.awt.Color(255, 0, 0));
-        errorNombre8.setText("No se permiten numeros");
-
         jLabel8.setText("Sexo:");
-
-        sexo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                sexoKeyPressed(evt);
-            }
-        });
 
         pacienteLabel.setText("INGRESAR CURP DEL PACIENTE A MODIFICAR:");
 
@@ -243,42 +203,29 @@ public class RegistrarPaciente extends javax.swing.JDialog {
 
         jLabel13.setText("Tipo de Sangre:");
 
+        sexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MASCULINO", "FEMENINO" }));
+
+        tipoSangre.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A+", "A-", "B+", "B-", "O+", "O-" }));
+
+        titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        titulo.setText("MODIFICAR PACIENTE");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(errorNombre))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(errorNombre3)))
+                .addGap(202, 202, 202)
+                .addComponent(errorNombre)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addComponent(pacienteLabel)
-                .addGap(27, 27, 27)
-                .addComponent(curpPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(errorNombre4)
-                        .addGap(466, 466, 466))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(325, 325, 325))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(312, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton2)
-                                .addGap(69, 69, 69)
+                                .addGap(165, 165, 165)
                                 .addComponent(jButton1)
                                 .addGap(312, 312, 312))
                             .addGroup(layout.createSequentialGroup()
@@ -287,7 +234,24 @@ public class RegistrarPaciente extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deloMun, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(187, 187, 187)
+                                        .addComponent(jLabel12)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel14)
+                                        .addGap(137, 137, 137))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
@@ -295,9 +259,9 @@ public class RegistrarPaciente extends javax.swing.JDialog {
                                         .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel6)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -306,98 +270,86 @@ public class RegistrarPaciente extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(buscarPaciente)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(apellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(errorNombre1)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(errorNombre2)
-                                            .addComponent(apellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(errorNombre1)
+                                                .addGap(136, 136, 136))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(apellidoP)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel4)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(10, 10, 10)
-                                                .addComponent(errorNombre5))))
+                                                .addComponent(apellidoM))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(errorNombre2)
+                                                .addGap(22, 22, 22))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel13)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel7)
-                                                .addGap(27, 27, 27)
-                                                .addComponent(curp, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(curp, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jLabel8)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(errorNombre8)
-                                                .addGap(0, 46, Short.MAX_VALUE))
-                                            .addComponent(sexo)
-                                            .addComponent(tipoSangre)))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(deloMun, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(281, 281, 281))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(187, 187, 187)
-                                        .addComponent(jLabel12)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addGap(137, 137, 137)))))))
+                                            .addComponent(sexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(tipoSangre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
                 .addGap(61, 61, 61))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(pacienteLabel)
+                        .addGap(27, 27, 27)
+                        .addComponent(curpPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(buscarPaciente)
+                        .addGap(195, 195, 195))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(titulo)
+                        .addGap(418, 418, 418))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pacienteLabel)
                     .addComponent(curpPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscarPaciente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(errorNombre)
-                    .addComponent(errorNombre1)
-                    .addComponent(errorNombre2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(apellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(apellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(errorNombre3)
-                    .addComponent(errorNombre4)
-                    .addComponent(errorNombre5))
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(curp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(errorNombre8)
-                .addGap(4, 4, 4)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(errorNombre)
+                            .addComponent(errorNombre1)
+                            .addComponent(errorNombre2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(apellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(apellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(curp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel5)
+                            .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(fechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(deloMun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -425,21 +377,6 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tipoSangreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoSangreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipoSangreActionPerformed
-
-    private void tipoSangreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tipoSangreKeyPressed
-        char c=evt.getKeyChar();
-        if (Character.isDigit(c)){
-            getToolkit().beep();
-            evt.consume();
-            errorNombre8.setVisible(true);
-        }
-        else
-        errorNombre8.setVisible(false);
-    }//GEN-LAST:event_tipoSangreKeyPressed
-
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreActionPerformed
@@ -461,13 +398,21 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         ServicioRespuesta respuesta ;
         if (jButton1.getText().contains("Registrar"))
         {
-            respuesta=paciente.registrarPaciente() ;
-            if(respuesta.isSuccess()){
-                this.dispose() ;
-                jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
-            }else {
+            respuesta=paciente.validarPaciente() ;
+            if (respuesta.isSuccess())
+                jOptionPane1.showMessageDialog(null, "Faltan Campos por Llenar", "ALERTA",jOptionPane1.INFORMATION_MESSAGE);
+             else
+            {
+                respuesta=paciente.registrarPaciente() ;
+                if(respuesta.isSuccess()){
+                    this.dispose() ;
+                    jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
+                }else {
                 jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.ERROR_MESSAGE);
+                }
             }
+            
+            
         }
         else
         {
@@ -509,46 +454,24 @@ public class RegistrarPaciente extends javax.swing.JDialog {
         errorNombre2.setVisible(false);
     }//GEN-LAST:event_apellidoMKeyPressed
 
-    private void fechaNacKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaNacKeyPressed
-        char c=evt.getKeyChar();
-        if (Character.isLetter(c)){
-            getToolkit().beep();
-            evt.consume();
-            errorNombre3.setVisible(true);
-        }
-        else
-        errorNombre3.setVisible(false);
-    }//GEN-LAST:event_fechaNacKeyPressed
-
     private void telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_telefonoActionPerformed
 
     private void telefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyPressed
-        char c=evt.getKeyChar();
+       /* char c=evt.getKeyChar();
         if (Character.isLetter(c)){
             getToolkit().beep();
             evt.consume();
             errorNombre4.setVisible(true);
         }
         else
-        errorNombre4.setVisible(false);
+        errorNombre4.setVisible(false);*/
     }//GEN-LAST:event_telefonoKeyPressed
 
     private void curpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_curpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_curpActionPerformed
-
-    private void sexoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sexoKeyPressed
-        char c=evt.getKeyChar();
-        if (Character.isDigit(c)){
-            getToolkit().beep();
-            evt.consume();
-            errorNombre5.setVisible(true);
-        }
-        else
-        errorNombre5.setVisible(false);
-    }//GEN-LAST:event_sexoKeyPressed
 
     private void deloMunKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_deloMunKeyPressed
         /*char c=evt.getKeyChar();
@@ -568,9 +491,27 @@ public class RegistrarPaciente extends javax.swing.JDialog {
             Paciente p =(Paciente) respuesta.getResult() ;
             nombre.setText(p.getNombre());
             observaciones.setText(p.getObservacion());
-            sexo.setText(p.getSexo());
+            int opSexo ,opTipoSangre;
+            
+            if (p.getSexo().contains("MASCULINO"))
+                opSexo=0;
+            else
+                opSexo=1;
+            
+            if (p.getSexo().contains("A"))
+                opTipoSangre=0;
+            else if(p.getSexo().contains("B+"))
+                opTipoSangre=1;
+            else if(p.getSexo().contains("B-"))
+                opTipoSangre=2;
+            else if(p.getSexo().contains("O+"))
+                opTipoSangre=3;
+            else
+                opTipoSangre=4;
+            
+            sexo.setSelectedIndex(opSexo);
             telefono.setText(p.getTelefono());
-            tipoSangre.setText(p.getTipoSangre()); ;
+            tipoSangre.setSelectedIndex(opTipoSangre);
             alergias.setText(p.getAlergia());
             apellidoM.setText(p.getApellidoMaterno());
             apellidoP.setText(p.getApellidoPaterno());
@@ -578,19 +519,21 @@ public class RegistrarPaciente extends javax.swing.JDialog {
             enfermedades.setText(p.getPadecimientos());
             deloMun.setText(p.getDireccion());
             idPaciente=p.getIdPaciente() ;
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String convertido = formatter.format(p.getFechaNacimiento());
-            fechaNac.setText(convertido);
+           /* SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String convertido = formatter.format(p.getFechaNacimiento());*/
+            fechaNac.setText(p.getFechaNacimiento());
             //this.dispose() ;
             jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
-
-            //Formulario1 formformulario1 = new Formulario1();
-            //formformulario1.setVisible(true);
+            jButton1.setEnabled(true);
 
         }else {
             jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_buscarPacienteActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -618,8 +561,9 @@ public class RegistrarPaciente extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(RegistrarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the dialog 
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 RegistrarPaciente dialog = new RegistrarPaciente(new javax.swing.JFrame(), true,2);
@@ -631,7 +575,7 @@ public class RegistrarPaciente extends javax.swing.JDialog {
                 });
                 dialog.setVisible(true);
             }
-        });*/
+        });
     }
 private javax.swing.JOptionPane jOptionPane1;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -646,14 +590,9 @@ private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JLabel errorNombre;
     private javax.swing.JLabel errorNombre1;
     private javax.swing.JLabel errorNombre2;
-    private javax.swing.JLabel errorNombre3;
-    private javax.swing.JLabel errorNombre4;
-    private javax.swing.JLabel errorNombre5;
-    private javax.swing.JLabel errorNombre8;
-    public static javax.swing.JTextField fechaNac;
+    public static datechooser.beans.DateChooserCombo fechaNac;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -672,8 +611,9 @@ private javax.swing.JOptionPane jOptionPane1;
     public static javax.swing.JTextField nombre;
     public static javax.swing.JTextArea observaciones;
     public static javax.swing.JLabel pacienteLabel;
-    public static javax.swing.JTextField sexo;
+    public static javax.swing.JComboBox sexo;
     public static javax.swing.JTextField telefono;
-    public static javax.swing.JTextField tipoSangre;
+    public static javax.swing.JComboBox tipoSangre;
+    private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

@@ -51,7 +51,7 @@ public class Menu extends javax.swing.JFrame {
         System.out.println(datos.getCedulaProfesional());
         System.out.println(datos.getNombre() + " " + datos.getApellidoPaterno() + " " + datos.getApellidoMaterno());
         System.out.println(datos.getDireccion());
-        System.out.println(datos.getFechaNacimiento());
+//        System.out.println(datos.getFechaNacimiento());
         System.out.println(datos.getEspecialidad());
         System.out.println(datos.getSexo());
         System.out.println(datos.getTelefono());

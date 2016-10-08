@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
 public class ActualizarMedic extends javax.swing.JDialog {
 MedicoAdministrador med_adm;
     String nombre,apeP,apeM,dir,espe,tel,usuario,password,sexo;
-    Date f_nac=new Date(1,1,1900);
+    String f_nac;//=new Date(1,1,1900);
     Boolean admin=false;
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     int cedula_prof;
@@ -488,12 +488,13 @@ MedicoAdministrador med_adm;
         apeP=jtf_apep.getText();
         System.out.println(apeP);
         apeM=jtf_apem.getText();
-        try {
-            f_nac=formatter.parse(jtf_fecha.getText());
+        f_nac=jtf_fecha.getText();
+       /* try {
+            f_nac=jtf_fecha.getText();//formatter.parse(jtf_fecha.getText());
         } catch (ParseException ex) {
             le_fecha.setVisible(true);
             Logger.getLogger(NuevoMedico.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         tel=jtf_tel.getText();
         dir=jtf_dir.getText();
         if (s_mujer.isSelected()) {
