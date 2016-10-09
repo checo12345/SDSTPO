@@ -10,6 +10,15 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana(Image img ,int f, int c) {
         initComponents();
         jLabel1.setIcon(new ImageIcon(img));
+        //setTitle(titulo);
+        setVisible(true);
+        setSize(img.getWidth(null), img.getHeight(null));
+        setLocation(img.getWidth(null)*f, img.getHeight(null)*c);
+    }
+    public Ventana(Image img ,int f, int c,String titulo) {
+        initComponents();
+        jLabel1.setIcon(new ImageIcon(img));
+        setTitle(titulo);
         setVisible(true);
         setSize(img.getWidth(null), img.getHeight(null));
         setLocation(img.getWidth(null)*f, img.getHeight(null)*c);

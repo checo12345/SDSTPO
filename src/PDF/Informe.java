@@ -2,6 +2,7 @@ package PDF;
 
 import Beans.Medicamento;
 import Beans.RecetaMedicaBean;
+import Imagenes.imagenes;
 import com.itextpdf.text.Chunk;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,7 +25,9 @@ public class Informe {
          public Informe(){} ;
          public void generarRecetaPDF(RecetaMedicaBean recetaMB) throws FileNotFoundException, DocumentException
 	{
-		FileOutputStream archivo = new FileOutputStream("C:\\Users\\Sergio\\Desktop\\Receta.pdf");
+            URL tmp;
+                tmp=imagenes.class.getResource("receta.jpg");
+		FileOutputStream archivo = new FileOutputStream("Receta.pdf");
 		Document documento = new Document();
 		PdfWriter.getInstance(documento, archivo);
 		documento.open();
@@ -32,7 +35,7 @@ public class Informe {
                 try
                 {
                 //  URL url= this.getClass().getResource("C:\\Users\\Sergio\\Desktop\\receta.jpg");
-                  Image foto = Image.getInstance("C:\\Users\\Sergio\\Desktop\\receta.jpg");
+                  Image foto = Image.getInstance(tmp.toString());
                   foto.scaleToFit(550, 550);
                   foto.setAlignment(Chunk.ALIGN_MIDDLE);
                   documento.add(foto);

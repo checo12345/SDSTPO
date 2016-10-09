@@ -1,10 +1,18 @@
 package org.opencv.imgproc;
+import com.sun.javafx.geom.Vec2f;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javafx.scene.paint.Color.color;
 import javax.imageio.ImageIO;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -15,6 +23,8 @@ import org.opencv.core.Size;
 import org.opencv.highgui.Highgui;
 import static org.opencv.core.Core.addWeighted;
 import static org.opencv.core.Core.countNonZero;
+import static org.opencv.core.CvType.CV_8UC1;
+import static org.opencv.core.Mat.zeros;
 
 public class prueba_1 {
     //static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME);}
@@ -25,15 +35,38 @@ public class prueba_1 {
     }
 }
 class Procesar_1 {
-    private Mat imagen,imagenCopia,imagenCopia1;
+    private Mat imagen,imagenCopia,imgc;
 
     public Procesar_1(){
-        imagen = Highgui.imread("C:/prueba4.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
-        imagenCopia = Highgui.imread("C:/Users/David Pantaleón/Pictures/Saved Pictures/prueba.JPG",Highgui.CV_LOAD_IMAGE_COLOR);
-        imagenCopia1 = Highgui.imread("C:/Users/David Pantaleón/Pictures/Saved Pictures/IMG_0169.JPG",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia = Highgui.imread("C:\\Program Files\\Fotos_CICS\\fotoIPWebCam52.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        //imagenCopia = Highgui.imread("C:\\Program Files\\Fotos_CICS\\fotoIPWebCam48.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        //imagenCopia = Highgui.imread("C:\\Program Files\\Fotos_CICS\\fotoIPWebCam50.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        //imagenCopia = Highgui.imread("C:\\Program Files\\Fotos_CICS\\fotoIPWebCam86.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagen = Highgui.imread("C:\\Program Files\\Fotos_CICS\\prueba4.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imgc=Highgui.imread("C:\\Program Files\\Fotos_CICS\\pterigion.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        
+        Mat img1,img2,img3,imgo,r1,r2,r3,r4,r5,r6,r7,r8;
+        r1 = zeros( new Size(648,423), CV_8UC1 );
+        r2 = zeros( new Size(648,423), CV_8UC1 );
+        r3 = zeros( new Size(648,423), CV_8UC1 );
+        r4 = zeros( new Size(648,423), CV_8UC1 );
+        r5 = zeros( new Size(648,423), CV_8UC1 );
+        r6 = zeros( new Size(648,423), CV_8UC1 );
+        r7 = zeros( new Size(720,540), CV_8UC1 );
+        r8 = zeros( new Size(720,540), CV_8UC1 );
         if(!imagen.empty()){
-            Imgproc.resize(imagen, imagen, new Size(648,423));
-            analizarPterigion(imagen);
+            double margen=30;
+            double rojos_a[]={202.082+margen,
+                122.983+margen,
+                116.311+margen};
+            double rojos_b[]={202.082-margen,
+                122.983-margen,
+                116.311-margen};
+            Imgproc.cvtColor(imgc,imgc,Imgproc.COLOR_BGR2HSV);            
+            Ventana v1=new Ventana(convertir(imgc),0,0,"color");
+            
+            //Core.inRange(imgc, rojos_b, rojos_a, imgc);
+            
         }else if (!imagenCopia.empty()){
             analizarPterigion(imagen);
         }else{
@@ -42,9 +75,9 @@ class Procesar_1 {
     }
      
     private Mat analizarPterigion(Mat img){
-        Ventana v2 = new Ventana(convertir(img),1,0);
+        //Ventana v2 = new Ventana(convertir(img),1,0);
         img = detectaPterigion(img,30,30,0,0);
-        Ventana v1 = new Ventana(convertir(img),1,0);
+        //Ventana v1 = new Ventana(convertir(img),1,0);
         return img;
     }
     private Mat detectaPterigion(Mat img_ana,int val1,int val2,int val3,int val4){
@@ -75,7 +108,7 @@ class Procesar_1 {
             
             img=blurearImg(img,25) ;
             img=descompCanImg(img,1) ;
-            Ventana v= new Ventana (convertir(img2),0,0) ;
+//            Ventana v= new Ventana (convertir(img2),0,0) ;
             totalP = tamImg-countNonZero(img2);
             
             img=umbralizarImg(img,30,150) ;
@@ -84,8 +117,8 @@ class Procesar_1 {
             System.out.println("El area afectada por melanoma es: "+(areaM*100)/totalP+ "%");
             System.out.println("El area de iris abarca: "+totalP);
             System.out.println("El total de pixeles es: "+tamImg);
-            addWeighted(descompCanImg(imagenCopia1,2),1,img,0.3,0.0,img) ;
-            Ventana v1 = new Ventana(convertir(img),1,0);
+            //addWeighted(descompCanImg(imagenCopia1,2),1,img,0.3,0.0,img) ;
+//            Ventana v1 = new Ventana(convertir(img),1,0);
             
             return img ;
     }
@@ -207,7 +240,7 @@ class Procesar_1 {
     }
      private Mat eriosionarImg(Mat umbralizada) {
             Mat dste = umbralizada.clone();
-            int erosion_size = 5;
+            int erosion_size = 1;
             Size s = new Size(2*erosion_size + 1, 2*erosion_size+1);
             Point p = new Point(erosion_size, erosion_size);
             Mat element = Imgproc.getStructuringElement( Imgproc.MORPH_ELLIPSE,s,p);
@@ -216,7 +249,7 @@ class Procesar_1 {
     }
      private Mat dilatarImg(Mat umbralizada) {
             Mat dstd = umbralizada.clone();
-            int dilatacion_size = 5;
+            int dilatacion_size = 1;
             Size sd = new Size(2*dilatacion_size + 1, 2*dilatacion_size+1);
             Point pd = new Point(dilatacion_size, dilatacion_size);
             Mat elementd = Imgproc.getStructuringElement( Imgproc.MORPH_ELLIPSE,sd,pd);

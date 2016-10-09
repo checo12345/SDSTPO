@@ -196,7 +196,7 @@ public boolean MostrarReceta(JDialog frame,int idConsulta){
     }
 
     public boolean CrearReceta(JDialog frame) {
-        RegistroReceta r = new RegistroReceta(frame, true, id);
+        RegistroReceta r = new RegistroReceta(frame, true, id, medico, paciente);
 
         r.setVisible(true);
 

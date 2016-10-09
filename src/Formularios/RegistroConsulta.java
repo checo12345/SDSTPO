@@ -105,6 +105,11 @@ private int opcioncapturador2=0;
             doctor.setText(medico.getNombre() + " " + medico.getApellidoPaterno() + " " + medico.getApellidoMaterno());
 
             consulta.obtenerSiguienteIdCosnulta();
+            
+        registrar.setEnabled(false);
+        receta.setEnabled(false);
+        reporte.setEnabled(false);
+        prediagnostico.setEnabled(false);
         /*nombreP.setVisible(false);
          direcc.setVisible(false);
          sexo.setVisible(false);
@@ -557,8 +562,12 @@ private void formWindowActivated(java.awt.event.WindowEvent evt) {
             direcc.setText(p.getDireccion());
             sexo.setText(p.getSexo());
             sangre.setText(p.getTipoSangre());
-            fechanac.setText(new SimpleDateFormat("yyyy-MM-dd").format(p.getFechaNacimiento()));
-            //fechanac.setText(p.getFechaNacimiento());            
+            //fechanac.setText(new SimpleDateFormat("yyyy-MM-dd").format(p.getFechaNacimiento()));
+            fechanac.setText(p.getFechaNacimiento());
+            registrar.setEnabled(true);
+            receta.setEnabled(true);
+            reporte.setEnabled(true);
+            prediagnostico.setEnabled(true);
         } else {
             banderaPaciente=false;
             JOptionPane.showMessageDialog(null, "Paciente No Existe:\n"

@@ -9,8 +9,7 @@ abstract class Persona {
     private String telefono;
     private String direccion;
     private String sexo;
-    /*  true = hombre
-        false= mujer  */
+    
     public Persona(){}
     public Persona(String nom,String apeP,String apeM,String fecNac,String Tel,String dir,String sex){
         nombre=nom;

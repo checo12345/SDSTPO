@@ -269,6 +269,7 @@ class Procesar2 {
         double[] data = null;
         //Vector<Mat> circlesList = new Vector<Mat>();
         Imgproc.HoughCircles(edges, circles, Imgproc.CV_HOUGH_GRADIENT, inv, distMinCir, umbMin, umbMax, radMin, radMax);
+        Imgproc.HoughLines(imagen, edges, inv, radMax, radMax);
         //Imgproc.HoughCircles(edges, circles, Imgproc.CV_HOUGH_GRADIENT, 1, 200, 1, 10, 20, 40  );
         //Imgproc.HoughCircles(edges, circles, Imgproc.CV_HOUGH_GRADIENT, 1, 50) ;
 

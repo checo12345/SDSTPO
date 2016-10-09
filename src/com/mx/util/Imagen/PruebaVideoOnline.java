@@ -28,6 +28,7 @@ public class PruebaVideoOnline extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jTextField3 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -55,6 +56,13 @@ public class PruebaVideoOnline extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,6 +86,10 @@ public class PruebaVideoOnline extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(120, 120, 120))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +104,9 @@ public class PruebaVideoOnline extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(168, 168, 168)
+                .addGap(42, 42, 42)
+                .addComponent(jButton2)
+                .addGap(103, 103, 103)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -120,6 +134,28 @@ public class PruebaVideoOnline extends javax.swing.JFrame {
         jPanel2.add(player);
         jPanel2.updateUI();*/
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String dir;
+        int pto;
+       // dir=jTextField1.getText();
+        //pto=jTextField2.getText();
+        c=new Captura("192.168.1.150");
+        c.iniciar();
+        //capIma=new CapturadorImagen(dir,8080);
+       /* jPanel1=c;
+        c=new Captura(dir);
+        c.iniciar();
+        */
+        /*player=capIma.iniciarTransmicion();
+        jPanel1.removeAll();
+        jPanel1.add(player);
+        jPanel1.updateUI();
+        jPanel2.removeAll();
+        jPanel2.add(player);
+        jPanel2.updateUI();*/
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,6 +194,7 @@ public class PruebaVideoOnline extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

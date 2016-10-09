@@ -42,6 +42,7 @@ public class inicioSesion extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SDSTPO v1.1");
 
         jPanel1.setToolTipText("");
 
@@ -73,7 +74,6 @@ public class inicioSesion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(98, 98, 98)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -84,7 +84,8 @@ public class inicioSesion extends javax.swing.JFrame {
                             .addComponent(jPasswordField1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addGap(62, 62, 62)))
+                        .addGap(62, 62, 62))
+                    .addComponent(jLabel1))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,7 +148,7 @@ public class inicioSesion extends javax.swing.JFrame {
     public static void main(String args[]) {
         
         try {
-           UIManager.setLookAndFeel(new UpperEssentialLookAndFeel("C:\\Users\\Sergio\\Desktop\\Checo1.theme"));
+           UIManager.setLookAndFeel(new UpperEssentialLookAndFeel("C:\\Users\\David Pantaleón\\Downloads\\LibreriaUpperEssential\\Librerias\\Checo.theme"));
         }catch (UnsupportedLookAndFeelException e )
         {
             

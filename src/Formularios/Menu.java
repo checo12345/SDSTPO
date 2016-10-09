@@ -74,6 +74,7 @@ public class Menu extends javax.swing.JFrame {
         historial = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SDSTPO v1.1 Menu principal");
         setPreferredSize(new java.awt.Dimension(1366, 800));
 
         consulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconoConsulta.png"))); // NOI18N
