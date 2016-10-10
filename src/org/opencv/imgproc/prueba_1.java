@@ -55,18 +55,9 @@ class Procesar_1 {
         r7 = zeros( new Size(720,540), CV_8UC1 );
         r8 = zeros( new Size(720,540), CV_8UC1 );
         if(!imagen.empty()){
-            double margen=30;
-            double rojos_a[]={202.082+margen,
-                122.983+margen,
-                116.311+margen};
-            double rojos_b[]={202.082-margen,
-                122.983-margen,
-                116.311-margen};
-            Imgproc.cvtColor(imgc,imgc,Imgproc.COLOR_BGR2HSV);            
-            Ventana v1=new Ventana(convertir(imgc),0,0,"color");
-            
-            //Core.inRange(imgc, rojos_b, rojos_a, imgc);
-            
+            Imgproc.resize(imagen, imagen, new Size(648,423));
+            Imgproc.GaussianBlur(imagen, imagen, new Size(3,3),0,0,Imgproc.BORDER_DEFAULT);
+            //Imgproc.cvtColor(imagen,imagen, CV_BGR2GRAY);
         }else if (!imagenCopia.empty()){
             analizarPterigion(imagen);
         }else{

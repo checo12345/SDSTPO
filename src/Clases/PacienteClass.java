@@ -76,7 +76,11 @@ public class PacienteClass {
              regPaciente.setNombre(RegistrarPaciente.nombre.getText());
              regPaciente.setApellidoPaterno(RegistrarPaciente.apellidoP.getText());
              regPaciente.setApellidoMaterno(RegistrarPaciente.apellidoM.getText());
-             regPaciente.setFechaNacimiento(RegistrarPaciente.fechaNac.getText());
+             String f_nac=RegistrarPaciente.fechaNac.getText();//01/10/1999
+             if (f_nac.length()<=9)
+                f_nac="0"+f_nac;
+             f_nac=f_nac.substring(6,10)+f_nac.substring(2,6)+f_nac.substring(0,2);
+             regPaciente.setFechaNacimiento(f_nac);
              regPaciente.setAlergia(RegistrarPaciente.alergias.getText());
              regPaciente.setDireccion(RegistrarPaciente.deloMun.getText());
              regPaciente.setTelefono(RegistrarPaciente.telefono.getText());
@@ -165,7 +169,12 @@ public class PacienteClass {
              regPaciente.setNombre(RegistrarPaciente.nombre.getText());
              regPaciente.setApellidoPaterno(RegistrarPaciente.apellidoP.getText());
              regPaciente.setApellidoMaterno(RegistrarPaciente.apellidoM.getText());
-             regPaciente.setFechaNacimiento(RegistrarPaciente.fechaNac.getText());
+             
+             String f_nac=RegistrarPaciente.fechaNac.getText();//01/10/1999
+             if (f_nac.length()<=9)
+                f_nac="0"+f_nac;
+             f_nac=f_nac.substring(6,10)+f_nac.substring(2,6)+f_nac.substring(0,2);
+             regPaciente.setFechaNacimiento(f_nac);
              
              regPaciente.setAlergia(RegistrarPaciente.alergias.getText());
              regPaciente.setDireccion(RegistrarPaciente.deloMun.getText());

@@ -503,6 +503,9 @@
       </Properties>
     </Component>
     <Component class="datechooser.beans.DateChooserCombo" name="fechaNac">
+      <Properties>
+        <Property name="dch_combo_dateFormat" type="int" value="2"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>

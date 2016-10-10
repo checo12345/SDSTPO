@@ -8,8 +8,11 @@ package Formularios;
 import Beans.Paciente;
 import Clases.PacienteClass;
 import Clases.ServicioRespuesta;
+import datechooser.model.exeptions.IncompatibleDataExeption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -208,6 +211,8 @@ public class RegistrarPaciente extends javax.swing.JDialog {
 
         titulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         titulo.setText("MODIFICAR PACIENTE");
+
+        fechaNac.setFormat(2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -521,7 +526,15 @@ public class RegistrarPaciente extends javax.swing.JDialog {
             idPaciente=p.getIdPaciente() ;
            /* SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String convertido = formatter.format(p.getFechaNacimiento());*/
-            fechaNac.setText(p.getFechaNacimiento());
+            try {
+                    fechaNac.setDefaultPeriods(
+                        new datechooser.model.multiple.PeriodSet(
+                            new datechooser.model.multiple.Period(
+                                new java.util.GregorianCalendar(Integer.parseInt(p.getFechaNacimiento().substring(0,4)), Integer.parseInt(p.getFechaNacimiento().substring(5,7))-1,Integer.parseInt(p.getFechaNacimiento().substring(8))),
+                                new java.util.GregorianCalendar(Integer.parseInt(p.getFechaNacimiento().substring(0,4)), Integer.parseInt(p.getFechaNacimiento().substring(5,7))-1,Integer.parseInt(p.getFechaNacimiento().substring(8))))));
+                } catch (IncompatibleDataExeption ex) {
+                    Logger.getLogger(NuevoMedico.class.getName()).log(Level.SEVERE, null, ex);
+                }
             //this.dispose() ;
             jOptionPane1.showMessageDialog(null, respuesta.getMensaje(), "REGISTRO DE PACIENTES",jOptionPane1.INFORMATION_MESSAGE);
             jButton1.setEnabled(true);

@@ -481,6 +481,8 @@ public class NuevoMedico extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(null, "El medico NO fue registrado exitosamente.\n\tERROR:"+estatus+".", "Registrar Medico.", JOptionPane.ERROR_MESSAGE);
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Ciertos campos no deben estar vacios, verifique.", "ALERTA",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BtnGuardarActionPerformed
 

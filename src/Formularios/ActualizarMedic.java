@@ -236,7 +236,7 @@ MedicoAdministrador med_adm;
                                 .addGap(61, 61, 61)
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(comboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelModificaLayout.createSequentialGroup()
                 .addGroup(panelModificaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -495,6 +495,8 @@ MedicoAdministrador med_adm;
             }else{
                 JOptionPane.showMessageDialog(null, "El medico NO fue actulizado exitosamente.\n\tERROR:"+estatus+".", "Actulizar Medico.", JOptionPane.ERROR_MESSAGE);
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Ciertos campos no deben estar vacios, verifique.", "ALERTA",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
@@ -561,10 +563,10 @@ MedicoAdministrador med_adm;
                 else if (m.getEspecialidad().equals("OFTÁLMOLOGO"))
                     comboEspe.setSelectedIndex(1);
                 else
-                
-                if (m.getSexo().equals("Masculino")){
+                    comboEspe.setSelectedIndex(0);
+                if (m.getSexo().toUpperCase().equals("MASCULINO")){
                     comboSexo.setSelectedIndex(0);
-                } else if (m.getSexo().equals("Femenino")){
+                } else if (m.getSexo().toUpperCase().equals("FEMENINO")){
                     comboSexo.setSelectedIndex(1);
                 }else{
                     comboSexo.setSelectedIndex(0);
