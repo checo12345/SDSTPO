@@ -28,16 +28,29 @@ import javax.swing.DefaultListModel;
  * @author laloe
  */
 public class RecetaMedica {
+
     private static final Logger logger = Logger.getLogger("RecetaMedica");
     private int id;
     private int idConsulta;
-    public RecetaMedica(int idConsulta){
+
+    public RecetaMedica(int idConsulta) {
         //obtenerSiguienteIdReceta();
         //System.out.println(id);
-        this.idConsulta=idConsulta;
-        
+        this.idConsulta = idConsulta;
+
     }
-    public ServicioRespuesta obtenerReceta(){
+
+    public void abrirReceta(String receta) {
+        try {
+            //definiendo la ruta en la propiedad file
+            Runtime.getRuntime().exec("cmd /c start " + receta);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ServicioRespuesta obtenerReceta() {
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: obtenerReceta() ============");
         try {
@@ -48,8 +61,7 @@ public class RecetaMedica {
                 throw new SDTPOException("Ocurrio un error al Buscar la Receta");
             }
 
-            
-            logger.info("Receta Encontrada: "+((RecetaMedicaBean)respuesta.getResult()).getIdReceta());
+            logger.info("Receta Encontrada: " + ((RecetaMedicaBean) respuesta.getResult()).getIdReceta());
         } catch (SDTPOException e) {
             logger.info("" + e.getMessage());
             respuesta.setSuccess(false);
@@ -61,7 +73,8 @@ public class RecetaMedica {
         }
         return respuesta;
     }
-    public ServicioRespuesta obtenerSiguienteIdReceta(){
+
+    public ServicioRespuesta obtenerSiguienteIdReceta() {
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: obtenerSiguienteIdReceta() ============");
         try {
@@ -73,7 +86,7 @@ public class RecetaMedica {
             }
 
             id = (int) respuesta.getResult();
-            logger.info("Siguiente Receta: "+id);
+            logger.info("Siguiente Receta: " + id);
         } catch (SDTPOException e) {
             logger.info("" + e.getMessage());
             respuesta.setSuccess(false);
@@ -85,7 +98,8 @@ public class RecetaMedica {
         }
         return respuesta;
     }
-    public ServicioRespuesta obtenerMedicamentos(){
+
+    public ServicioRespuesta obtenerMedicamentos() {
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: obtenerMedicamentos() ============");
         try {
@@ -97,7 +111,6 @@ public class RecetaMedica {
             }
 
             //id = (int) respuesta.getResult();
-            
         } catch (SDTPOException e) {
             logger.info("" + e.getMessage());
             respuesta.setSuccess(false);
@@ -109,47 +122,57 @@ public class RecetaMedica {
         }
         return respuesta;
     }
-    public ServicioRespuesta crearMedicamento(Medicamento medicamento){
+
+    public ServicioRespuesta crearMedicamento(Medicamento medicamento) {
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: crearMedicamento() ============");
-        
+
         try {
             ServicioDAO servicio = new ServicioDAO();
-            respuesta=servicio.insertarMedicamento(medicamento);
-            if((int)respuesta.getResult()==0){throw new SDTPOException("Ocurrio un error al insertar consulta");}
-            
-        }  catch (SDTPOException ex) {
+            respuesta = servicio.insertarMedicamento(medicamento);
+            if ((int) respuesta.getResult() == 0) {
+                throw new SDTPOException("Ocurrio un error al insertar consulta");
+            }
+
+        } catch (SDTPOException ex) {
             Logger.getLogger(ConsultaMedica.class.getName()).log(Level.SEVERE, null, ex);
             respuesta.setSuccess(false);
         }
         return respuesta;
     }
-     public boolean registrarReceta(String recomendaciones,ArrayList<Medicamento> lista) {
+
+    public boolean registrarReceta(String recomendaciones, ArrayList<Medicamento> lista, String ruta, String fechaProx) {
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: registrarReceta() ============");
-        
+
         try {
-            
+
             ServicioDAO servicio = new ServicioDAO();
-            RecetaMedicaBean rmb=new RecetaMedicaBean(recomendaciones,new SimpleDateFormat("yyyy-MM-dd").format(new Date()),idConsulta);
-            respuesta=servicio.insertarReceta(rmb);
-            logger.info("Se registro la receta medica con id: "+rmb.getIdReceta());
-            id=rmb.getIdReceta();
-            if((int)respuesta.getResult()==0){throw new SDTPOException("Ocurrio un error al insertar la Receta");}
-            for (Medicamento med : lista) {
-                respuesta=servicio.insertarRecetaMedicamento(new RecetaMedicaMedicamento(id,med.getIdMedicamento(),med.getDosis()));
-                 if((int)respuesta.getResult()==0){throw new SDTPOException("Ocurrio un error al insertar una medicamento de la receta");}
+            RecetaMedicaBean rmb = new RecetaMedicaBean(recomendaciones, new SimpleDateFormat("yyyy-MM-dd").format(new Date()), idConsulta);
+            rmb.setProximaCita(fechaProx);
+            rmb.setReporte(ruta);
+
+            respuesta = servicio.insertarReceta(rmb);
+            logger.info("Se registro la receta medica con id: " + rmb.getIdReceta());
+            id = rmb.getIdReceta();
+            if ((int) respuesta.getResult() == 0) {
+                throw new SDTPOException("Ocurrio un error al insertar la Receta");
             }
-            
+            for (Medicamento med : lista) {
+                respuesta = servicio.insertarRecetaMedicamento(new RecetaMedicaMedicamento(id, med.getIdMedicamento(), med.getDosis()));
+                if ((int) respuesta.getResult() == 0) {
+                    throw new SDTPOException("Ocurrio un error al insertar una medicamento de la receta");
+                }
+            }
+
         } catch (SDTPOException ex) {
             Logger.getLogger(ConsultaMedica.class.getName()).log(Level.SEVERE, null, ex);
             respuesta.setSuccess(false);
         }
         return respuesta.isSuccess();
     }
-     
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new RecetaMedica(1);
     }
 }

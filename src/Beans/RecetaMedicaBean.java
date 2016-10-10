@@ -16,6 +16,8 @@ public class RecetaMedicaBean {
     private int    idReceta;
     private String recomendaciones,nombrePaciente,proximaCita,nombreResponsable,especialidadResp,cedulaResp;
     private String fecha;
+    
+    private String reporte;
     private int    idConsulta;
     private List<Medicamento> medicamentos;
     
@@ -29,6 +31,16 @@ public class RecetaMedicaBean {
         this.idConsulta = idConsulta;
     }
 
+    
+
+    public String getReporte() {
+        return reporte;
+    }
+
+    public void setReporte(String reporte) {
+        this.reporte = reporte;
+    }
+    
     public List<Medicamento> getMedicamentos() {
         return medicamentos;
     }

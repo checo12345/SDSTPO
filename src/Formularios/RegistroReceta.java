@@ -37,20 +37,23 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RegistroReceta extends javax.swing.JDialog {
 
-    MedicoBean medico_responsable=null;
-    Paciente paciente=null;
+    MedicoBean medico_responsable = null;
+    Paciente paciente = null;
     RecetaMedica receta = null;
     List<Medicamento> listaMedicamentos = null;
     ArrayList<Medicamento> listaMedicamentosSel;
     Vector columnas = null;
     boolean completado = false;
+    String ruta;
 
     /**
      * Creates new form RecetaMedica2
      */
-    public RegistroReceta(javax.swing.JDialog parent, boolean modal, int idConsulta,MedicoBean m,Paciente p) {
+    public RegistroReceta(javax.swing.JDialog parent, boolean modal, int idConsulta, MedicoBean m, Paciente p, String ruta) {
         super(parent, modal);
         initComponents();
+        this.ruta = ruta;
+        System.out.println("Ruta en Receta: " + this.ruta);
         listaMedicamentosSel = new ArrayList<>();
         receta = new RecetaMedica(idConsulta);
         //fecha.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
@@ -63,16 +66,17 @@ public class RegistroReceta extends javax.swing.JDialog {
         columnas.add("dosis");
         llenarTabla();
 
-        this.medico_responsable=m;
-        this.paciente=p;
-        nombrePac.setText(this.paciente.getNombre()+" "+this.paciente.getApellidoPaterno()+" "+this.paciente.getApellidoMaterno());
-        nombreResp.setText(this.medico_responsable.getNombre()+" "+this.medico_responsable.getApellidoPaterno()+" "+this.medico_responsable.getApellidoMaterno());
-        if (this.medico_responsable.getEspecialidad().equals("OPTOMETRISTA"))
+        this.medico_responsable = m;
+        this.paciente = p;
+        nombrePac.setText(this.paciente.getNombre() + " " + this.paciente.getApellidoPaterno() + " " + this.paciente.getApellidoMaterno());
+        nombreResp.setText(this.medico_responsable.getNombre() + " " + this.medico_responsable.getApellidoPaterno() + " " + this.medico_responsable.getApellidoMaterno());
+        if (this.medico_responsable.getEspecialidad().equals("OPTOMETRISTA")) {
             especialidad.setSelectedIndex(0);
-        else if (this.medico_responsable.getEspecialidad().equals("OFTÁLMOLOGO"))
+        } else if (this.medico_responsable.getEspecialidad().equals("OFTÁLMOLOGO")) {
             especialidad.setSelectedIndex(1);
-        else
+        } else {
             especialidad.setSelectedIndex(0);
+        }
         cedulaResp.setText(String.valueOf(this.medico_responsable.getCedulaProfesional()));
         nombreMedi.setVisible(false);
         dosis.setVisible(false);
@@ -121,6 +125,7 @@ public class RegistroReceta extends javax.swing.JDialog {
         presentacionMedi = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         dosisMedi = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1300, 600));
@@ -174,7 +179,7 @@ public class RegistroReceta extends javax.swing.JDialog {
 
         jLabel5.setText("Recomendaciones Generales para el Paciente:");
 
-        jButton1.setText("Generar PDF");
+        jButton1.setText("Abrir PDF");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -217,6 +222,13 @@ public class RegistroReceta extends javax.swing.JDialog {
 
         jLabel13.setText("Dosis:");
 
+        jButton2.setText("Regresar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -224,9 +236,11 @@ public class RegistroReceta extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(305, 305, 305)
                 .addComponent(registrarReceta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(130, 130, 130)
                 .addComponent(jButton1)
-                .addGap(235, 235, 235))
+                .addGap(131, 131, 131)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,7 +365,8 @@ public class RegistroReceta extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registrarReceta)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap())
         );
 
@@ -367,31 +382,37 @@ public class RegistroReceta extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "No se ha introducido alguna recomendacion", "Registro No Completado",
                     JOptionPane.ERROR_MESSAGE);
         } else {
-            boolean respuesta = receta.registrarReceta(recomendaciones.getText(), listaMedicamentosSel);
+            String f_nac = proxCita.getText();//01/10/1999
+            if (f_nac.length() <= 9) {
+                f_nac = "0" + f_nac;
+            }
+            f_nac = f_nac.substring(6, 10) + f_nac.substring(2, 6) + f_nac.substring(0, 2);
+            boolean respuesta = receta.registrarReceta(recomendaciones.getText(), listaMedicamentosSel, (ruta + "Receta.pdf"),f_nac);
             if (respuesta == true) {
-                JOptionPane.showMessageDialog(null, "Registro de la Receta exitoso", "Registro Completado",
-                        JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Registro de la Receta exitoso", "Registro Completado",
+                 //       JOptionPane.INFORMATION_MESSAGE);
                 completado = true;
-                this.dispose();
+                crearPDF();
+                registrarReceta.setEnabled(false);
             }
         }
     }//GEN-LAST:event_registrarRecetaActionPerformed
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
             //Medicamento m = listaMedicamentos.get(comboMedicamentos.getSelectedIndex());
-            String sel_nom,sel_pre,completa;
-            completa=comboMedicamentos.getSelectedItem().toString();
-            sel_nom=completa.substring(0,completa.indexOf("-"));
-            sel_pre=completa.substring(completa.indexOf("-")+1);
+            /*String sel_nom,sel_pre,completa;
+         completa=comboMedicamentos.getSelectedItem().toString();
+         sel_nom=completa.substring(0,completa.indexOf("-"));
+         sel_pre=completa.substring(completa.indexOf("-")+1);
             
-            Medicamento mnuevo = new Medicamento(1, sel_nom, sel_pre, dosisMedi.getText());
+         Medicamento mnuevo = new Medicamento(1, sel_nom, sel_pre, dosisMedi.getText());
 
-            listaMedicamentosSel.add(mnuevo);
-            llenarTabla();
-            nombreMedi.setText("");
-            presentacionMedi.setText("");
-            dosisMedi.setText("");
-        /*if (dosis.getText().equals("")) {
+         listaMedicamentosSel.add(mnuevo);
+         llenarTabla();
+         nombreMedi.setText("");
+         presentacionMedi.setText("");
+         dosisMedi.setText("");*/
+        if (dosisMedi.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingresar dosis para el medicamento seleccionado", "Dosis no introducida",
                     JOptionPane.ERROR_MESSAGE);
         } else if (comboMedicamentos.getSelectedIndex() == -1) {
@@ -399,29 +420,28 @@ public class RegistroReceta extends javax.swing.JDialog {
                     JOptionPane.ERROR_MESSAGE);
         } else {
             Medicamento m = listaMedicamentos.get(comboMedicamentos.getSelectedIndex());
-            Medicamento mnuevo = new Medicamento(m.getIdMedicamento(), m.getNombre(), m.getPresentacion(), dosis.getText());
+            Medicamento mnuevo = new Medicamento(m.getIdMedicamento(), m.getNombre(), m.getPresentacion(), dosisMedi.getText());
 
             listaMedicamentosSel.add(mnuevo);
             llenarTabla();
             comboMedicamentos.setSelectedIndex(-1);
-            dosis.setText("");
-        }*/
+            dosisMedi.setText("");
+        }
     }//GEN-LAST:event_agregarActionPerformed
-   private void cargarMedicamentos() {
+    private void cargarMedicamentos() {
         comboMedicamentos.removeAllItems();
         ServicioRespuesta respuesta = receta.obtenerMedicamentos();
         if (respuesta.isSuccess()) {
             listaMedicamentos = (List) respuesta.getResult();
             for (Medicamento med : listaMedicamentos) {
-                comboMedicamentos.addItem(med.getNombre()+"-"+med.getPresentacion());
+                comboMedicamentos.addItem(med.getNombre() + "-" + med.getPresentacion());
             }
             comboMedicamentos.setSelectedIndex(-1);
         }
     }
-
     private void llenarTabla() {
         DefaultTableModel datos = new DefaultTableModel();
-for (int i = 0; i < columnas.size(); i++) {
+        for (int i = 0; i < columnas.size(); i++) {
             datos.addColumn(columnas.get(i));
         }
         this.tablaMedicamentos.setModel(datos);
@@ -451,7 +471,7 @@ for (int i = 0; i < columnas.size(); i++) {
         if (desicion == 0) {
             if (nombre.getText().equals("") && presentacion.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos Los campos deben estar llenos ", "No se realizo el registro",
-                    JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.ERROR_MESSAGE);
             } else {
                 Medicamento medic = new Medicamento();
                 medic.setNombre(nombre.getText());
@@ -461,46 +481,55 @@ for (int i = 0; i < columnas.size(); i++) {
                 ServicioRespuesta respuesta = receta.crearMedicamento(medic);
                 if (respuesta.isSuccess()) {
                     JOptionPane.showMessageDialog(null, "El medicamento se registro exitosamente", "Registro Completado",
-                        JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
                 cargarMedicamentos();
             }
         }
     }//GEN-LAST:event_nuevoActionPerformed
-
-    private void nombreMediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreMediActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreMediActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       RecetaMedicaBean recetaMB= new RecetaMedicaBean() ;
+public void crearPDF(){
+    RecetaMedicaBean recetaMB = new RecetaMedicaBean();
         recetaMB.setNombrePaciente(nombrePac.getText());
         recetaMB.setFecha(fechaCons.getText());
         recetaMB.setProximaCita(proxCita.getText());
         recetaMB.setNombreResponsable(nombreResp.getText());
         recetaMB.setCedulaResp(cedulaResp.getText());
         recetaMB.setRecomendaciones(recomendaciones.getText());
-        
-        String cadena ;
-        if (especialidad.getSelectedIndex()==0)
-            cadena="Optometrista" ;
-        else
-            cadena="Oftálmologo" ;
-        
+
+        String cadena;
+        if (especialidad.getSelectedIndex() == 0) {
+            cadena = "Optometrista";
+        } else {
+            cadena = "Oftálmologo";
+        }
+
         recetaMB.setEspecialidadResp(cadena);
         recetaMB.setMedicamentos(listaMedicamentosSel);
-                
-        Informe recetaPdf = new Informe() ;
+        
+        Informe recetaPdf = new Informe();
         try {
-                
-                recetaPdf.generarRecetaPDF(recetaMB);
-                JOptionPane.showMessageDialog(null, "La receta médica se genero exitosamente", "GENERAR RECETA EN PDF",JOptionPane.INFORMATION_MESSAGE);
+
+            recetaPdf.generarRecetaPDF(recetaMB, ruta);
+            JOptionPane.showMessageDialog(null, "La receta médica se genero exitosamente", "GENERAR RECETA EN PDF", JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(RegistroReceta.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DocumentException ex) {
             Logger.getLogger(RegistroReceta.class.getName()).log(Level.SEVERE, null, ex);
         }
+}
+    private void nombreMediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreMediActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreMediActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        receta.abrirReceta(ruta+"Receta.pdf");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -532,24 +561,24 @@ for (int i = 0; i < columnas.size(); i++) {
 
         /* Create and display the dialog 
          try {
-           UIManager.setLookAndFeel(new UpperEssentialLookAndFeel("C:\\Users\\Sergio\\Desktop\\Checo1.theme"));
-        }catch (UnsupportedLookAndFeelException e )
-        {
+         UIManager.setLookAndFeel(new UpperEssentialLookAndFeel("C:\\Users\\Sergio\\Desktop\\Checo1.theme"));
+         }catch (UnsupportedLookAndFeelException e )
+         {
             
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                  RegistroReceta dialog = new RegistroReceta(new javax.swing.JDialog(), true,3);
-                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                 @Override
-                 public void windowClosing(java.awt.event.WindowEvent e) {
-                 System.exit(0);
-                 }
-                 });
-                 dialog.setVisible(true);
+         }
+         java.awt.EventQueue.invokeLater(new Runnable() {
+         public void run() {
+         RegistroReceta dialog = new RegistroReceta(new javax.swing.JDialog(), true,3);
+         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+         @Override
+         public void windowClosing(java.awt.event.WindowEvent e) {
+         System.exit(0);
+         }
+         });
+         dialog.setVisible(true);
                  
-            }
-        });*/
+         }
+         });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -561,6 +590,7 @@ for (int i = 0; i < columnas.size(); i++) {
     private javax.swing.JComboBox especialidad;
     private datechooser.beans.DateChooserCombo fechaCons;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

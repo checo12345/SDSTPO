@@ -6,56 +6,93 @@
 package Formularios;
 
 import Beans.Medicamento;
+import Beans.MedicoBean;
+import Beans.Paciente;
 import Beans.RecetaMedicaBean;
 import Clases.RecetaMedica;
 import Clases.ServicioRespuesta;
+import datechooser.model.exeptions.IncompatibleDataExeption;
 import javax.swing.JDialog;
 
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author laloe
  */
 public class VerReceta extends javax.swing.JDialog {
-Vector columnas = null;
+
+    Vector columnas = null;
     /**
      * Creates new form VerReceta
+     *
      * @param parent
      * @param modal
      * @param idConsulta
      */
-private RecetaMedicaBean receta;
-    public VerReceta(JDialog parent, boolean modal,int idConsulta) {
+    private RecetaMedicaBean receta;
+    private MedicoBean medico_responsable;
+    private Paciente paciente;
+    private RecetaMedica rm;
+    public VerReceta(JDialog parent, boolean modal, int idConsulta, MedicoBean m, Paciente p) {
         super(parent, modal);
         initComponents();
-        RecetaMedica rm=new RecetaMedica(idConsulta);
-        ServicioRespuesta respuesta=rm.obtenerReceta();
-        if(respuesta.isSuccess()==true){
-            receta=(RecetaMedicaBean)respuesta.getResult();
-        
-        columnas = new Vector();
-        columnas.add("Id");
-        columnas.add("Nombre");
-        columnas.add("Presentacion");
-        columnas.add("dosis");
-        cargarDatos();
-        }
-        else{
+        rm = new RecetaMedica(idConsulta);
+        ServicioRespuesta respuesta = rm.obtenerReceta();
+        if (respuesta.isSuccess() == true) {
+            this.setTitle("Registro de Receta de la consulta: " + idConsulta);
+            receta = (RecetaMedicaBean) respuesta.getResult();
+            this.medico_responsable = m;
+            this.paciente = p;
+            String proxcita=receta.getProximaCita();
+            try {
+                    proxCita.setDefaultPeriods(
+                        new datechooser.model.multiple.PeriodSet(
+                            new datechooser.model.multiple.Period(
+                                new java.util.GregorianCalendar(Integer.parseInt(proxcita.substring(0,4)), Integer.parseInt(proxcita.substring(5,7))-1,Integer.parseInt(proxcita.substring(8))),
+                                new java.util.GregorianCalendar(Integer.parseInt(proxcita.substring(0,4)), Integer.parseInt(proxcita.substring(5,7))-1,Integer.parseInt(proxcita.substring(8))))));
+                } catch (IncompatibleDataExeption ex) {
+                    Logger.getLogger(NuevoMedico.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            nombrePac.setText(this.paciente.getNombre() + " " + this.paciente.getApellidoPaterno() + " " + this.paciente.getApellidoMaterno());
+            nombreResp.setText(this.medico_responsable.getNombre() + " " + this.medico_responsable.getApellidoPaterno() + " " + this.medico_responsable.getApellidoMaterno());
+            if (this.medico_responsable.getEspecialidad().equals("OPTOMETRISTA")) {
+                especialidad.setSelectedIndex(0);
+            } else if (this.medico_responsable.getEspecialidad().equals("OFTÁLMOLOGO")) {
+                especialidad.setSelectedIndex(1);
+            } else {
+                especialidad.setSelectedIndex(0);
+            }
+            cedulaResp.setText(String.valueOf(this.medico_responsable.getCedulaProfesional()));
+            columnas = new Vector();
+            columnas.add("Id");
+            columnas.add("Nombre");
+            columnas.add("Presentacion");
+            columnas.add("dosis");
+            cargarDatos();
+        } else {
             JOptionPane.showMessageDialog(null, "No se tiene una receta Regitrada para esta consulta", "No se encontro Receta",
                     JOptionPane.ERROR_MESSAGE);
             cerrar();
         }
-        
+
     }
-    public void cerrar(){this.dispose();}
-public void cargarDatos(){
-    fecha.setText(receta.getFecha());
-    recomendaciones.setText(receta.getRecomendaciones());
-    llenarTabla();
-}
-private void llenarTabla() {
+
+    public void cerrar() {
+        this.dispose();
+    }
+
+    public void cargarDatos() {
+       
+        recomendaciones.setText(receta.getRecomendaciones());
+        llenarTabla();
+    }
+
+    private void llenarTabla() {
         DefaultTableModel datos = new DefaultTableModel();
         for (int i = 0; i < columnas.size(); i++) {
             datos.addColumn(columnas.get(i));
@@ -70,6 +107,7 @@ private void llenarTabla() {
             datos.addRow(vec);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,21 +117,78 @@ private void llenarTabla() {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        fecha = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaMedicamentos = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        nombrePac = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        fechaCons = new datechooser.beans.DateChooserCombo();
+        jLabel10 = new javax.swing.JLabel();
+        proxCita = new datechooser.beans.DateChooserCombo();
+        jLabel7 = new javax.swing.JLabel();
+        nombreResp = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        especialidad = new javax.swing.JComboBox();
+        jLabel9 = new javax.swing.JLabel();
+        cedulaResp = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         recomendaciones = new javax.swing.JTextPane();
+        regresar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaMedicamentos = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1300, 600));
 
-        fecha.setEditable(false);
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel12.setText("RECETA MÉDICA");
 
-        jLabel4.setText("Medicamentos Agregados:");
+        jLabel6.setText("Nombre Completo del Paciente:");
 
+        nombrePac.setEditable(false);
+
+        jLabel2.setText("Fecha de la Consulta:");
+
+        fechaCons.setEnabled(false);
+
+        jLabel10.setText("Proxima Cita:");
+
+        proxCita.setEnabled(false);
+
+        jLabel7.setText("Nombre Completo del Responsable:");
+
+        nombreResp.setEditable(false);
+
+        jLabel8.setText("Especialidad:");
+
+        especialidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "OPTOMETRISTA", "OFTÁLMOLOGO" }));
+        especialidad.setEnabled(false);
+
+        jLabel9.setText("Cédula Profesional:");
+
+        cedulaResp.setEditable(false);
+
+        jLabel5.setText("Recomendaciones Generales para el Paciente:");
+
+        jScrollPane2.setViewportView(recomendaciones);
+
+        regresar.setText("Regresar");
+        regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regresarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Ver PDF");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        tablaMedicamentos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -108,51 +203,126 @@ private void llenarTabla() {
         tablaMedicamentos.setEnabled(false);
         jScrollPane1.setViewportView(tablaMedicamentos);
 
-        jLabel2.setText("Fecha:");
-
-        jLabel5.setText("Recomendaciones:");
-
-        jScrollPane2.setViewportView(recomendaciones);
+        jLabel4.setText("Medicamentos Agregados:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addContainerGap(15, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nombreResp, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(especialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cedulaResp))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nombrePac, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fechaCons, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(proxCita, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(438, 438, 438)
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(283, 283, 283)
+                .addComponent(regresar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1)
+                            .addGap(185, 185, 185))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addGap(445, 445, 445))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel12)
+                                    .addGap(386, 386, 386))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane2)))
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(1, 1, 1)
-                .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(nombrePac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addComponent(fechaCons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel10))
+                    .addComponent(proxCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cedulaResp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(nombreResp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)
+                        .addComponent(especialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9)))
+                .addGap(11, 11, 11)
                 .addComponent(jLabel4)
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                .addComponent(regresar)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel12)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jButton1)
+                    .addContainerGap()))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
+
+        this.dispose();
+    }//GEN-LAST:event_regresarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        rm.abrirReceta(receta.getReporte());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,27 +353,40 @@ private void llenarTabla() {
 
         /* Create and display the dialog */
         /*java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                VerReceta dialog = new VerReceta(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });*/
+         public void run() {
+         VerReceta dialog = new VerReceta(new javax.swing.JFrame(), true);
+         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+         @Override
+         public void windowClosing(java.awt.event.WindowEvent e) {
+         System.exit(0);
+         }
+         });
+         dialog.setVisible(true);
+         }
+         });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField fecha;
+    private javax.swing.JTextField cedulaResp;
+    private javax.swing.JComboBox especialidad;
+    private datechooser.beans.DateChooserCombo fechaCons;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField nombrePac;
+    private javax.swing.JTextField nombreResp;
+    private datechooser.beans.DateChooserCombo proxCita;
     private javax.swing.JTextPane recomendaciones;
+    private javax.swing.JButton regresar;
     private javax.swing.JTable tablaMedicamentos;
     // End of variables declaration//GEN-END:variables
 }

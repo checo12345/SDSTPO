@@ -23,11 +23,11 @@ public class Informe {
          
          
          public Informe(){} ;
-         public void generarRecetaPDF(RecetaMedicaBean recetaMB) throws FileNotFoundException, DocumentException
+         public void generarRecetaPDF(RecetaMedicaBean recetaMB,String ruta) throws FileNotFoundException, DocumentException
 	{
             URL tmp;
                 tmp=imagenes.class.getResource("receta.jpg");
-		FileOutputStream archivo = new FileOutputStream("Receta.pdf");
+		FileOutputStream archivo = new FileOutputStream(ruta+"Receta.pdf");
 		Document documento = new Document();
 		PdfWriter.getInstance(documento, archivo);
 		documento.open();

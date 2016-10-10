@@ -56,6 +56,8 @@
         <result property="idReceta" column="idReceta"/>
         <result property="recomendaciones" column="recomendaciones"/>
         <result property="fecha" column="fecha"/>
+        <result property="reporte" column="rutaReporte"/>
+        <result property="proximaCita" column="fechaProxCita"/>
         <result property="idConsulta" column="idConsulta"/>
        
        
@@ -164,8 +166,8 @@
         VALUES (#{nombre}, #{presentacion});        
     </insert>
     <insert id="insertReceta" parameterType="Beans.RecetaMedicaBean" useGeneratedKeys="true" keyColumn="idReceta" keyProperty="idReceta">
-        INSERT INTO recetamedica (fecha, recomendaciones, idConsulta)
-        VALUES (#{fecha}, #{recomendaciones}, #{idConsulta});        
+        INSERT INTO recetamedica (fecha, recomendaciones,rutaReporte, fechaProxCita, idConsulta)
+        VALUES (#{fecha}, #{recomendaciones}, #{reporte}, #{proximaCita}, #{idConsulta});        
     </insert>
     <insert id="insertRecetaMedicamento" parameterType="Beans.RecetaMedicaMedicamento">
         INSERT INTO recetamedicamedicamento (idReceta, idMedicamento, dosis)

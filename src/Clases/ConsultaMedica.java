@@ -76,7 +76,7 @@ public class ConsultaMedica {
         
     }
 public boolean MostrarReceta(JDialog frame,int idConsulta){
-    VerReceta vr=new VerReceta(frame,true,idConsulta);
+    VerReceta vr=new VerReceta(frame,true,idConsulta,medico,paciente);
     vr.setVisible(true);
     return true;
 }
@@ -107,7 +107,7 @@ public boolean MostrarReceta(JDialog frame,int idConsulta){
         return respuesta;
     }
 
-    public ServicioRespuesta obtenerSiguienteIdCosnulta() {
+    public ServicioRespuesta obtenerSiguienteIdConsulta() {
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: obtenerSiguienteIdCosnulta() ============");
         try {
@@ -196,7 +196,7 @@ public boolean MostrarReceta(JDialog frame,int idConsulta){
     }
 
     public boolean CrearReceta(JDialog frame) {
-        RegistroReceta r = new RegistroReceta(frame, true, id, medico, paciente);
+        RegistroReceta r = new RegistroReceta(frame, true, id, medico, paciente,(creaExpediente() + "/"));
 
         r.setVisible(true);
 

@@ -104,7 +104,7 @@ private int opcioncapturador2=0;
 
             doctor.setText(medico.getNombre() + " " + medico.getApellidoPaterno() + " " + medico.getApellidoMaterno());
 
-            consulta.obtenerSiguienteIdCosnulta();
+            consulta.obtenerSiguienteIdConsulta();
             
         registrar.setEnabled(false);
         receta.setEnabled(false);
@@ -565,7 +565,7 @@ private void formWindowActivated(java.awt.event.WindowEvent evt) {
             //fechanac.setText(new SimpleDateFormat("yyyy-MM-dd").format(p.getFechaNacimiento()));
             fechanac.setText(p.getFechaNacimiento());
             registrar.setEnabled(true);
-            receta.setEnabled(true);
+            //receta.setEnabled(true);
             reporte.setEnabled(true);
             prediagnostico.setEnabled(true);
         } else {
