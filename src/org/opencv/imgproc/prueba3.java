@@ -24,8 +24,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.opencv.core.Core.addWeighted;
 import static org.opencv.core.Core.addWeighted;
+import static org.opencv.core.Core.convertScaleAbs;
 import static org.opencv.core.Core.countNonZero;
+import static org.opencv.core.CvType.CV_16S;
 import org.opencv.core.Rect;
+import static org.opencv.imgproc.Imgproc.BORDER_DEFAULT;
+import static org.opencv.imgproc.Imgproc.Sobel;
 
 public class prueba3 {
 
@@ -44,20 +48,21 @@ class Procesar3 {
     public Procesar3() {
         for(int i=1;i<=71;i++){
         imagen = Highgui.imread("C:\\Users\\laloe\\Desktop\\Probar\\fotoIPWebCam"+i+".jpg", Highgui.CV_LOAD_IMAGE_COLOR);
-        //imagenCopia = Highgui.imread("C:\\Users\\laloe\\Desktop\\Probar\\fotoIPWebCam1.jpg", Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia = Highgui.imread("C:\\Users\\laloe\\Desktop\\Probar\\fotoIPWebCam"+i+".jpg", Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia1 = Highgui.imread("C:\\Users\\laloe\\Desktop\\Probar\\fotoIPWebCam"+i+".jpg", Highgui.CV_LOAD_IMAGE_COLOR);
         
         if (!imagen.empty()) {
             try {
                 Imgproc.resize(imagen, imagen, new Size(480, 640));
-                //Imgproc.resize(imagenCopia, imagenCopia, new Size(480, 640));
-                
+                Imgproc.resize(imagenCopia, imagenCopia, new Size(480, 640));
+                Imgproc.resize(imagenCopia1, imagenCopia1, new Size(480, 640));
                 //segmentarPupila(imagen);
-                //Ventana v1 =new Ventana(convertir(imagen),0,0);
-                double[] pupila=segmentarPupila(imagen);
-                if (pupila!=null)
-                    Core.circle(imagen, new Point(pupila[0], pupila[1]), (int) pupila[2], new Scalar(255, 0, 0), 3);
-                new Ventana(convertir(imagen),0,0);
-                sleep(500);
+                Ventana v1 =new Ventana(convertir(imagen),0,0);
+                imagen=dameLaDona(imagen);
+                //if (pupila!=null)
+                  //  Core.circle(imagen, new Point(pupila[0], pupila[1]), (int) pupila[2], new Scalar(255, 0, 0), 3);
+                new Ventana(convertir(imagen),1,0);
+                sleep(1);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Procesar3.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -67,6 +72,28 @@ class Procesar3 {
         }
     }
 
+    private Mat dameDonaMayor(Mat img1) {
+        
+         double[ ] iris = segmentarIris(img1);
+        iris[2]=iris[2]*0.8;
+        Size sizeA = img1.size();
+        Mat max = img1.clone();
+
+        double[] data;
+        for (int i = 0; i < sizeA.height; i++) {
+            for (int j = 0; j < sizeA.width; j++) {
+                if ((Math.pow(iris[0] - j, 2) + Math.pow(iris[1] - i, 2) >= Math.pow(iris[2], 2)) ) {
+                    data = img1.get(i, j);
+                    data[0] = 255;
+                    data[1] = 255;
+                    data[2] = 255;
+                    max.put(i, j, data);
+                }
+
+            }
+        }
+        return max;
+    }
     private Mat analizarCatarata(Mat img) {
         double[] pupila = segmentarPupila(img);
         double[] clase = {68.6250, 125.8750, 118.6250};
@@ -82,7 +109,7 @@ class Procesar3 {
                 if ((Math.pow(pupila[0] - j, 2) + Math.pow(pupila[1] - i, 2) <= Math.pow(pupila[2], 2))) {
                     data = img.get(i, j);
                     double res = Math.sqrt(Math.pow(clase[0] - data[2], 2) + Math.pow(clase[1] - data[1], 2) + Math.pow(clase[2] - data[0], 2));
-                    if (res < 120) {
+                    if (res < 50) {
                         data[0] = 0;
                         data[1] = 255;
                         data[2] = 0;
@@ -97,7 +124,6 @@ class Procesar3 {
         //Ventana v2 = new Ventana(convertir(imagen), 2, 0);
         return max;
     }
-
     private Mat analizarMelanoma(Mat img) {
         int totalP, areaM, tamImg = img.width() * img.height();
 
@@ -108,7 +134,7 @@ class Procesar3 {
 
         img = blurearImg(img, 25);
         img = descompCanImg(img, 1);
-        Ventana v = new Ventana(convertir(img2), 0, 0);
+        //Ventana v = new Ventana(convertir(img2), 0, 0);
         totalP = tamImg - countNonZero(img2);
 
         img = umbralizarImg(img, 30, 150);
@@ -122,7 +148,6 @@ class Procesar3 {
 
         return img;
     }
-
     private Mat dameLaDona(Mat img1) {
         double[] iris = segmentarIris(img1);
         double[] pupila = segmentarPupila(img1);
@@ -145,57 +170,79 @@ class Procesar3 {
         }
         return max;
     }
-
     private double[] segmentarIris(Mat img) {
         /*Imagen original*/
         Image imagenMostrar = convertir(img);
-        //Ventana ventana = new Ventana(imagenMostrar,0,0);
+        //img=dameLaDonaMayor(img);
+        //Ventana ventana = new Ventana(convertir(img),0,0);
             /*Descomponer canales*/
         img = descompCanImg(img, 1);
         //Ventana ventana3 = new Ventana(convertir(img),1,0);
             /*Filtro Gauss*/
-        img = blurearImg(img, 25);
+        img = blurearImg(img, 31);
+        int scale = 1;
+  int delta = 0;
+  int ddepth = CV_16S;
+  Mat grad_x = null, grad_y;
+  Mat abs_grad_x = null, abs_grad_y;
+        Sobel( img, img, ddepth, 1, 0, 3, scale, delta, BORDER_DEFAULT );
+  convertScaleAbs( img, img );
+  //Ventana ventana31 = new Ventana(convertir(img),2,0);
+  
+        //img = blurearImg(img, 25);
             //Ventana ventana31 = new Ventana(convertir(img),2,0);
             /*Umbralizado*/
         // img=umbralizarIris(img) ;
-        img = umbralizarImg(img, 100, 150);
-        //Ventana ventana4 = new Ventana(convertir(img),0,0);
+        //img = umbralizarImg(img, 150, 200);
+        //Ventana ventana4 = new Ventana(convertir(img),1,0);
             /* Erosionar*/
-        img = eriosionarImg(img);
+        //img = eriosionarImg(img);
         //Ventana ventana5 = new Ventana(convertir(img),1,1);
             /* Erosionar*/
         img = dilatarImg(img);
+        img = eriosionarImg(img);
             //Ventana ventana6 = new Ventana(convertir(img),2,1);
             /*Canny*/
         //imagen=filtroCanny(imagen) ;
-        img = umbralizarImg(img, 0, 255);
-        //Ventana ventana7 = new Ventana(convertir(img),0,2);
+        //img = umbralizarImg(img,30, 255);
+        //Ventana ventana7 = new Ventana(convertir(img),1,0);
+       // img = eriosionarImg(img);
+        //Ventana ventana7 = new Ventana(convertir(img),1,0);
              /*Transformada Hough*/
-        return TransfHough(img, 1, 200, 1, 10, 100, 150);
+        
+        return TransfHough(img, 1, 200, 1, 10, 100, 170);
     }
-
     private double[] segmentarPupila(Mat img) {
         /*Imagen original*/
         Image imagenMostrar = convertir(img);
        // Ventana ventana = new Ventana(imagenMostrar, 0, 0);
-
-        img = descompCanImg(img, 2);
+        img=dameDonaMayor(img);
         //Ventana ventana3 = new Ventana(convertir(img), 1, 0);
-
-        /*Umbralizado*/
-        img = umbralizarImg(img, 70, 110);
+        img = descompCanImg(img, 2);
         //Ventana ventana4 = new Ventana(convertir(img), 2, 0);
 
-        /* Erosionar*/
-        img = eriosionarImg(img);
-        //Ventana ventana5 = new Ventana(convertir(img), 0, 1);
+        /*Umbralizado*/
+        //img = umbralizarImg(img, 60, 80);
+        img = blurearImg(img, 31);
+        int scale = 1;
+  int delta = 0;
+  int ddepth = CV_16S;
+  Mat grad_x = null, grad_y;
+  Mat abs_grad_x = null, abs_grad_y;
+        Sobel( img, img, ddepth, 1, 0, 3, scale, delta, BORDER_DEFAULT );
+  convertScaleAbs( img, img );
+       // Ventana ventana4 = new Ventana(convertir(img), 1, 0);
+
+        
 
         /* Dilatar*/
         img = dilatarImg(img);
         //Ventana ventana6 = new Ventana(convertir(img), 1, 1);
-
+/* Erosionar*/
+        img = eriosionarImg(img);
+        //Ventana ventana5 = new Ventana(convertir(img), 0, 1);
         /*Canny*/
-        img = filtroCanny(img);
+        //img = filtroCanny(img);
         //img=umbralizarImg(img,0,255) ;
         //Ventana ventana7 = new Ventana(convertir(img), 2, 1);
 
@@ -265,7 +312,6 @@ class Procesar3 {
 
         return segmentada;
     }
-
     private double[] TransfHough(Mat edges, int inv, int distMinCir, int umbMin, int umbMax, int radMin, int radMax) {
 
         Mat color = imagenCopia;

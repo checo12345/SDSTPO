@@ -586,6 +586,7 @@ private void formWindowActivated(java.awt.event.WindowEvent evt) {
 
     private void prediagnosticoActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        consulta.realizarPrediagnostico(new Imagen(capturador1.getImagen()), new Imagen(capturador2.getImagen()), this);
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
