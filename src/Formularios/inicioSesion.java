@@ -14,6 +14,7 @@ public class inicioSesion extends javax.swing.JFrame {
 
     public inicioSesion() {
         initComponents();
+        System.loadLibrary("opencv_java2413");
     }
 
     @SuppressWarnings("unchecked")

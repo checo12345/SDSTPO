@@ -202,6 +202,12 @@ public boolean MostrarReceta(JDialog frame,int idConsulta){
 
         return true;
     }
+    
+    public void realizarPrediagnostico(Imagen izq,Imagen der,JDialog frame){
+        this.ojoIzq=izq;
+        this.ojoDer=der;
+        Prediagnostico pre=new Prediagnostico(this.ojoIzq,this.ojoDer,frame,0);
+    }
 
     public static void main(String[] args) {
         try {

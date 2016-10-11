@@ -6,21 +6,30 @@
 package Beans;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
 
 /**
  *
  * @author David Pantaleón
  */
 public class Imagen {
+
     private BufferedImage fotografia;
     private int alto;
     private int ancho;
     private String ruta;
-    public Imagen(){}
-    public Imagen(BufferedImage fot){
-        fotografia=fot;
-        alto=fot.getHeight();
-        ancho=fot.getWidth();
+
+    public Imagen() {
+    }
+
+    public Imagen(BufferedImage fot) {
+        fotografia = fot;
+        alto = fot.getHeight();
+        ancho = fot.getWidth();
     }
 
     public String getRuta() {
@@ -30,17 +39,40 @@ public class Imagen {
     public void setRuta(String ruta) {
         this.ruta = ruta;
     }
-    
-    public BufferedImage getFotografia(){return fotografia;}
-    public int getAlto(){return alto;}
-    public int getAncho(){return ancho;}
-    public void setFotografia(BufferedImage fot){
-        fotografia=fot;
+
+    public BufferedImage getFotografia() {
+        return fotografia;
     }
-    public void setAlto(int alt){
-        alto=alt;
+
+    public int getAlto() {
+        return alto;
     }
-    public void setAncho(int anc){
-        ancho=anc;
+
+    public int getAncho() {
+        return ancho;
+    }
+
+    public void setFotografia(BufferedImage fot) {
+        fotografia = fot;
+    }
+
+    public void setAlto(int alt) {
+        alto = alt;
+    }
+
+    public void setAncho(int anc) {
+        ancho = anc;
+    }
+
+    public Mat getMatFotografia() {
+        byte[] pixels = ((DataBufferByte) fotografia.getRaster().getDataBuffer())
+                .getData();
+
+// Create a Matrix the same size of image
+        Mat image = new Mat(alto, ancho, CvType.CV_8UC3);
+// Fill Matrix with image values
+        image.put(0, 0, pixels);
+        Imgproc.resize(image, image, new Size(480, 640));
+        return image;
     }
 }
