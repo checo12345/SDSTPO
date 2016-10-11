@@ -16,6 +16,7 @@ import UpperEssential.UpperEssentialLookAndFeel;
 import com.itextpdf.text.DocumentException;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,6 +53,8 @@ public class RegistroReceta extends javax.swing.JDialog {
     public RegistroReceta(javax.swing.JDialog parent, boolean modal, int idConsulta, MedicoBean m, Paciente p, String ruta) {
         super(parent, modal);
         initComponents();
+        fechaCons.setDateFormat(DateFormat.getDateInstance(DateFormat.MEDIUM));
+        proxCita.setDateFormat(DateFormat.getDateInstance(DateFormat.MEDIUM));
         this.ruta = ruta;
         System.out.println("Ruta en Receta: " + this.ruta);
         listaMedicamentosSel = new ArrayList<>();

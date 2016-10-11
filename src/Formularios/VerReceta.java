@@ -12,6 +12,7 @@ import Beans.RecetaMedicaBean;
 import Clases.RecetaMedica;
 import Clases.ServicioRespuesta;
 import datechooser.model.exeptions.IncompatibleDataExeption;
+import java.text.DateFormat;
 import javax.swing.JDialog;
 
 import java.util.Vector;
@@ -41,6 +42,8 @@ public class VerReceta extends javax.swing.JDialog {
     public VerReceta(JDialog parent, boolean modal, int idConsulta, MedicoBean m, Paciente p) {
         super(parent, modal);
         initComponents();
+        fechaCons.setDateFormat(DateFormat.getDateInstance(DateFormat.MEDIUM));
+        proxCita.setDateFormat(DateFormat.getDateInstance(DateFormat.MEDIUM));
         rm = new RecetaMedica(idConsulta);
         ServicioRespuesta respuesta = rm.obtenerReceta();
         if (respuesta.isSuccess() == true) {
@@ -252,21 +255,20 @@ public class VerReceta extends javax.swing.JDialog {
                 .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1)
-                            .addGap(185, 185, 185))
+                            .addContainerGap()
+                            .addComponent(jScrollPane2))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jButton1)
+                                    .addGap(185, 185, 185))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jLabel5)
                                     .addGap(445, 445, 445))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jLabel12)
-                                    .addGap(386, 386, 386))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane2)))
+                                    .addGap(386, 386, 386)))))
                     .addContainerGap()))
         );
         layout.setVerticalGroup(

@@ -27,7 +27,7 @@ public class RegistrarPaciente extends javax.swing.JDialog {
     public RegistrarPaciente(java.awt.Frame parent, boolean modal,int opcion) {
         super(parent, modal);
         initComponents();
-        
+        fechaNac.setDateFormat(DateFormat.getDateInstance(DateFormat.MEDIUM));
          if (opcion == 1)
         {
             curpPaciente.setVisible(false);

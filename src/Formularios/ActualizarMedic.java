@@ -36,6 +36,7 @@ MedicoAdministrador med_adm;
         super(parent, modal);
         med_adm=me_ad;
         initComponents();
+        dateNac.setDateFormat(DateFormat.getDateInstance(DateFormat.MEDIUM));
         limpiarLeyendasError();
         ocultarCampos();
     }

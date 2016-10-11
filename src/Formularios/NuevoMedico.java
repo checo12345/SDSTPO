@@ -9,6 +9,7 @@ import Clases.MedicoAdministrador;
 import Imagenes.imagenes;
 import datechooser.model.exeptions.IncompatibleDataExeption;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,6 +34,7 @@ public class NuevoMedico extends javax.swing.JDialog {
     public NuevoMedico(java.awt.Frame parent, boolean modal,MedicoAdministrador me_ad) {
         super(parent, modal);
         initComponents();
+        dateCombo.setDateFormat(DateFormat.getDateInstance(DateFormat.MEDIUM));
         limpiarLeyendasError();
         med_adm=me_ad;
     }
