@@ -59,11 +59,33 @@
         <result property="reporte" column="rutaReporte"/>
         <result property="proximaCita" column="fechaProxCita"/>
         <result property="idConsulta" column="idConsulta"/>
-       
-       
-       
+    </resultMap>
+    <resultMap id="resultPrediagnostico" type="Beans.PrediagnosticoBean">
+        <result property="idPreDiag" column="idPreDiag"/>
+        <result property="observaciones" column="observaciones"/>
+        <result property="idConsulta" column="idConsulta"/>
+        
+    </resultMap>
+    <resultMap id="resultResultados" type="Beans.ResultadoPrediagnostico">
+        <result property="idResultado" column="idResultado"/>
+        <result property="patologia" column="patologia"/>
+        <result property="ojo" column="ojo"/>
+        <result property="resultado" column="resultado"/>
+        <result property="rutaImagen" column="rutaImagen"/>
+        <result property="idPreDiag" column="idPreDiag"/>
     </resultMap>
     <!-- AQUI VAN TODOS LOS SELECT-->
+    <select id="selPrediagnostico" parameterType="java.lang.Integer" resultMap="resultPrediagnostico">
+	select * 
+	from prediagnostico
+	where idConsulta=#{value};
+        
+    </select>
+    <select id="sql.getAllResultadosPrediag" resultMap="resultResultados" parameterType="java.lang.Integer">
+       select * 
+	from resultadosPrediagnostico
+	where idPreDiag=#{value};
+    </select>
     <select id="selReceta" parameterType="java.lang.Integer" resultMap="resultReceta">
 	select * 
 	from recetamedica
@@ -176,6 +198,14 @@
         <insert id="insertConsulta" parameterType="Beans.ConsultaMedicaBean" useGeneratedKeys="true" keyColumn="idConsulta" keyProperty="idConsulta">
         INSERT INTO consultamedica (fecha, motivo, imgOjoIzq, imgOjoDer, cedProfMed,idPaciente)
         VALUES (#{fechaConsulta}, #{motivoConsulta}, #{ojoIzquierdo}, #{ojoDerecho}, #{cedulaMedico}, #{idPaciente});        
+    </insert>
+    <insert id="insertPredignostico" parameterType="Beans.PrediagnosticoBean" useGeneratedKeys="true" keyColumn="idPreDiag" keyProperty="idPreDiag">
+        INSERT INTO prediagnostico (observaciones,idConsulta)
+        VALUES (#{observaciones}, #{idConsulta});        
+    </insert>
+    <insert id="insertReultadoPredignostico" parameterType="Beans.ResultadoPrediagnostico" useGeneratedKeys="true" keyColumn="idResultado" keyProperty="idResultado">
+        INSERT INTO resultadosPrediagnostico (patologia,ojo,resultado,rutaImagen,idPreDiag)
+        VALUES (#{patologia},#{ojo},#{resultado},#{rutaImagen},#{idPreDiag});        
     </insert>
     <insert id="insertManifestacion" parameterType="Beans.ManifestacionBean" >
         INSERT INTO ManifestacionConsulta VALUES (#{idConsulta}, #{manifestacion});        

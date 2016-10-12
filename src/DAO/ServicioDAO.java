@@ -5,8 +5,10 @@ import Beans.ManifestacionBean;
 import Beans.Medicamento;
 import Beans.MedicoBean;
 import Beans.Paciente;
+import Beans.PrediagnosticoBean;
 import Beans.RecetaMedicaBean;
 import Beans.RecetaMedicaMedicamento;
+import Beans.ResultadoPrediagnostico;
 import Beans.Sesion;
 import Clases.ServicioRespuesta;
 import Excepciones.SDTPOException;
@@ -1155,6 +1157,119 @@ logger.info("buscando receta con idConsulta="+idConsulta);
                 respuesta.setSuccess(true);
                 respuesta.setMensaje("Receta Encontrada: "+receta.getIdReceta());
                 respuesta.setResult(receta);
+            } else {
+                logger.info("No se obtuvo respuesta de Receta");
+                respuesta.setSuccess(false);
+                respuesta.setMensaje("No se obtuvo respuesta de Receta");
+            }
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
+    public ServicioRespuesta insertarResultadoPre(ResultadoPrediagnostico rpb) {
+        logger.info("**********  SERVICIO METODO: insertatPrediagnostico(" + rpb + ")**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+            if ((rpb == null)) {
+                throw new SDTPOException("Petición Inválida");
+            }
+            sqlSession = getSQLSession();
+
+            respuesta.setResult(sqlSession.insert("sql.insertReultadoPredignostico", rpb));
+            respuesta.setMensaje("insercion realizada");
+            respuesta.setSuccess(true);
+
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
+    public ServicioRespuesta insertarPrediagnostico(PrediagnosticoBean pb) {
+        logger.info("**********  SERVICIO METODO: insertatPrediagnostico(" + pb + ")**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+            if ((pb == null)) {
+                throw new SDTPOException("Petición Inválida");
+            }
+            sqlSession = getSQLSession();
+
+            respuesta.setResult(sqlSession.insert("sql.insertPredignostico", pb));
+            respuesta.setMensaje("insercion realizada");
+            respuesta.setSuccess(true);
+
+            sqlSession.commit();
+            logger.info("PERFORM COMMIT();");
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            e.printStackTrace();
+            if (e.getCause() instanceof SQLException) {
+                SQLException sqlE = (SQLException) e.getCause();
+                logger.info("###SQL ERROR###: [" + sqlE.getErrorCode() + "] " + sqlE.getMessage());
+            }
+            respuesta.setSuccess(false);
+            respuesta.setMensaje("Ocurrió una excepción.");
+        } finally {
+            logger.info("sqlSession.close();");
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
+        logger.info("************************" + respuesta + "************************");
+        return respuesta;
+    }
+    public ServicioRespuesta getPrediagnostico(int idConsulta) {
+        logger.info("**********  SERVICIO METODO: getPrediagnostico()**********");
+        ServicioRespuesta respuesta = new ServicioRespuesta();
+        SqlSession sqlSession = null;
+        try {
+
+            respuesta.setMensaje("NOT EXECUTED");
+            respuesta.setSuccess(false);
+            sqlSession = getSQLSession();
+logger.info("buscando prediagnostico con idConsulta="+idConsulta);
+            PrediagnosticoBean prediagnostico  = sqlSession.selectOne("sql.selPrediagnostico",idConsulta);
+            if (prediagnostico != null) {
+                logger.info("Prediagnostico Encontrado: "+prediagnostico.getIdPreDiag());
+                
+                    prediagnostico.setResultados(sqlSession.selectList("sql.getAllResultadosPrediag",prediagnostico.getIdPreDiag()));
+                    logger.info("Medicamentos: "+prediagnostico.getResultados().size());
+                
+                respuesta.setSuccess(true);
+                respuesta.setMensaje("Receta Encontrada: "+prediagnostico.getIdPreDiag());
+                respuesta.setResult(prediagnostico);
             } else {
                 logger.info("No se obtuvo respuesta de Receta");
                 respuesta.setSuccess(false);

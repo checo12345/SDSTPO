@@ -39,6 +39,7 @@ public class VerReceta extends javax.swing.JDialog {
     private MedicoBean medico_responsable;
     private Paciente paciente;
     private RecetaMedica rm;
+    private boolean banderacerrar;
     public VerReceta(JDialog parent, boolean modal, int idConsulta, MedicoBean m, Paciente p) {
         super(parent, modal);
         initComponents();
@@ -47,7 +48,7 @@ public class VerReceta extends javax.swing.JDialog {
         rm = new RecetaMedica(idConsulta);
         ServicioRespuesta respuesta = rm.obtenerReceta();
         if (respuesta.isSuccess() == true) {
-            this.setTitle("Registro de Receta de la consulta: " + idConsulta);
+            this.setTitle("Receta de la consulta: " + idConsulta);
             receta = (RecetaMedicaBean) respuesta.getResult();
             this.medico_responsable = m;
             this.paciente = p;
@@ -78,9 +79,9 @@ public class VerReceta extends javax.swing.JDialog {
             columnas.add("dosis");
             cargarDatos();
         } else {
+            banderacerrar=true;
             JOptionPane.showMessageDialog(null, "No se tiene una receta Regitrada para esta consulta", "No se encontro Receta",
                     JOptionPane.ERROR_MESSAGE);
-            cerrar();
         }
 
     }
@@ -144,6 +145,11 @@ public class VerReceta extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1300, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel12.setText("RECETA MÉDICA");
@@ -253,12 +259,11 @@ public class VerReceta extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane2))
+                        .addComponent(jScrollPane2)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(0, 0, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jButton1)
@@ -325,6 +330,12 @@ public class VerReceta extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         rm.abrirReceta(receta.getReporte());
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        
+            this.dispose();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

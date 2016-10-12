@@ -6,11 +6,15 @@
 package Formularios;
 
 import Beans.Imagen;
+import Beans.PrediagnosticoBean;
+import Beans.ResultadoPrediagnostico;
+import Clases.Prediagnostico;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,26 +25,29 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
     /**
      * Creates new form VisualizarPrediagnostico
      */
-    private Imagen imgOIC,imgODC,imgIzq,imgDer,imgOIM,imgODM,imgOIP,imgODP;
+    private Imagen imgOIC, imgODC, imgIzq, imgDer, imgOIM, imgODM, imgOIP, imgODP;
     private double[] resultados;
     private int opcion;
-    public VisualizarPrediagnostico(JDialog parent, boolean modal,Imagen imgIzq,Imagen imgDer,Imagen imgOIC,Imagen imgODC,Imagen imgOIM,Imagen imgODM,double[] resultados) {
+    Prediagnostico prediagnostico;
+
+    public VisualizarPrediagnostico(JDialog parent, boolean modal, Imagen imgIzq, Imagen imgDer, Imagen imgOIC, Imagen imgODC, Imagen imgOIM, Imagen imgODM, double[] resultados, Prediagnostico pre) {
         super(parent, modal);
         initComponents();
-        opcion=0;
+        opcion = 0;
+        prediagnostico = pre;
         panelOIP.setVisible(false);
         panelODP.setVisible(false);
         labelPteDer.setVisible(false);
         labelPteIzq.setVisible(false);
         resultPteDer.setVisible(false);
         resultPteIzq.setVisible(false);
-        this.resultados=resultados;
-        this.imgOIC=imgOIC;
-        this.imgODC=imgODC;
-        this.imgIzq=imgIzq;
-        this.imgDer=imgDer;
-        this.imgOIM=imgOIM;
-        this.imgODM=imgODM;
+        this.resultados = resultados;
+        this.imgOIC = imgOIC;
+        this.imgODC = imgODC;
+        this.imgIzq = imgIzq;
+        this.imgDer = imgDer;
+        this.imgOIM = imgOIM;
+        this.imgODM = imgODM;
         JLabel label = new JLabel(new ImageIcon(((new ImageIcon(imgIzq.getFotografia())).getImage()).getScaledInstance(panelOI.getWidth(), panelOI.getHeight(), java.awt.Image.SCALE_SMOOTH)));
         label.setSize(panelOI.getWidth(), panelOI.getHeight());
         panelOI.add(label);
@@ -50,7 +57,7 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
         label = new JLabel(new ImageIcon(((new ImageIcon(imgOIM.getFotografia())).getImage()).getScaledInstance(panelOIM.getWidth(), panelOIM.getHeight(), java.awt.Image.SCALE_SMOOTH)));
         label.setSize(panelOIM.getWidth(), panelOIM.getHeight());
         panelOIM.add(label);
-        
+
         label = new JLabel(new ImageIcon(((new ImageIcon(imgDer.getFotografia())).getImage()).getScaledInstance(panelOD.getWidth(), panelOD.getHeight(), java.awt.Image.SCALE_SMOOTH)));
         label.setSize(panelOD.getWidth(), panelOD.getHeight());
         panelOD.add(label);
@@ -60,46 +67,140 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
         label = new JLabel(new ImageIcon(((new ImageIcon(imgODM.getFotografia())).getImage()).getScaledInstance(panelODM.getWidth(), panelODM.getHeight(), java.awt.Image.SCALE_SMOOTH)));
         label.setSize(panelODM.getWidth(), panelODM.getHeight());
         panelODM.add(label);
-        resulCatIzq.setText(resultados[0]+"% de la área de la pupila detectada con Catarata.");
-        resulCatDer.setText(resultados[1]+"% de la área de la pupila detectada con Catarata.");
-        resultMeIzq.setText(resultados[2]+"% de la área del iris detectada con Melanoma");
-        resultMeDer.setText(resultados[3]+"% de la área del iris detectada con Melanoma");
-        
+        resulCatIzq.setText(resultados[0] + "% de la área de la pupila detectada con Catarata.");
+        resulCatDer.setText(resultados[1] + "% de la área de la pupila detectada con Catarata.");
+        resultMeIzq.setText(resultados[2] + "% de la área del iris detectada con Melanoma");
+        resultMeDer.setText(resultados[3] + "% de la área del iris detectada con Melanoma");
+
     }
-    public VisualizarPrediagnostico(JDialog parent, boolean modal,Imagen imgIzq,Imagen imgDer,Imagen imgOIP,Imagen imgODP,double[] resultados) {
+
+    public VisualizarPrediagnostico(JDialog parent, boolean modal, PrediagnosticoBean prediag,Imagen imgIzq, Imagen imgDer) {
+        super(parent, modal);
+        initComponents();
+        this.imgIzq = imgIzq;
+        this.imgDer = imgDer;
+        observaciones.setEditable(false);
+        labelCatDer.setVisible(false);
+        labelCatIzq.setVisible(false);
+        labelMelDer.setVisible(false);
+        labelMelIzq.setVisible(false);
+        labelPteDer.setVisible(false);
+        labelPteIzq.setVisible(false);
+        panelODC.setVisible(false);
+        panelODM.setVisible(false);
+        panelODP.setVisible(false);
+        panelOIC.setVisible(false);
+        panelOIM.setVisible(false);
+        panelOIP.setVisible(false);
+        resulCatDer.setVisible(false);
+        resulCatIzq.setVisible(false);
+        resultMeDer.setVisible(false);
+        resultMeIzq.setVisible(false);
+        resultPteDer.setVisible(false);
+        resultPteIzq.setVisible(false);
+        registrar.setVisible(false);
+        JLabel label;
+        for (ResultadoPrediagnostico rp : prediag.getResultados()) {
+            if (rp.getOjo().equals("Derecho")) {
+                if (rp.getPatologia().equals("Catarata")) {
+                    panelODC.setVisible(true);
+                    resulCatDer.setVisible(true);
+                    labelCatDer.setVisible(true);
+                    imgODC = new Imagen(rp.getRutaImagen());
+                    label = new JLabel(new ImageIcon(((new ImageIcon(imgODC.getFotografia())).getImage()).getScaledInstance(panelODC.getWidth(), panelODC.getHeight(), java.awt.Image.SCALE_SMOOTH)));
+                    label.setSize(panelODC.getWidth(), panelODC.getHeight());
+                    panelODC.add(label);
+                    resulCatDer.setText(rp.getResultado() + "% de la área de la pupila detectada con Catarata.");
+                } else if (rp.getPatologia().equals("Melanoma")) {
+                    panelODM.setVisible(true);
+                    resultMeDer.setVisible(true);
+                    labelMelDer.setVisible(true);
+                    imgODM = new Imagen(rp.getRutaImagen());
+                    label = new JLabel(new ImageIcon(((new ImageIcon(imgODM.getFotografia())).getImage()).getScaledInstance(panelODM.getWidth(), panelODM.getHeight(), java.awt.Image.SCALE_SMOOTH)));
+                    label.setSize(panelODM.getWidth(), panelODM.getHeight());
+                    panelODM.add(label);
+                    resultMeDer.setText(rp.getResultado() + "% de la área del iris detectada con Melanoma");
+                } else {
+                    panelODP.setVisible(true);
+                    labelPteDer.setVisible(true);
+                    resultPteDer.setVisible(false);
+                    imgODP = new Imagen(rp.getRutaImagen());
+                    label = new JLabel(new ImageIcon(((new ImageIcon(imgODP.getFotografia())).getImage()).getScaledInstance(panelODP.getWidth(), panelODP.getHeight(), java.awt.Image.SCALE_SMOOTH)));
+                    label.setSize(panelODP.getWidth(), panelODP.getHeight());
+                    panelODP.add(label);
+                }
+            } else {
+                if (rp.getPatologia().equals("Catarata")) {
+                    panelOIC.setVisible(true);
+                    resulCatIzq.setVisible(true);
+                    labelCatIzq.setVisible(true);
+                    imgOIC = new Imagen(rp.getRutaImagen());
+                    label = new JLabel(new ImageIcon(((new ImageIcon(imgOIC.getFotografia())).getImage()).getScaledInstance(panelOIC.getWidth(), panelOIC.getHeight(), java.awt.Image.SCALE_SMOOTH)));
+                    label.setSize(panelOIC.getWidth(), panelOIC.getHeight());
+                    panelOIC.add(label);
+                    resulCatIzq.setText(rp.getResultado() + "% de la área de la pupila detectada con Catarata.");
+                } else if (rp.getPatologia().equals("Melanoma")) {
+                    panelOIM.setVisible(true);
+                    resultMeIzq.setVisible(true);
+                    labelMelIzq.setVisible(true);
+                    imgOIM = new Imagen(rp.getRutaImagen());
+                    label = new JLabel(new ImageIcon(((new ImageIcon(imgOIM.getFotografia())).getImage()).getScaledInstance(panelOIM.getWidth(), panelOIM.getHeight(), java.awt.Image.SCALE_SMOOTH)));
+                    label.setSize(panelOIM.getWidth(), panelOIM.getHeight());
+                    panelOIM.add(label);
+                    resultMeIzq.setText(rp.getResultado() + "% de la área del iris detectada con Melanoma");
+                } else {
+                    panelOIP.setVisible(true);
+                    labelPteIzq.setVisible(true);
+                    resultPteIzq.setVisible(true);
+                    imgOIP = new Imagen(rp.getRutaImagen());
+                    label = new JLabel(new ImageIcon(((new ImageIcon(imgOIP.getFotografia())).getImage()).getScaledInstance(panelOIP.getWidth(), panelOIP.getHeight(), java.awt.Image.SCALE_SMOOTH)));
+                    label.setSize(panelOIP.getWidth(), panelOIP.getHeight());
+                    panelOIP.add(label);
+                }
+            }
+        }
+
+        label = new JLabel(new ImageIcon(((new ImageIcon(imgIzq.getFotografia())).getImage()).getScaledInstance(panelOI.getWidth(), panelOI.getHeight(), java.awt.Image.SCALE_SMOOTH)));
+        label.setSize(panelOI.getWidth(), panelOI.getHeight());
+        panelOI.add(label);
+        label = new JLabel(new ImageIcon(((new ImageIcon(imgDer.getFotografia())).getImage()).getScaledInstance(panelOD.getWidth(), panelOD.getHeight(), java.awt.Image.SCALE_SMOOTH)));
+        label.setSize(panelOD.getWidth(), panelOD.getHeight());
+        panelOD.add(label);
+        observaciones.setText(prediag.getObservaciones());
+    }
+
+    public VisualizarPrediagnostico(JDialog parent, boolean modal, Imagen imgIzq, Imagen imgDer, Imagen imgOIP, Imagen imgODP, double[] resultados, Prediagnostico pre) {
         super(parent, modal);
         initComponents();
         this.setTitle("Pre-diagnostico");
-        opcion=1;
-       resulCatIzq.setVisible(false);
-       resulCatDer.setVisible(false);
-       resultMeIzq.setVisible(false);
-       resultMeDer.setVisible(false);
-       panelODC.setVisible(false); 
-       panelODM.setVisible(false); 
-       panelOIC.setVisible(false); 
-       panelOIM.setVisible(false); 
-       labelCatDer.setVisible(false);
-       labelCatIzq.setVisible(false);
-       labelMelDer.setVisible(false);
-       labelMelIzq.setVisible(false);
-       
-       
-       
-        this.resultados=resultados;
-        this.imgOIP=imgOIP;
-        this.imgODP=imgODP;
-        this.imgIzq=imgIzq;
-        this.imgDer=imgDer;
-        
+        prediagnostico = pre;
+        opcion = 1;
+        resulCatIzq.setVisible(false);
+        resulCatDer.setVisible(false);
+        resultMeIzq.setVisible(false);
+        resultMeDer.setVisible(false);
+        panelODC.setVisible(false);
+        panelODM.setVisible(false);
+        panelOIC.setVisible(false);
+        panelOIM.setVisible(false);
+        labelCatDer.setVisible(false);
+        labelCatIzq.setVisible(false);
+        labelMelDer.setVisible(false);
+        labelMelIzq.setVisible(false);
+
+        this.resultados = resultados;
+        this.imgOIP = imgOIP;
+        this.imgODP = imgODP;
+        this.imgIzq = imgIzq;
+        this.imgDer = imgDer;
+
         JLabel label = new JLabel(new ImageIcon(((new ImageIcon(imgIzq.getFotografia())).getImage()).getScaledInstance(panelOI.getWidth(), panelOI.getHeight(), java.awt.Image.SCALE_SMOOTH)));
         label.setSize(panelOI.getWidth(), panelOI.getHeight());
         panelOI.add(label);
         label = new JLabel(new ImageIcon(((new ImageIcon(imgOIP.getFotografia())).getImage()).getScaledInstance(panelOIP.getWidth(), panelOIP.getHeight(), java.awt.Image.SCALE_SMOOTH)));
         label.setSize(panelOIP.getWidth(), panelOIP.getHeight());
         panelOIP.add(label);
-        
-        
+
         label = new JLabel(new ImageIcon(((new ImageIcon(imgDer.getFotografia())).getImage()).getScaledInstance(panelOD.getWidth(), panelOD.getHeight(), java.awt.Image.SCALE_SMOOTH)));
         label.setSize(panelOD.getWidth(), panelOD.getHeight());
         panelOD.add(label);
@@ -109,10 +210,6 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
         resultPteDer.setText("RESULTADO DERECHO");
         resultPteIzq.setText("RESULTADO Izquierdo");
 
-
-
-
-        
     }
 
     /**
@@ -151,8 +248,14 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
         labelCatDer = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        observaciones = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        registrar = new javax.swing.JButton();
+        regresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -434,7 +537,7 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(panelODM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(labelMelDer))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelPteDer)
                                     .addComponent(panelODP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -470,6 +573,26 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setText("Pre-diagnóstico");
 
+        observaciones.setColumns(20);
+        observaciones.setRows(5);
+        jScrollPane1.setViewportView(observaciones);
+
+        jLabel6.setText("Observaciones:");
+
+        registrar.setText("Registrar");
+        registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarActionPerformed(evt);
+            }
+        });
+
+        regresar.setText("Regresar");
+        regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regresarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -478,13 +601,25 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(337, 337, 337)
-                        .addComponent(jLabel5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)))
+                .addContainerGap(39, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(registrar)
+                    .addComponent(regresar))
+                .addGap(93, 93, 93))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,8 +628,18 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(registrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(regresar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -502,43 +647,66 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
 
     private void panelOIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelOIMouseClicked
         // TODO add your handling code here:
-        new VerImagen(this,false,imgIzq);
+        new VerImagen(this, false, imgIzq);
     }//GEN-LAST:event_panelOIMouseClicked
 
     private void panelOICMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelOICMouseClicked
         // TODO add your handling code here:
-        new VerImagen(this,false,imgOIC);
+        new VerImagen(this, false, imgOIC);
     }//GEN-LAST:event_panelOICMouseClicked
 
     private void panelOIMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelOIMMouseClicked
         // TODO add your handling code here:
-        new VerImagen(this,false,imgOIM);
+        new VerImagen(this, false, imgOIM);
     }//GEN-LAST:event_panelOIMMouseClicked
 
     private void panelODMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelODMouseClicked
         // TODO add your handling code here:
-        new VerImagen(this,false,imgDer);
+        new VerImagen(this, false, imgDer);
     }//GEN-LAST:event_panelODMouseClicked
 
     private void panelODCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelODCMouseClicked
         // TODO add your handling code here:
-        new VerImagen(this,false,imgODC);
+        new VerImagen(this, false, imgODC);
     }//GEN-LAST:event_panelODCMouseClicked
 
     private void panelODMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelODMMouseClicked
         // TODO add your handling code here:
-        new VerImagen(this,false,imgODM);
+        new VerImagen(this, false, imgODM);
     }//GEN-LAST:event_panelODMMouseClicked
 
     private void panelOIPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelOIPMouseClicked
         // TODO add your handling code here:
-        new VerImagen(this,false,imgOIP);
+        new VerImagen(this, false, imgOIP);
     }//GEN-LAST:event_panelOIPMouseClicked
 
     private void panelODPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelODPMouseClicked
         // TODO add your handling code here:
-        new VerImagen(this,false,imgODP);
+        new VerImagen(this, false, imgODP);
     }//GEN-LAST:event_panelODPMouseClicked
+
+    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
+        // TODO add your handling code here:
+        if (!observaciones.getText().equals("")) {
+            if (prediagnostico.Registrar(observaciones.getText())) {
+                registrar.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "El Pre-diagnóstico se registro exitosamente", "Registro Exitoso",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se logró registrar el Pre-diagnóstico", "Registro Fallido",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El campo de observaciones no se ha llenado", "Registro Fallido",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_registrarActionPerformed
+
+    private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_regresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -569,17 +737,17 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         /*java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                VisualizarPrediagnostico dialog = new VisualizarPrediagnostico(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });*/
+         public void run() {
+         VisualizarPrediagnostico dialog = new VisualizarPrediagnostico(new javax.swing.JFrame(), true);
+         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+         @Override
+         public void windowClosing(java.awt.event.WindowEvent e) {
+         System.exit(0);
+         }
+         });
+         dialog.setVisible(true);
+         }
+         });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -588,14 +756,17 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCatDer;
     private javax.swing.JLabel labelCatIzq;
     private javax.swing.JLabel labelMelDer;
     private javax.swing.JLabel labelMelIzq;
     private javax.swing.JLabel labelPteDer;
     private javax.swing.JLabel labelPteIzq;
+    private javax.swing.JTextArea observaciones;
     private javax.swing.JPanel panelOD;
     private javax.swing.JPanel panelODC;
     private javax.swing.JPanel panelODM;
@@ -604,6 +775,8 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
     private javax.swing.JPanel panelOIC;
     private javax.swing.JPanel panelOIM;
     private javax.swing.JPanel panelOIP;
+    private javax.swing.JButton registrar;
+    private javax.swing.JButton regresar;
     private javax.swing.JLabel resulCatDer;
     private javax.swing.JLabel resulCatIzq;
     private javax.swing.JLabel resultMeDer;

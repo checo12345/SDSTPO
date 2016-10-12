@@ -46,7 +46,7 @@ public class VerConsulta extends javax.swing.JDialog {
         initComponents();
         capturador2.setPreferredSize(new java.awt.Dimension(247, 329));
         this.consultabean = consulta;        
-        this.consulta = new ConsultaMedica();
+        this.consulta = new ConsultaMedica(consulta);
         ServicioRespuesta respuesta = this.consulta.validarMedico(new MedicoBean(consultabean.getCedulaMedico()));
         if (respuesta.isSuccess()) {
             medico = (MedicoBean) respuesta.getResult();
@@ -435,6 +435,7 @@ public class VerConsulta extends javax.swing.JDialog {
 
     private void prediagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prediagnosticoActionPerformed
         // TODO add your handling code here:
+        consulta.verPrediagnostico(this);
     }//GEN-LAST:event_prediagnosticoActionPerformed
 
     /**

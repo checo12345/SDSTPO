@@ -7,6 +7,11 @@ package Beans;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
@@ -24,6 +29,17 @@ public class Imagen {
     private String ruta;
 
     public Imagen() {
+    }
+
+    public Imagen(String ruta) {
+        try {
+            this.ruta = ruta;
+            fotografia = ImageIO.read(new File(ruta));
+            alto = fotografia.getHeight();
+            ancho = fotografia.getWidth();
+        } catch (IOException ex) {
+            Logger.getLogger(Imagen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Imagen(BufferedImage fot) {

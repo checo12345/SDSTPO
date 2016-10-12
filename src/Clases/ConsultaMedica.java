@@ -72,8 +72,10 @@ public class ConsultaMedica {
     public ConsultaMedica(MedicoBean medico) {
         this.medico = medico;
     }
-    public ConsultaMedica(){
-        
+    public ConsultaMedica(ConsultaMedicaBean cons){
+        ojoDer=new Imagen(cons.getOjoDerecho());
+        ojoIzq=new Imagen(cons.getOjoIzquierdo());
+        id=cons.getIdConsulta();
     }
 public boolean MostrarReceta(JDialog frame,int idConsulta){
     VerReceta vr=new VerReceta(frame,true,idConsulta,medico,paciente);
@@ -203,12 +205,20 @@ public boolean MostrarReceta(JDialog frame,int idConsulta){
         return true;
     }
     
-    public void realizarPrediagnostico(Imagen izq,Imagen der,JDialog frame){
+    public boolean realizarPrediagnostico(Imagen izq,Imagen der,JDialog frame){
         this.ojoIzq=izq;
         this.ojoDer=der;
-        Prediagnostico pre=new Prediagnostico(this.ojoIzq,this.ojoDer,frame,0);
+        Prediagnostico pre=new Prediagnostico(this.ojoIzq,this.ojoDer,frame,0,(creaExpediente()+"/"),id);
+        if(pre.isRegistro()){
+            //GenerarPDF
+            return true;
+        }else{
+        return false;
+        }
     }
-
+    public void verPrediagnostico(JDialog frame){
+        Prediagnostico pre=new Prediagnostico(frame,id,this.ojoIzq,this.ojoDer);
+    }
     public static void main(String[] args) {
         try {
             File archivo = Resources.getResourceAsFile("configuracion.properties");
