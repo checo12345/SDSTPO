@@ -40,6 +40,7 @@ public class Prediagnostico {
     private int opcion;
     private String ruta;
     private int idConsulta;
+    private String observaciones;
     private boolean Registro;
     public Prediagnostico(JDialog frame,int idConsulta,Imagen imgIzq, Imagen imgDer){
         this.idConsulta=idConsulta;
@@ -104,6 +105,7 @@ public class Prediagnostico {
 
     public boolean Registrar(String observaciones) {
         Registro=true;
+        this.observaciones=observaciones;
         ServicioRespuesta respuesta = new ServicioRespuesta();
         logger.info("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t============ METODO: Registrar() ============");
         if (opcion == 0) {
@@ -120,7 +122,7 @@ public class Prediagnostico {
                 ImageIO.write(imgODC.getFotografia(), "jpg", DerechoCat);
                 ImageIO.write(imgOIC.getFotografia(), "jpg", IzquierdoCat);
                 ImageIO.write(imgODM.getFotografia(), "jpg", DerechoMel);
-                ImageIO.write(imgODM.getFotografia(), "jpg", IzquierdoMel);
+                ImageIO.write(imgOIM.getFotografia(), "jpg", IzquierdoMel);
                 
                 ServicioDAO servicio = new ServicioDAO();
                 PrediagnosticoBean pb=new PrediagnosticoBean(observaciones,idConsulta);
@@ -196,4 +198,38 @@ public class Prediagnostico {
         }
         return respuesta.isSuccess();
     }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public Imagen getOjoIzquierdo() {
+        return ojoIzquierdo;
+    }
+
+    public Imagen getOjoDerecho() {
+        return ojoDerecho;
+    }
+
+    public Imagen getImgOIC() {
+        return imgOIC;
+    }
+
+    public Imagen getImgODC() {
+        return imgODC;
+    }
+
+    public Imagen getImgOIM() {
+        return imgOIM;
+    }
+
+    public Imagen getImgODM() {
+        return imgODM;
+    }
+
+    public double[] getResultado() {
+        return resultado;
+    }
+    
+    
 }

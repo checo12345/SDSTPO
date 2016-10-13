@@ -15,6 +15,7 @@ import Excepciones.SDTPOException;
 import Formularios.RegistroReceta;
 import Formularios.RegistroReceta;
 import Formularios.VerReceta;
+import PDF.Informe;
 import java.awt.Frame;
 import java.util.logging.Logger;
 import java.io.File;
@@ -173,7 +174,7 @@ public boolean MostrarReceta(JDialog frame,int idConsulta){
             ImageIO.write(ojoDer.getFotografia(), "jpg", Derecho);
             ImageIO.write(ojoIzq.getFotografia(), "jpg", Izquierdo);
             ServicioDAO servicio = new ServicioDAO();
-            ConsultaMedicaBean cmb = new ConsultaMedicaBean(new SimpleDateFormat("yyyy-MM-dd").format(new Date()), motivo, Izquierdo.toString(), Derecho.toString(), medico.getCedulaProfesional(), paciente.getIdPaciente());
+            ConsultaMedicaBean cmb = new ConsultaMedicaBean(new SimpleDateFormat("yyyy-MM-dd").format(new Date()), motivo, Izquierdo.toString(), Derecho.toString(), medico.getCedulaProfesional(), paciente.getIdPaciente(),creaExpediente()+"/Reporte.pdf");
             respuesta = servicio.insertarConsulta(cmb);
             logger.info("Se registro la consulta con el id: " + cmb.getIdConsulta());
             id = cmb.getIdConsulta();
@@ -204,13 +205,32 @@ public boolean MostrarReceta(JDialog frame,int idConsulta){
 
         return true;
     }
-    
-    public boolean realizarPrediagnostico(Imagen izq,Imagen der,JDialog frame){
-        this.ojoIzq=izq;
-        this.ojoDer=der;
-        Prediagnostico pre=new Prediagnostico(this.ojoIzq,this.ojoDer,frame,0,(creaExpediente()+"/"),id);
+    public void abrirReporte(String reporte)
+    {
+       try {
+            //definiendo la ruta en la propiedad file
+            Runtime.getRuntime().exec("cmd /c start " + reporte);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } 
+    }
+    public void abrirReporte(){
+        try {
+            //definiendo la ruta en la propiedad file
+            Runtime.getRuntime().exec("cmd /c start " + creaExpediente()+"/Reporte.pdf");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public boolean realizarPrediagnostico(JDialog frame,int Opc){
+        
+        Prediagnostico pre=new Prediagnostico(this.ojoIzq,this.ojoDer,frame,Opc,(creaExpediente()+"/"),id);
         if(pre.isRegistro()){
-            //GenerarPDF
+            Informe inf=new Informe();
+            if(Opc==0)
+                inf.generarReporteMelCat(creaExpediente()+"/", paciente, medico, pre);
             return true;
         }else{
         return false;

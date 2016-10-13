@@ -48,6 +48,7 @@
         <result property="motivoConsulta" column="motivo"/>
         <result property="ojoIzquierdo" column="imgOjoIzq"/>
         <result property="ojoDerecho" column="imgOjoDer"/>
+        <result property="rutaInforme" column="rutaInforme"/>
         <result property="idConsulta" column="idConsulta"/>
         <result property="cedulaMedico" column="cedProfMed"/>
         <result property="idPaciente" column="idPaciente"/>
@@ -196,8 +197,8 @@
         VALUES (#{idReceta}, #{idMedicamento}, #{dosis});        
     </insert>
         <insert id="insertConsulta" parameterType="Beans.ConsultaMedicaBean" useGeneratedKeys="true" keyColumn="idConsulta" keyProperty="idConsulta">
-        INSERT INTO consultamedica (fecha, motivo, imgOjoIzq, imgOjoDer, cedProfMed,idPaciente)
-        VALUES (#{fechaConsulta}, #{motivoConsulta}, #{ojoIzquierdo}, #{ojoDerecho}, #{cedulaMedico}, #{idPaciente});        
+        INSERT INTO consultamedica (fecha, motivo, imgOjoIzq, imgOjoDer, rutaInforme, cedProfMed, idPaciente)
+        VALUES (#{fechaConsulta}, #{motivoConsulta}, #{ojoIzquierdo}, #{ojoDerecho}, #{rutaInforme}, #{cedulaMedico}, #{idPaciente});        
     </insert>
     <insert id="insertPredignostico" parameterType="Beans.PrediagnosticoBean" useGeneratedKeys="true" keyColumn="idPreDiag" keyProperty="idPreDiag">
         INSERT INTO prediagnostico (observaciones,idConsulta)

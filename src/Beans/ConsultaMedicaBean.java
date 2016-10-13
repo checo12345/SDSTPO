@@ -26,9 +26,18 @@ public class ConsultaMedicaBean {
     private String motivoConsulta;
     private String ojoIzquierdo;
     private String ojoDerecho;
+    private String rutaInforme;
     private List<String> manifestaciones;
     private int    cedulaMedico;
     private int    idPaciente;
+
+    public String getRutaInforme() {
+        return rutaInforme;
+    }
+
+    public void setRutaInforme(String rutaInforme) {
+        this.rutaInforme = rutaInforme;
+    }
 
     public int getCedulaMedico() {
         return cedulaMedico;
@@ -60,13 +69,14 @@ public class ConsultaMedicaBean {
         manifestaciones=man;
     }
 
-    public ConsultaMedicaBean(String fechaConsulta, String motivoConsulta, String ojoIzquierdo, String ojoDerecho, int cedulaMedico, int idPaciente) {
+    public ConsultaMedicaBean(String fechaConsulta, String motivoConsulta, String ojoIzquierdo, String ojoDerecho, int cedulaMedico, int idPaciente,String rutaInforme) {
         this.fechaConsulta = fechaConsulta;
         this.motivoConsulta = motivoConsulta;
         this.ojoIzquierdo = ojoIzquierdo;
         this.ojoDerecho = ojoDerecho;
         this.cedulaMedico = cedulaMedico;
         this.idPaciente = idPaciente;
+        this.rutaInforme=rutaInforme;
     }
     
     public String getFechaConsulta(){return fechaConsulta;}

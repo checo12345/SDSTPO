@@ -431,6 +431,7 @@ public class VerConsulta extends javax.swing.JDialog {
 
     private void reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteActionPerformed
         // TODO add your handling code here:
+        consulta.abrirReporte(consultabean.getRutaInforme());
     }//GEN-LAST:event_reporteActionPerformed
 
     private void prediagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prediagnosticoActionPerformed

@@ -54,7 +54,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
     private int opcioncapturador2 = 0;
     private JPanel jPanel2;
     private JPanel jPanel3;
-    private boolean banderaPrediagnostico=false;
+    private boolean banderaPrediagnostico = false;
 
     public RegistroConsulta(java.awt.Frame parent, boolean modal, MedicoBean m) {
         super(parent, modal);
@@ -68,11 +68,11 @@ public class RegistroConsulta extends javax.swing.JDialog {
         panel.setLayout(new GridLayout(2, 1));
         panel.add(rbtn1);
         panel.add(rbtn2);
-        
+
         int desicion = JOptionPane.showOptionDialog(null, panel, "Selección de opción pra obtencion de Imagen", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-        
+
         if (desicion == 0) {
-            
+
             if (rbtn1.isSelected()) {
                 ip = JOptionPane.showInputDialog("Ingrese direccion IP: ");
                 banderacapturador = true;
@@ -88,7 +88,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
                 opcioncapturador1 = 1;
                 opcioncapturador2 = 1;
             }
-            
+
         } else {
             bandera = true;
         }
@@ -98,18 +98,19 @@ public class RegistroConsulta extends javax.swing.JDialog {
         jLabel13.setText("");
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/RegPaciente.png")));
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/RegPaciente.png")));
-        
+
         fecha.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         medico = m;
         consulta = new ConsultaMedica(medico);
-        
+
         doctor.setText(medico.getNombre() + " " + medico.getApellidoPaterno() + " " + medico.getApellidoMaterno());
-        
+
         consulta.obtenerSiguienteIdConsulta();
-        
+
         registrar.setEnabled(false);
         receta.setEnabled(false);
         reporte.setEnabled(false);
+        reporte.setText("Ver Reporte");
         prediagnostico.setEnabled(false);
         /*nombreP.setVisible(false);
          direcc.setVisible(false);
@@ -126,7 +127,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-        
+
         jScrollPane1 = new javax.swing.JScrollPane();
         motivo = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -166,35 +167,35 @@ public class RegistroConsulta extends javax.swing.JDialog {
         capturador2 = new CapturadorImagen(ip);
         jLabel12 = new javax.swing.JLabel();
         captura2 = new javax.swing.JButton();
-        
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
-        
+
         motivo.setColumns(20);
         motivo.setRows(5);
         jScrollPane1.setViewportView(motivo);
-        
+
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jList1);
-        
+
         jButton1.setLabel("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        
+
         registrar.setText("Registrar");
         registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registrarActionPerformed(evt);
             }
         });
-        
+
         receta.setText("Crear Receta");
         //receta.setEnabled(false);
         receta.addActionListener(new java.awt.event.ActionListener() {
@@ -202,11 +203,11 @@ public class RegistroConsulta extends javax.swing.JDialog {
                 recetaActionPerformed(evt);
             }
         });
-        
+
         jLabel9.setText("<html><body>Motivo de <br>la Consulta:</body></html>");
-        
+
         jLabel10.setText("Manifestaciónes:");
-        
+
         reporte.setText("Generar Reporte");
         reporte.setToolTipText("");
         reporte.addActionListener(new java.awt.event.ActionListener() {
@@ -214,36 +215,36 @@ public class RegistroConsulta extends javax.swing.JDialog {
                 reporteActionPerformed(evt);
             }
         });
-        
+
         prediagnostico.setText("Pre-diagnóstico");
         prediagnostico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 prediagnosticoActionPerformed(evt);
             }
         });
-        
+
         jButton2.setText("Quitar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        
+
         sangre.setEditable(false);
         sangre.setName(""); // NOI18N
 
         jLabel7.setText("<html><body>Tipo de<br> Sangre:</body></html>");
-        
+
         fecha.setEditable(false);
         fecha.setText("Fecha");
-        
+
         jLabel2.setText("Fecha de Consulta:");
-        
+
         sexo.setEditable(false);
         sexo.setName(""); // NOI18N
 
         jLabel6.setText("Sexo:");
-        
+
         fechanac.setEditable(false);
         fechanac.setName(""); // NOI18N
 
@@ -253,27 +254,27 @@ public class RegistroConsulta extends javax.swing.JDialog {
                 consultaPacienteActionPerformed(evt);
             }
         });
-        
+
         jLabel5.setText("<html><body>Fecha de<br> Nacimiento:</body></html>");
-        
+
         direcc.setEditable(false);
         direcc.setName(""); // NOI18N
 
         jLabel3.setText("CURP del Paciente:");
-        
+
         jLabel8.setText("Dirección:");
-        
+
         jLabel1.setText("Nombre del Doctor:");
-        
+
         doctor.setEditable(false);
         doctor.setText("Dr.");
-        
+
         jLabel4.setText("Nombre del Paciente:");
-        
+
         nombreP.setEditable(false);
         nombreP.setName(""); // NOI18N
         nombreP.setOpaque(false);
-        
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -353,13 +354,13 @@ public class RegistroConsulta extends javax.swing.JDialog {
                                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(33, Short.MAX_VALUE))
         );
-        
+
         fecha.getAccessibleContext().setAccessibleName("");
-        
+
         capturador1.setPreferredSize(new java.awt.Dimension(247, 329));
-        
+
         jLabel13.setText("Imagen del Ojo Izquierdo");
-        
+
         javax.swing.GroupLayout capturador1Layout = new javax.swing.GroupLayout(capturador1);
         capturador1.setLayout(capturador1Layout);
         capturador1Layout.setHorizontalGroup(
@@ -376,14 +377,14 @@ public class RegistroConsulta extends javax.swing.JDialog {
                         .addComponent(jLabel13)
                         .addGap(162, 162, 162))
         );
-        
+
         captura1.setText("Capturar");
         captura1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 captura1ActionPerformed(evt);
             }
         });
-        
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -407,11 +408,11 @@ public class RegistroConsulta extends javax.swing.JDialog {
                         .addComponent(captura1)
                         .addGap(43, 43, 43))
         );
-        
+
         jPanel3.setPreferredSize(new java.awt.Dimension(366, 421));
         capturador2.setPreferredSize(new java.awt.Dimension(247, 329));
         jLabel12.setText("Imagen del Ojo Derecho");
-        
+
         javax.swing.GroupLayout capturador2Layout = new javax.swing.GroupLayout(capturador2);
         capturador2.setLayout(capturador2Layout);
         capturador2Layout.setHorizontalGroup(
@@ -428,14 +429,14 @@ public class RegistroConsulta extends javax.swing.JDialog {
                         .addComponent(jLabel12)
                         .addContainerGap(160, Short.MAX_VALUE))
         );
-        
+
         captura2.setText("Capturar");
         captura2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 captura2ActionPerformed(evt);
             }
         });
-        
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -459,7 +460,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
                         .addComponent(captura2)
                         .addGap(43, 43, 43))
         );
-        
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -536,7 +537,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
                                                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addContainerGap())))
         );
-        
+
         pack();
     }// </editor-fold>                                                                                                                         
 
@@ -549,7 +550,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
         if (bandera) {
             this.dispose();
         }
-    }    
+    }
 
     private void consultaPacienteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -581,35 +582,58 @@ public class RegistroConsulta extends javax.swing.JDialog {
         /*if (!ip.equals("")) {
          capturador1.iniciar();
          }*/
-        
+
     }
-    
+
     private void reporteActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        consulta.abrirReporte();
     }
-    
+
     private void prediagnosticoActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (banderaPrediagnostico) {
             consulta.verPrediagnostico(this);
         } else {
-            if (consulta.realizarPrediagnostico(new Imagen(capturador1.getImagen()), new Imagen(capturador2.getImagen()), this)) {
-                prediagnostico.setText("Ver Pre-diagnóstico");
-                banderaPrediagnostico = true;
-                reporte.setEnabled(true);
+            JPanel panel = new JPanel();
+            JRadioButton rbtn1 = new JRadioButton("Melanoma y Cataratas", true);
+            JRadioButton rbtn2 = new JRadioButton("Pterigion", false);
+            //Creación del Grupo de Botones:
+            ButtonGroup grupo1 = new ButtonGroup();
+            grupo1.add(rbtn1);
+            grupo1.add(rbtn2);
+            panel.setLayout(new GridLayout(2, 1));
+            panel.add(rbtn1);
+            panel.add(rbtn2);
+
+            int desicion = JOptionPane.showOptionDialog(null, panel, "Selección de opción para la deteccion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (desicion == 0) {
+
+                if (rbtn1.isSelected()) {
+                    if (consulta.realizarPrediagnostico(this, 0)) {
+                        prediagnostico.setText("Ver Pre-diagnóstico");
+                        banderaPrediagnostico = true;
+                        reporte.setEnabled(true);
+
+                    }
+                } else if (rbtn2.isSelected()) {
+
+                }
+
             }
+
         }
     }
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         if (!manifestacion.getText().equals("")) {
             modelo.addElement(manifestacion.getText());
             jList1.setModel(modelo);
             manifestacion.setText("");
         }
-        
+
     }
-    
+
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (!motivo.getText().equals("") && banderaPaciente == true) {
@@ -618,6 +642,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Registro de la Consulta exitoso", "Registro Completado",
                         JOptionPane.INFORMATION_MESSAGE);
                 receta.setEnabled(true);
+                registrar.setEnabled(false);
                 prediagnostico.setEnabled(true);
             }
         } else {
@@ -631,7 +656,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void captura1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (opcioncapturador1 == 2) {
@@ -663,7 +688,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
         //JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
 
     }
-    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here: BOTON QUITAR
         int index = jList1.getSelectedIndex();
@@ -673,9 +698,9 @@ public class RegistroConsulta extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado una manifestacion.", "No se logró quitar manifestacion.",
                     JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
-    
+
     private void captura2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (opcioncapturador2 == 2) {
@@ -703,7 +728,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
             //JOptionPane.showMessageDialog(null, "Has seleccionado NO.");
         }
     }
-    
+
     private void recetaActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         this.setVisible(false);
