@@ -39,7 +39,7 @@ public class VerReceta extends javax.swing.JDialog {
     private MedicoBean medico_responsable;
     private Paciente paciente;
     private RecetaMedica rm;
-    private boolean banderacerrar;
+    private boolean banderacerrar=false;
     public VerReceta(JDialog parent, boolean modal, int idConsulta, MedicoBean m, Paciente p) {
         super(parent, modal);
         initComponents();
@@ -333,7 +333,7 @@ public class VerReceta extends javax.swing.JDialog {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-        
+        if(banderacerrar)
             this.dispose();
     }//GEN-LAST:event_formWindowActivated
 
