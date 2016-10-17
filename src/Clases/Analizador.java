@@ -21,6 +21,7 @@ public class Analizador {
     private Segmentador segmentador=null;
     private double resultadoMelanoma;
     private double resultadoCatarata;
+    private double resultadoPterigion;
     Analizador(){
         segmentador=new Segmentador();
     }
@@ -30,6 +31,9 @@ public class Analizador {
     }
     public double getResultadoCatarata() {
         return resultadoCatarata;
+    }
+    public double getResultadoPterigion(){
+        return resultadoPterigion;
     }
 
     
@@ -91,6 +95,20 @@ public class Analizador {
         addWeighted(segmentador.descompCanImg(imagenCopia1, 2), 1, img, 0.3, 0.0, img);
         //Ventana v1 = new Ventana(segmentador.convertir(img), 1, 0);
 
+        return segmentador.Mat2BufferedImage(img);
+    }
+
+    public BufferedImage analizarPterigion(Mat img) {
+        //Imgproc.resize(imagenCopia, imagenCopia, new Size(540,720));
+        int areaT=0,areaP=0;
+        double por;
+        img=segmentador.detectaPterigion(img,30,30,30);
+        areaP=segmentador.detectaAreaPterigion(img);
+        areaT=segmentador.detectaEsclerotica(img,60,60,60)+areaP;
+        //por=((areaP*100)/areaT);
+        resultadoPterigion=((areaP*100)/areaT);
+        System.out.println("Area total:"+areaT+"\tArea Afectada:"+areaP+"\tPorcentaje:"+resultadoPterigion);
+        
         return segmentador.Mat2BufferedImage(img);
     }
 }

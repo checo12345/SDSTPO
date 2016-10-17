@@ -227,10 +227,13 @@ public boolean MostrarReceta(JDialog frame,int idConsulta){
     public boolean realizarPrediagnostico(JDialog frame,int Opc){
         
         Prediagnostico pre=new Prediagnostico(this.ojoIzq,this.ojoDer,frame,Opc,(creaExpediente()+"/"),id);
+        //Prediagnostico pre=new Prediagnostico(this.ojoIzq,this.ojoDer,frame,1,(creaExpediente()+"/"),id);
         if(pre.isRegistro()){
             Informe inf=new Informe();
             if(Opc==0)
                 inf.generarReporteMelCat(creaExpediente()+"/", paciente, medico, pre);
+            else if (Opc==1)
+                inf.generarReportePte(creaExpediente()+"/", paciente, medico, pre);
             return true;
         }else{
         return false;

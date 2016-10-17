@@ -1,10 +1,14 @@
 package org.opencv.imgproc;
 import com.sun.javafx.geom.Vec2f;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -22,9 +26,12 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.highgui.Highgui;
 import static org.opencv.core.Core.addWeighted;
+import static org.opencv.core.Core.convertScaleAbs;
 import static org.opencv.core.Core.countNonZero;
+import static org.opencv.core.CvType.CV_16S;
 import static org.opencv.core.CvType.CV_8UC1;
 import static org.opencv.core.Mat.zeros;
+import static org.opencv.imgproc.Imgproc.BORDER_DEFAULT;
 
 public class prueba_1 {
     //static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME);}
@@ -38,47 +45,76 @@ class Procesar_1 {
     private Mat imagen,imagenCopia,imgc;
 
     public Procesar_1(){
-        imagenCopia = Highgui.imread("C:\\Program Files\\Fotos_CICS\\fotoIPWebCam52.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia = Highgui.imread("C:\\Program Files\\Fotos_CICS_2\\fotoIPWebCam6.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        //15,19
         //imagenCopia = Highgui.imread("C:\\Program Files\\Fotos_CICS\\fotoIPWebCam48.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
         //imagenCopia = Highgui.imread("C:\\Program Files\\Fotos_CICS\\fotoIPWebCam50.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
         //imagenCopia = Highgui.imread("C:\\Program Files\\Fotos_CICS\\fotoIPWebCam86.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
-        imagen = Highgui.imread("C:\\Program Files\\Fotos_CICS\\prueba4.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
-        imgc=Highgui.imread("C:\\Program Files\\Fotos_CICS\\pterigion.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
-        
-        Mat img1,img2,img3,imgo,r1,r2,r3,r4,r5,r6,r7,r8;
-        r1 = zeros( new Size(648,423), CV_8UC1 );
-        r2 = zeros( new Size(648,423), CV_8UC1 );
-        r3 = zeros( new Size(648,423), CV_8UC1 );
-        r4 = zeros( new Size(648,423), CV_8UC1 );
-        r5 = zeros( new Size(648,423), CV_8UC1 );
-        r6 = zeros( new Size(648,423), CV_8UC1 );
-        r7 = zeros( new Size(720,540), CV_8UC1 );
-        r8 = zeros( new Size(720,540), CV_8UC1 );
-        if(!imagen.empty()){
-            Imgproc.resize(imagen, imagen, new Size(648,423));
-            Imgproc.GaussianBlur(imagen, imagen, new Size(3,3),0,0,Imgproc.BORDER_DEFAULT);
-            //Imgproc.cvtColor(imagen,imagen, CV_BGR2GRAY);
-        }else if (!imagenCopia.empty()){
-            analizarPterigion(imagen);
+        //imagen=Highgui.imread("C:\\Program Files\\Fotos_CICS\\fotoIPWebCam52.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        //imagen = Highgui.imread("C:\\Program Files\\Fotos_CICS\\prueba4.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        //imagenCopia=imagen.clone();
+        //imgc=Highgui.imread("C:\\Program Files\\Fotos_CICS\\pterigion.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imgc=Highgui.imread("C:\\Program Files\\Fotos_CICS\\fotoIPWebCam86.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        //imagenCopia=imgc.clone();
+        if (!imagenCopia.empty()){
+            
+            Point[] vertices=new Point[3];
+            vertices[0]=new Point(1,1);
+            int contador=0;
+            Imgproc.resize(imagenCopia, imagenCopia, new Size(540,720));
+            imagen=imagenCopia.clone();
+            //Ventana v1=new Ventana(convertir(imagenCopia),0,1);
+                        
+            /*Ventana v3=new Ventana(convertir(imagenCopia),1,0);7
+            v3.addMouseListener(
+                    new MouseAdapter(){
+                        @Override
+                        public void mousePressed(MouseEvent e){ 
+                           if (contador<3){
+                               System.out.println(e.getX()+","+e.getY());
+                               //Core.circle(imagenCopia, new Point(e.getX(),e.getY()),150, new Scalar(255,255,0));
+                               //vertices[contador]=new Point(e.getX(),e.getY());
+                           }
+                        }
+                    }
+            );
+            int x,y,x2,y2;
+            x=345;y=295;
+            x2=345;y2=260;
+            Core.circle(imagenCopia, new Point(x,y),100, new Scalar(255,255,0));
+            Core.circle(imagenCopia, new Point(x,y),1, new Scalar(255,255,0));
+            Core.circle(imagenCopia, new Point(x2,y2),100, new Scalar(255,255,0));
+            Core.circle(imagenCopia, new Point(x2,y2),1, new Scalar(255,255,0));*/
+            int areaT=0,areaP=0;
+            double por;
+            imagenCopia=detectaPterigion(imagenCopia,30,30,30);
+            areaP=detectaAreaPterigion(imagenCopia);
+            areaT=detectaEsclerotica(imagenCopia,60,60,60)+areaP;
+            por=((areaP*100)/areaT);
+            Ventana v2=new Ventana(convertir(imagenCopia),0,0);
+            System.out.println("Area total:"+areaT+"\tArea Afectada:"+areaP+"\tPorcentaje:"+por);
+           // imagenCopia=vueltaDosPterigion(imagenCopia);
+            //Ventana v3=new Ventana(convertir(imagenCopia),1,1);
         }else{
             System.out.println("\tImagen NO encontrada");
         }
     }
-     
-    private Mat analizarPterigion(Mat img){
-        //Ventana v2 = new Ventana(convertir(img),1,0);
-        img = detectaPterigion(img,30,30,0,0);
-        //Ventana v1 = new Ventana(convertir(img),1,0);
-        return img;
+    public void mouseClicked(MouseEvent e){
+        int x=e.getX();
+        int y=e.getY();
+        System.out.println(x+","+y);
     }
-    private Mat detectaPterigion(Mat img_ana,int val1,int val2,int val3,int val4){
+    private Mat Segmenta(Mat img_ana){
+        
+        //CvSeq ptr = new CvSeq();
+        return img_ana;
+    }
+    private Mat detectaPterigion(Mat img_ana,int val1,int val2,int val3){
+        int r=200,g=125,b=115;
         for (int y=0;y<img_ana.rows();y++){
             for(int x=0;x<img_ana.cols();x++){
                 double[] color=img_ana.get(y, x);
-                /*color[0]=color[0]/2;
-                color[1]=color[1]/2;
-                color[2]=color[2]/2;*/
-                if(color[2]>=150 && color[2]<=255 && color[1]>=40 && color[1]<=200 && color[0]>=0 && color[0]<=160){
+                if(color[2]>=r-val1 && color[2]<=r+val1 && color[1]>=g-val2 && color[1]<=g+val2 && color[0]>=b-val3 && color[0]<=b+val3){
                 color[0]=0;
                 color[1]=255;
                 color[2]=255;    
@@ -87,6 +123,31 @@ class Procesar_1 {
             }
         }
         return img_ana;
+    }
+    private int detectaEsclerotica(Mat img_ana,int val1,int val2,int val3){
+        int r=190,g=187,b=181,area=0;
+        for (int y=0;y<img_ana.rows();y++){
+            for(int x=0;x<img_ana.cols();x++){
+                double[] color=img_ana.get(y, x);
+                if(color[2]>=r-val1 && color[2]<=r+val1 && color[1]>=g-val2 && color[1]<=g+val2 && color[0]>=b-val3 && color[0]<=b+val3){
+                    area++;
+                }
+                img_ana.put(y, x, color);
+            }
+        }
+        return area;
+    }
+    private int detectaAreaPterigion(Mat img_ana){
+        int area=0;
+        for (int y=0;y<img_ana.rows();y++){
+            for(int x=0;x<img_ana.cols();x++){
+                double[] color=img_ana.get(y, x);
+                if(color[2]==255 && color[1]==255 && color[0]==0){
+                    area++;
+                }
+            }
+        }
+        return area;
     }
     private Mat analizarMelanoma(Mat img)
     {       

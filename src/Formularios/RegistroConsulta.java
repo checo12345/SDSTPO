@@ -617,7 +617,11 @@ public class RegistroConsulta extends javax.swing.JDialog {
 
                     }
                 } else if (rbtn2.isSelected()) {
-
+                    if(consulta.realizarPrediagnostico(this, 1)){
+                        prediagnostico.setText("Ver Pre-diagnostico");
+                        banderaPrediagnostico=true;
+                        reporte.setEnabled(true);
+                    }
                 }
 
             }

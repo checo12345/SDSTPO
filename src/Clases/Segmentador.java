@@ -35,6 +35,46 @@ public class Segmentador {
     public Segmentador() {
 
     }
+    public Mat detectaPterigion(Mat img_ana,int val1,int val2,int val3){
+        int r=200,g=125,b=115;
+        for (int y=0;y<img_ana.rows();y++){
+            for(int x=0;x<img_ana.cols();x++){
+                double[] color=img_ana.get(y, x);
+                if(color[2]>=r-val1 && color[2]<=r+val1 && color[1]>=g-val2 && color[1]<=g+val2 && color[0]>=b-val3 && color[0]<=b+val3){
+                color[0]=0;
+                color[1]=255;
+                color[2]=255;    
+                }
+                img_ana.put(y, x, color);
+            }
+        }
+        return img_ana;
+    }
+    public int detectaEsclerotica(Mat img_ana,int val1,int val2,int val3){
+        int r=190,g=187,b=181,area=0;
+        for (int y=0;y<img_ana.rows();y++){
+            for(int x=0;x<img_ana.cols();x++){
+                double[] color=img_ana.get(y, x);
+                if(color[2]>=r-val1 && color[2]<=r+val1 && color[1]>=g-val2 && color[1]<=g+val2 && color[0]>=b-val3 && color[0]<=b+val3){
+                    area++;
+                }
+                img_ana.put(y, x, color);
+            }
+        }
+        return area;
+    }
+    public int detectaAreaPterigion(Mat img_ana){
+        int area=0;
+        for (int y=0;y<img_ana.rows();y++){
+            for(int x=0;x<img_ana.cols();x++){
+                double[] color=img_ana.get(y, x);
+                if(color[2]==255 && color[1]==255 && color[0]==0){
+                    area++;
+                }
+            }
+        }
+        return area;
+    }
     public  Mat dameLaDona(Mat img1) {
         double[] iris = segmentarIris(img1);
         double[] pupila = segmentarPupila(img1);

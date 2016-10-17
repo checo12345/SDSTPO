@@ -223,6 +223,152 @@ public class Informe {
                  Logger.getLogger(Informe.class.getName()).log(Level.SEVERE, null, ex);
              }
          }
+         public void generarReportePte(String ruta,Paciente paciente,MedicoBean medico,Prediagnostico prediagnostico){
+             try {
+                 FileOutputStream archivo = null;
+                 try {
+                     archivo = new FileOutputStream(ruta+"Reporte.pdf");
+                 } catch (FileNotFoundException ex) {
+                     Logger.getLogger(Informe.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                 Document documento = new Document(PageSize.LETTER);
+                 try {
+                     PdfWriter.getInstance(documento, archivo);
+                 } catch (DocumentException ex) {
+                     Logger.getLogger(Informe.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                 documento.open();
+                 
+                 
+                 
+                 try
+                 {
+                     
+                     Image foto = Image.getInstance(imagenes.class.getResource("receta.jpg"));
+                     foto.scaleToFit(550, 550);
+                     foto.setAlignment(Chunk.ALIGN_MIDDLE);
+                     documento.add(foto);
+                 }
+                 catch ( Exception e )
+                 {
+                     e.printStackTrace();
+                 }
+                 documento.add(new Paragraph(" "));
+                 Calendar c = new GregorianCalendar();
+                 Date fecha = new Date();
+                 documento.add(new Paragraph("Nombre Completo del Paciente: "+"   "+paciente.getNombre()+" "+paciente.getApellidoPaterno()+" "+paciente.getApellidoMaterno() ));
+                 documento.add(new Paragraph("CURP: "+"   "+paciente.getCurp()  ));
+                 documento.add(new Paragraph("Sexo: "+"   "+paciente.getSexo() ));
+                 documento.add(new Paragraph("Tipo de Sangre: "+"   "+paciente.getTipoSangre()  ));
+                 documento.add(new Paragraph("Fecha de Nacimiento: "+"  "+paciente.getFechaNacimiento() ));
+                 documento.add(new Paragraph("Telefono: "+"   "+paciente.getTelefono()  ));
+                 documento.add(new Paragraph("Dirección: "+"   "+paciente.getDireccion() ));
+                 
+                 documento.add(new Paragraph("Fecha de la Consulta: "+Integer.toString(c.get(Calendar.DATE))+"-"+Integer.toString(c.get(Calendar.MONTH))+"-"+Integer.toString(c.get(Calendar.YEAR))+"         Hora: "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds()));
+                 documento.add(new Paragraph(" "));
+                 
+                 documento.add(new Paragraph("PRE-DIAGNOSTICO DE PATOLOGÍAS OCULARES"));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph("OBSERVACIONES DEL MEDICO"));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(prediagnostico.getObservaciones()));
+
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph("                      Imagen del ojo Izquierdo                                   Imagen del Ojo Derecho"));
+                 
+                 try
+                 {
+                     
+                     Image foto = Image.getInstance(prediagnostico.getOjoIzquierdo().getRuta());
+                     foto.scaleToFit(200, 200);
+                     // foto.setAlignment(Chunk.ALIGN_MIDDLE);
+                     foto.setAbsolutePosition(100f, 50f);
+                     documento.add(foto);
+                     Image foto1 = Image.getInstance(prediagnostico.getOjoDerecho().getRuta());
+                     foto1.scaleToFit(200, 200);
+                     
+                     //foto1.setAlignment(Chunk.ALIGN_MIDDLE);
+                     foto1.setAbsolutePosition(350f, 50f);
+                     documento.add(foto1);
+                 }
+                 catch ( Exception e )
+                 {
+                     e.printStackTrace();
+                 }
+                 
+                 documento.newPage();
+                 try
+                 {
+                     
+                     Image foto = Image.getInstance(imagenes.class.getResource("receta.jpg"));
+                     foto.scaleToFit(550, 550);
+                     foto.setAlignment(Chunk.ALIGN_MIDDLE);
+                     documento.add(foto);
+                 }
+                 catch ( Exception e )
+                 {
+                     e.printStackTrace();
+                 }
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph("                    Se obtuvieron los siguientes resultados para la patología PTERIGION:"));
+                 
+                 
+                 try
+                 {
+                     
+                     Image foto = Image.getInstance(prediagnostico.getImgOIP().getRuta());
+                     foto.scaleToFit(200, 200);
+                     foto.setAbsolutePosition(100f, 380f);
+                     documento.add(foto);
+                     
+                     Image foto1 = Image.getInstance(prediagnostico.getImgODP().getRuta());
+                     foto1.scaleToFit(200, 200);
+                     foto1.setAbsolutePosition(350f, 380f);
+                     documento.add(foto1);
+                 }
+                 catch ( Exception e )
+                 {
+                     e.printStackTrace();
+                 }
+                 double[] resultados=prediagnostico.getResultado();
+                 documento.add(new Paragraph("                      Imagen del ojo Izquierdo                                   Imagen del Ojo Derecho"));
+                 documento.add(new Paragraph("                      Área afectada: "+new DecimalFormat("#.##").format(resultados[0])+"%                                              Área afectada: "+new DecimalFormat("#.##").format(resultados[1])+"%"));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 /*documento.add(new Paragraph("                          Se obtuvieron los siguientes resultados para la patología CATARATA:"));
+                 documento.add(new Paragraph("                      Imagen del ojo Izquierdo                                   Imagen del Ojo Derecho"));
+                 documento.add(new Paragraph("                      Área afectada: "+new DecimalFormat("#.##").format(resultados[0])+"%                                              Área afectada: "+new DecimalFormat("#.##").format(resultados[1])+"%"));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));
+                 documento.add(new Paragraph(" "));*/
+                 documento.add(new Paragraph("Nombre del Responsable: "+"   Dr. "+medico.getNombre()+" "+medico.getApellidoPaterno()+" "+medico.getApellidoMaterno()));
+                 documento.add(new Paragraph("Especialidad: "+medico.getEspecialidad()+ "                               Cedula Profesional: "+medico.getEspecialidad())) ;
+                 documento.close();
+             } catch (DocumentException ex) {
+                 Logger.getLogger(Informe.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         }
     /*public static void main(String[] a3d) throws FileNotFoundException, DocumentException//, DocumentException
 	{
 		FileOutputStream archivo = new FileOutputStream("C:\\Users\\Sergio\\Desktop\\Receta.pdf");

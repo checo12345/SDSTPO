@@ -207,8 +207,10 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
         label = new JLabel(new ImageIcon(((new ImageIcon(imgODP.getFotografia())).getImage()).getScaledInstance(panelODP.getWidth(), panelODP.getHeight(), java.awt.Image.SCALE_SMOOTH)));
         label.setSize(panelODP.getWidth(), panelODP.getHeight());
         panelODP.add(label);
-        resultPteDer.setText("RESULTADO DERECHO");
-        resultPteIzq.setText("RESULTADO Izquierdo");
+        //resultPteDer.setText("RESULTADO DERECHO");
+        resultPteDer.setText("El ojo presenta un " + resultados[0] + "% de pterigon en el area de la esclerotica.");
+        //resultPteIzq.setText("RESULTADO Izquierdo");
+        resultPteIzq.setText("El ojo presenta un " + resultados[1] + "% de pterigon en el area de la esclerotica.");
 
     }
 

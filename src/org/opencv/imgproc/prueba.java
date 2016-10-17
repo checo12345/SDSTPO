@@ -35,9 +35,9 @@ class Procesar {
     private Mat imagen,imagenCopia,imagenCopia1;
 
     public Procesar(){
-        imagen = Highgui.imread("C:\\Users\\Sergio\\Desktop\\adaptador1.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
-        imagenCopia = Highgui.imread("C:\\Users\\Sergio\\Desktop\\adaptador1.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
-        imagenCopia1 = Highgui.imread("C:\\Users\\Sergio\\Desktop\\adaptador1.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagen = Highgui.imread("C:\\Program Files\\Fotos_CICS\\melanoma.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia = Highgui.imread("C:\\Program Files\\Fotos_CICS\\melanoma.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
+        imagenCopia1 = Highgui.imread("C:\\Program Files\\Fotos_CICS\\melanoma.jpg",Highgui.CV_LOAD_IMAGE_COLOR);
         if(!imagen.empty()){
            //  Imgproc.resize(imagen, imagen, new Size(480,640));
             analizarMelanoma(imagen) ;
@@ -52,17 +52,25 @@ class Procesar {
             int totalP,areaM,tamImg=img.width()*img.height() ;
             
             img= dameLaDona(img) ;
+            //Ventana vimg20=new Ventana(convertir(img),0,1);
             Mat img2=dameLaDona(imagenCopia) ;
+            //Ventana vimg0=new Ventana(convertir(img2),0,0);
             img2=descompCanImg(img2,1) ;
+            //Ventana vimg21=new Ventana(convertir(img2),0,1);
             img2=umbralizarImg(img2,254,255) ;
+            //Ventana vimg22=new Ventana(convertir(img2),0,1);
             
             img=blurearImg(img,25) ;
+            //Ventana vimg1=new Ventana(convertir(img),0,0);
             img=descompCanImg(img,1) ;
+            Ventana vimg2=new Ventana(convertir(img2),0,0);
            // Ventana v= new Ventana (convertir(img2),0,0) ;
             totalP = tamImg-countNonZero(img2);
             
             img=umbralizarImg(img,30,150) ;
+            //Ventana vimg31=new Ventana(convertir(img),1,1);
             img=umbralizarImg(img,0,255) ;
+            Ventana vimg32=new Ventana(convertir(img),1,1);
             areaM = tamImg- countNonZero(img);
             System.out.println("El area afectada por melanoma es: "+(areaM*100)/totalP+ "%");
             System.out.println("El area de iris abarca: "+totalP);

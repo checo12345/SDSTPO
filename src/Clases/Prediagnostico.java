@@ -95,8 +95,16 @@ public class Prediagnostico {
             resultado[3] = analizador.getResultadoMelanoma();
             VisualizarPrediagnostico vp = new VisualizarPrediagnostico(frame, true, ojoIzquierdo, ojoDerecho, imgOIC, imgODC, imgOIM, imgODM, resultado, this);
             vp.setVisible(true);
+        }else if (opcion == 1){
+            //imgOIP, imgODP
+            resultado=new double[2];
+            imgOIP=new Imagen(analizador.analizarPterigion(ojoIzquierdo.getMatFotografia()));
+            resultado[0]=analizador.getResultadoPterigion();
+            imgODP=new Imagen(analizador.analizarPterigion(ojoDerecho.getMatFotografia()));
+            resultado[1]=analizador.getResultadoPterigion();
+            VisualizarPrediagnostico vp=new VisualizarPrediagnostico(frame,true,ojoIzquierdo,ojoDerecho,imgOIP,imgODP,resultado,this);
+            vp.setVisible(true);
         }
-
     }
 
     public boolean isRegistro() {
@@ -226,7 +234,14 @@ public class Prediagnostico {
     public Imagen getImgODM() {
         return imgODM;
     }
+    
+    public Imagen getImgOIP() {
+        return imgOIP;
+    }
 
+    public Imagen getImgODP() {
+        return imgODP;
+    }
     public double[] getResultado() {
         return resultado;
     }
