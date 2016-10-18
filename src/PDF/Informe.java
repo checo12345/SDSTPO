@@ -217,7 +217,7 @@ public class Informe {
                  documento.add(new Paragraph(" "));
                  documento.add(new Paragraph(" "));
                  documento.add(new Paragraph("Nombre del Responsable: "+"   Dr. "+medico.getNombre()+" "+medico.getApellidoPaterno()+" "+medico.getApellidoMaterno()));
-                 documento.add(new Paragraph("Especialidad: "+medico.getEspecialidad()+ "                               Cedula Profesional: "+medico.getEspecialidad())) ;
+                 documento.add(new Paragraph("Especialidad: "+medico.getEspecialidad()+ "                               Cedula Profesional: "+medico.getCedulaProfesional())) ;
                  documento.close();
              } catch (DocumentException ex) {
                  Logger.getLogger(Informe.class.getName()).log(Level.SEVERE, null, ex);
@@ -363,7 +363,7 @@ public class Informe {
                  documento.add(new Paragraph(" "));
                  documento.add(new Paragraph(" "));*/
                  documento.add(new Paragraph("Nombre del Responsable: "+"   Dr. "+medico.getNombre()+" "+medico.getApellidoPaterno()+" "+medico.getApellidoMaterno()));
-                 documento.add(new Paragraph("Especialidad: "+medico.getEspecialidad()+ "                               Cedula Profesional: "+medico.getEspecialidad())) ;
+                 documento.add(new Paragraph("Especialidad: "+medico.getEspecialidad()+ "                               Cedula Profesional: "+medico.getCedulaProfesional())) ;
                  documento.close();
              } catch (DocumentException ex) {
                  Logger.getLogger(Informe.class.getName()).log(Level.SEVERE, null, ex);
