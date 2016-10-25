@@ -96,8 +96,8 @@ public class RegistroConsulta extends javax.swing.JDialog {
         this.setTitle("Registro de Consulta");
         jLabel12.setText("");
         jLabel13.setText("");
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/RegPaciente.png")));
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/RegPaciente.png")));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/jpg.png")));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/jpg.png")));
 
         fecha.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         medico = m;

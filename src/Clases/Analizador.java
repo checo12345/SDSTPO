@@ -66,6 +66,7 @@ public class Analizador {
             }
         }
         resultadoCatarata=(acumulador*100)/areaPupila;
+        resultadoCatarata=(double)((int)(resultadoCatarata*100.00)/100);
         //Core.circle(imagen, new Point(pupila[0], pupila[1]), (int) pupila[2], new Scalar(255, 0, 0), 3);
         //Ventana v1 = new Ventana(segmentador.convertir(max), 0, 0);
         //Ventana v2 = new Ventana(convertir(imagen), 2, 0);
@@ -89,6 +90,7 @@ public class Analizador {
         img = segmentador.umbralizarImg(img, 0, 255);
         areaM = tamImg - countNonZero(img);
         resultadoMelanoma=(areaM * 100) / (double)totalP;
+        resultadoMelanoma=(double)((int)(resultadoMelanoma*100.00)/100); 
         System.out.println("El area afectada por melanoma es: " + resultadoMelanoma+ "%");
         System.out.println("El area de iris abarca: " + totalP);
         System.out.println("El total de pixeles es: " + tamImg);

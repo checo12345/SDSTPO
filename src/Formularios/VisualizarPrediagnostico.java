@@ -67,10 +67,10 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
         label = new JLabel(new ImageIcon(((new ImageIcon(imgODM.getFotografia())).getImage()).getScaledInstance(panelODM.getWidth(), panelODM.getHeight(), java.awt.Image.SCALE_SMOOTH)));
         label.setSize(panelODM.getWidth(), panelODM.getHeight());
         panelODM.add(label);
-        resulCatIzq.setText(resultados[0] + "% de la área de la pupila detectada con Catarata.");
-        resulCatDer.setText(resultados[1] + "% de la área de la pupila detectada con Catarata.");
-        resultMeIzq.setText(resultados[2] + "% de la área del iris detectada con Melanoma");
-        resultMeDer.setText(resultados[3] + "% de la área del iris detectada con Melanoma");
+        resulCatIzq.setText(resultados[0] + "% del área de la pupila detectada con Catarata");
+        resulCatDer.setText(resultados[1] + "% del área de la pupila detectada con Catarata.");
+        resultMeIzq.setText(resultados[2] + "% del área del iris detectada con Melanoma");
+        resultMeDer.setText(resultados[3] + "% del área del iris detectada con Melanoma");
 
     }
 
@@ -110,7 +110,7 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
                     label = new JLabel(new ImageIcon(((new ImageIcon(imgODC.getFotografia())).getImage()).getScaledInstance(panelODC.getWidth(), panelODC.getHeight(), java.awt.Image.SCALE_SMOOTH)));
                     label.setSize(panelODC.getWidth(), panelODC.getHeight());
                     panelODC.add(label);
-                    resulCatDer.setText(rp.getResultado() + "% de la área de la pupila detectada con Catarata.");
+                    resulCatDer.setText("Se encontro un "+rp.getResultado() + "% del área de la pupila detectada con Catarata.");
                 } else if (rp.getPatologia().equals("Melanoma")) {
                     panelODM.setVisible(true);
                     resultMeDer.setVisible(true);
@@ -119,7 +119,7 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
                     label = new JLabel(new ImageIcon(((new ImageIcon(imgODM.getFotografia())).getImage()).getScaledInstance(panelODM.getWidth(), panelODM.getHeight(), java.awt.Image.SCALE_SMOOTH)));
                     label.setSize(panelODM.getWidth(), panelODM.getHeight());
                     panelODM.add(label);
-                    resultMeDer.setText(rp.getResultado() + "% de la área del iris detectada con Melanoma");
+                    resultMeDer.setText("Se encontro un "+rp.getResultado() + "% del área del iris detectada con Melanoma");
                 } else {
                     panelODP.setVisible(true);
                     labelPteDer.setVisible(true);
@@ -138,7 +138,7 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
                     label = new JLabel(new ImageIcon(((new ImageIcon(imgOIC.getFotografia())).getImage()).getScaledInstance(panelOIC.getWidth(), panelOIC.getHeight(), java.awt.Image.SCALE_SMOOTH)));
                     label.setSize(panelOIC.getWidth(), panelOIC.getHeight());
                     panelOIC.add(label);
-                    resulCatIzq.setText(rp.getResultado() + "% de la área de la pupila detectada con Catarata.");
+                    resulCatIzq.setText("Se encontro un "+rp.getResultado() + "% del área de la pupila detectada con Catarata.");
                 } else if (rp.getPatologia().equals("Melanoma")) {
                     panelOIM.setVisible(true);
                     resultMeIzq.setVisible(true);
@@ -147,7 +147,7 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
                     label = new JLabel(new ImageIcon(((new ImageIcon(imgOIM.getFotografia())).getImage()).getScaledInstance(panelOIM.getWidth(), panelOIM.getHeight(), java.awt.Image.SCALE_SMOOTH)));
                     label.setSize(panelOIM.getWidth(), panelOIM.getHeight());
                     panelOIM.add(label);
-                    resultMeIzq.setText(rp.getResultado() + "% de la área del iris detectada con Melanoma");
+                    resultMeIzq.setText("Se encontro un "+rp.getResultado() + "% del área del iris detectada con Melanoma");
                 } else {
                     panelOIP.setVisible(true);
                     labelPteIzq.setVisible(true);
@@ -257,6 +257,7 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
         regresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 800));
         setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -318,10 +319,16 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        resulCatIzq.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        resulCatIzq.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         resulCatIzq.setText("cat");
 
+        resultPteIzq.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        resultPteIzq.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         resultPteIzq.setText("pter");
 
+        resultMeIzq.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        resultMeIzq.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         resultMeIzq.setText("mel");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -358,10 +365,6 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(318, 318, 318))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,7 +387,11 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
                     .addComponent(resultPteIzq)
                     .addComponent(resulCatIzq)
                     .addComponent(resultMeIzq))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(267, 267, 267))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,10 +478,16 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        resulCatDer.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        resulCatDer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         resulCatDer.setText("cat");
 
+        resultPteDer.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        resultPteDer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         resultPteDer.setText("pter");
 
+        resultMeDer.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        resultMeDer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         resultMeDer.setText("mel");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -518,32 +531,25 @@ public class VisualizarPrediagnostico extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(resultMeDer)
+                    .addComponent(resultPteDer)
+                    .addComponent(resulCatDer)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(panelOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(128, 128, 128)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(resultMeDer)
-                                    .addComponent(resultPteDer)
-                                    .addComponent(resulCatDer))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(panelOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(128, 128, 128)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(panelODC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelCatDer))
-                                .addGap(138, 138, 138)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(panelODM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelMelDer))
-                                .addGap(95, 95, 95)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelPteDer)
-                                    .addComponent(panelODP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(57, 57, 57))))
+                            .addComponent(panelODC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelCatDer))
+                        .addGap(138, 138, 138)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelODM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelMelDer))
+                        .addGap(95, 95, 95)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelPteDer)
+                            .addComponent(panelODP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

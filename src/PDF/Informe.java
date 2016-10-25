@@ -58,7 +58,7 @@ public class Informe {
 		documento.add(new Paragraph("Fecha de la Consulta: "+recetaMB.getFecha()));
 		documento.add(new Paragraph(" "));
                 for (Medicamento medicamento: recetaMB.getMedicamentos())
-                    documento.add(new Paragraph("Medicamento :"+medicamento.getNombre() +"Presentación: "+medicamento.getPresentacion()+ "Dosis: "+medicamento.getDosis()));
+                    documento.add(new Paragraph(medicamento.getNombre() +"   "+medicamento.getPresentacion()+ "   "+medicamento.getDosis()));
                
 
                 documento.add(new Paragraph(" "));
