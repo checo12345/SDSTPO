@@ -55,6 +55,7 @@ public class ConsultarHistorial extends javax.swing.JDialog implements ActionLis
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Historial Clinico");
 
         consultar.setText("consultar");
         consultar.addActionListener(new java.awt.event.ActionListener() {

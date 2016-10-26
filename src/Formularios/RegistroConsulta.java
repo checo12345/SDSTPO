@@ -94,11 +94,15 @@ public class RegistroConsulta extends javax.swing.JDialog {
         }
         initComponents();
         this.setTitle("Registro de Consulta");
-        jLabel12.setText("");
-        jLabel13.setText("");
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/jpg.png")));
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/jpg.png")));
-
+        
+        capturador1.removeAll();
+        JLabel label = new JLabel(new ImageIcon(((new ImageIcon(getClass().getResource("/Imagenes/ojoDer.png"))).getImage()).getScaledInstance(capturador1.getWidth(), capturador1.getHeight(), java.awt.Image.SCALE_SMOOTH)));
+        label.setSize(capturador1.getWidth(), capturador1.getHeight());
+        capturador1.add(label);
+        capturador2.removeAll();
+        label = new JLabel(new ImageIcon(((new ImageIcon(getClass().getResource("/Imagenes/ojoIzq.png"))).getImage()).getScaledInstance(capturador2.getWidth(), capturador2.getHeight(), java.awt.Image.SCALE_SMOOTH)));
+        label.setSize(capturador2.getWidth(), capturador2.getHeight());
+        capturador2.add(label);
         fecha.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         medico = m;
         consulta = new ConsultaMedica(medico);
@@ -676,7 +680,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
                 if (!ip.equals("")) {
                     capturador1.iniciar();
                 } else {
-                    capturador1.removeAll();
+                    capturador1.capturar();
                 }
             } else if (ax == JOptionPane.NO_OPTION || ax == 2) {
                 //captura1.setEnabled(false);
@@ -720,7 +724,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
                 if (!ip.equals("")) {
                     capturador2.iniciar();
                 } else {
-                    capturador2.removeAll();
+                    capturador2.capturar();
                 }
             } else if (ax == JOptionPane.NO_OPTION || ax == 2) {
                 //captura2.setEnabled(false);

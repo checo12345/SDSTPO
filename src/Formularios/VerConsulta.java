@@ -61,6 +61,7 @@ public class VerConsulta extends javax.swing.JDialog {
     private void ConstruirConsulta() {
         try {
             fecha.setText(consultabean.getFechaConsulta());
+            this.setTitle("Consulta médica del "+consultabean.getFechaConsulta());
             motivo.setText(consultabean.getMotivoConsulta());
             List<String> lista = consultabean.getManifestaciones();
             for (String s : lista) {
