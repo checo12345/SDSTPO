@@ -188,9 +188,9 @@ public class Menu extends javax.swing.JFrame {
     }
     private void consultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultaMouseClicked
         // TODO add your handling code here:
-        this.setVisible(false);
+        //this.setVisible(false);
         ((Medico) medico).GenerarConsulta(this);
-        this.setVisible(true);
+        //this.setVisible(true);
     }//GEN-LAST:event_consultaMouseClicked
 
     private void gestionMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionMedMouseClicked
@@ -208,13 +208,13 @@ public class Menu extends javax.swing.JFrame {
         
         int desicion = JOptionPane.showOptionDialog(null, panel, "Gestión de Médicos", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
         if (desicion == 0) {
-            this.setVisible(false);
+            //this.setVisible(false);
             if(rbtn1.isSelected()){
                 ((MedicoAdministrador)medico).registrarMedico(this);
             }else if(rbtn2.isSelected()){
                 ((MedicoAdministrador)medico).actualizarMedico(this);
             }
-            this.setVisible(true);
+            //this.setVisible(true);
         }
     }//GEN-LAST:event_gestionMedMouseClicked
 
@@ -234,19 +234,19 @@ public class Menu extends javax.swing.JFrame {
         
         int desicion = JOptionPane.showOptionDialog(null, panel, "Gestión de Médicos", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
         if (desicion == 0) {
-            this.setVisible(false);
+            //this.setVisible(false);
             if(rbtn1.isSelected()){
                 ((Medico)medico).registrarPaciente(this);
             }else if(rbtn2.isSelected()){
                 ((MedicoAdministrador)medico).actualizarPaciente(this);
             }
-            this.setVisible(true);
+            //this.setVisible(true);
         }
         }
         else{
-            this.setVisible(false);
+            //this.setVisible(false);
             ((Medico)medico).registrarPaciente(this);
-            this.setVisible(true);
+            //this.setVisible(true);
         }
     }//GEN-LAST:event_gestionarPacMouseClicked
 
@@ -285,9 +285,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_consultaMouseExited
 
     private void historialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historialMouseClicked
-        this.setVisible(false);
+        //this.setVisible(false);
         ((Medico)medico).generarHistorial(this);
-        this.setVisible(true);
+        //this.setVisible(true);
     }//GEN-LAST:event_historialMouseClicked
 
     private void gestionarPacMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionarPacMouseEntered
