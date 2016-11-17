@@ -40,7 +40,7 @@ public class Analizador {
     
     public BufferedImage analizarCatarata(Mat img) {
         double[] pupila = segmentador.segmentarPupila(img);
-        double[] clase = {68.6250, 125.8750, 118.6250};
+        double[] clase = {99.8125, 150.7500, 150.8125};
         double areaPupila=Math.PI*Math.pow(pupila[2],2);
         int acumulador=0;
 //Core.circle(img, new Point(pupila[0], pupila[1]), (int) pupila[2], new Scalar(255, 0, 0), 3);
@@ -55,7 +55,7 @@ public class Analizador {
                 if ((Math.pow(pupila[0] - j, 2) + Math.pow(pupila[1] - i, 2) <= Math.pow(pupila[2], 2))) {
                     data = img.get(i, j);
                     double res = Math.sqrt(Math.pow(clase[0] - data[2], 2) + Math.pow(clase[1] - data[1], 2) + Math.pow(clase[2] - data[0], 2));
-                    if (res < 50) {
+                    if (res < 60) {
                         data[0] = 0;
                         data[1] = 255;
                         data[2] = 0;
