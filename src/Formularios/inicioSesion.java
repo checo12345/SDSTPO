@@ -147,7 +147,7 @@ public class inicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
-        
+        //System.out.println(System.getProperty("user.home").replaceAll(System.getProperty("file.separator"), "/"));
         try {
            UIManager.setLookAndFeel(new UpperEssentialLookAndFeel("/Imagenes/sdstpoTheme.theme"));
         }catch (UnsupportedLookAndFeelException e )

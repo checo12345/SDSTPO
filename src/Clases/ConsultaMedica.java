@@ -143,8 +143,9 @@ public boolean MostrarReceta(JDialog frame,int idConsulta){
 
             Properties properties = Resources.getResourceAsProperties("configuracion.properties");
             // Cargar las propiedades del archivo
-
-            directorio = new File(properties.getProperty("directorio") + expediente);
+            //String Escritorio=System.getProperty("user.home").replaceAll("\\", "/")+"/Desktop";
+            directorio = new File(System.getProperty("user.home")+System.getProperty("file.separator")+"Desktop"+System.getProperty("file.separator")+properties.getProperty("directorio") + expediente);
+            //directorio = new File(System.getProperty("user.home")+System.getProperty("file.separator")+"Desktop"+ expediente);
             logger.info(directorio.toString());
             if (!directorio.exists()) {
                 directorio.mkdirs();

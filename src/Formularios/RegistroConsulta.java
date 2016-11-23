@@ -644,7 +644,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        if (!motivo.getText().equals("") && banderaPaciente == true) {
+        if (!motivo.getText().equals("") && banderaPaciente == true&&capturador1.getImagen()!=null&&capturador2.getImagen()!=null) {
             boolean respuesta = consulta.Registrar(motivo.getText(), modelo, new Imagen(capturador1.getImagen()), new Imagen(capturador2.getImagen()));
             if (respuesta == true) {
                 JOptionPane.showMessageDialog(null, "Registro de la Consulta exitoso", "Registro Completado",
@@ -663,6 +663,10 @@ public class RegistroConsulta extends javax.swing.JDialog {
             }
             if (banderaPaciente == false) {
                 JOptionPane.showMessageDialog(null, "No se ha asignado un paciente a la consulta.", "No se Completo el registro",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            if (capturador1.getImagen() == null&&capturador2.getImagen() == null) {
+                JOptionPane.showMessageDialog(null, "No se ha hecho alguna toma del ojo.", "No se Completo el registro",
                         JOptionPane.ERROR_MESSAGE);
             }
         }
