@@ -107,6 +107,9 @@ public class NuevoMedico extends javax.swing.JDialog {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_telKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_telKeyTyped(evt);
+            }
         });
 
         le_nombre.setForeground(new java.awt.Color(255, 0, 0));
@@ -184,6 +187,9 @@ public class NuevoMedico extends javax.swing.JDialog {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_nombreKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_nombreKeyTyped(evt);
+            }
         });
 
         jLabel10.setText("Cedula Profesional");
@@ -191,6 +197,9 @@ public class NuevoMedico extends javax.swing.JDialog {
         jtf_apep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_apepKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_apepKeyTyped(evt);
             }
         });
 
@@ -200,11 +209,22 @@ public class NuevoMedico extends javax.swing.JDialog {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_apemKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_apemKeyTyped(evt);
+            }
         });
 
+        jtf_cedPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_cedProActionPerformed(evt);
+            }
+        });
         jtf_cedPro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_cedProKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_cedProKeyTyped(evt);
             }
         });
 
@@ -553,6 +573,56 @@ public class NuevoMedico extends javax.swing.JDialog {
     private void jtf_telActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_telActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_telActionPerformed
+
+    private void jtf_telKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_telKeyTyped
+
+ char c=evt.getKeyChar(); 
+        
+        if (Character.isDigit(c)&&jtf_tel.getText().length() <10) {
+            
+        }
+        else{
+            evt.consume();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_telKeyTyped
+
+    private void jtf_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreKeyTyped
+char c=evt.getKeyChar(); 
+        
+        if (Character.isDigit(c)) {
+            evt.consume();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_nombreKeyTyped
+
+    private void jtf_apepKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_apepKeyTyped
+char c=evt.getKeyChar(); 
+        
+        if (Character.isDigit(c)) {
+            evt.consume();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_apepKeyTyped
+
+    private void jtf_apemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_apemKeyTyped
+char c=evt.getKeyChar(); 
+        
+        if (Character.isDigit(c)) {
+            evt.consume();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_apemKeyTyped
+
+    private void jtf_cedProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_cedProActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_cedProActionPerformed
+
+    private void jtf_cedProKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_cedProKeyTyped
+char c=evt.getKeyChar(); 
+        
+        if (Character.isDigit(c)&&jtf_cedPro.getText().length()<10) {
+            
+        }else{
+            evt.consume();
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_jtf_cedProKeyTyped
 private void limpiarCampos(){
         jtf_nombre.setText("");
         jtf_apep.setText("");

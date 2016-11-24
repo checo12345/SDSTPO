@@ -432,7 +432,11 @@ public class VerConsulta extends javax.swing.JDialog {
 
     private void reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteActionPerformed
         // TODO add your handling code here:
+        if(new File(consultabean.getRutaInforme()).exists())
         consulta.abrirReporte(consultabean.getRutaInforme());
+        else
+            JOptionPane.showMessageDialog(null, "No se encuentra el informe guradado", "Informe no encontrado",
+                    JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_reporteActionPerformed
 
     private void prediagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prediagnosticoActionPerformed

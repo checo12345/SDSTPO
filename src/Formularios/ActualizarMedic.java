@@ -102,6 +102,9 @@ MedicoAdministrador med_adm;
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_nombreKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_nombreKeyTyped(evt);
+            }
         });
 
         jLabel3.setText("Apellido Paterno");
@@ -115,6 +118,9 @@ MedicoAdministrador med_adm;
         jtf_apep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_apepKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_apepKeyTyped(evt);
             }
         });
 
@@ -132,6 +138,9 @@ MedicoAdministrador med_adm;
         jtf_tel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_telKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_telKeyTyped(evt);
             }
         });
 
@@ -177,6 +186,9 @@ MedicoAdministrador med_adm;
         jtf_apem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_apemKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_apemKeyTyped(evt);
             }
         });
 
@@ -344,6 +356,9 @@ MedicoAdministrador med_adm;
         jtf_cedPro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_cedProKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_cedProKeyTyped(evt);
             }
         });
 
@@ -591,6 +606,53 @@ MedicoAdministrador med_adm;
             }
         }
     }//GEN-LAST:event_BtnConsultarActionPerformed
+
+    private void jtf_telKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_telKeyTyped
+        char c=evt.getKeyChar(); 
+        
+        if (Character.isDigit(c)&&jtf_tel.getText().length() <10) {
+            
+        }
+        else{
+            evt.consume();
+        } 
+    }//GEN-LAST:event_jtf_telKeyTyped
+
+    private void jtf_cedProKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_cedProKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar(); 
+        
+        if (Character.isDigit(c)&&jtf_cedPro.getText().length()<10) {
+            
+        }else{
+            evt.consume();
+        }// TODO ad
+    }//GEN-LAST:event_jtf_cedProKeyTyped
+
+    private void jtf_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreKeyTyped
+char c=evt.getKeyChar(); 
+        
+        if (Character.isDigit(c)) {
+            evt.consume();
+        }           // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_nombreKeyTyped
+
+    private void jtf_apepKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_apepKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar(); 
+        
+        if (Character.isDigit(c)) {
+            evt.consume();
+        }   
+    }//GEN-LAST:event_jtf_apepKeyTyped
+
+    private void jtf_apemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_apemKeyTyped
+char c=evt.getKeyChar(); 
+        
+        if (Character.isDigit(c)) {
+            evt.consume();
+        }           // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_apemKeyTyped
     private boolean contieneLetras(String cadena){
         boolean retorno=false;
         char a;

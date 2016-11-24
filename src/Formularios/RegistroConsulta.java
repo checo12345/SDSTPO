@@ -652,8 +652,8 @@ public class RegistroConsulta extends javax.swing.JDialog {
                 receta.setEnabled(true);
                 registrar.setEnabled(false);
                 prediagnostico.setEnabled(true);
-                capturador1.setEnabled(false);
-                capturador2.setEnabled(false);
+                captura1.setEnabled(false);
+                captura2.setEnabled(false);
                 consultaPaciente.setEnabled(false);
             }
         } else {
@@ -665,7 +665,7 @@ public class RegistroConsulta extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "No se ha asignado un paciente a la consulta.", "No se Completo el registro",
                         JOptionPane.ERROR_MESSAGE);
             }
-            if (capturador1.getImagen() == null&&capturador2.getImagen() == null) {
+            if (capturador1.getImagen() == null||capturador2.getImagen() == null) {
                 JOptionPane.showMessageDialog(null, "No se ha hecho alguna toma del ojo.", "No se Completo el registro",
                         JOptionPane.ERROR_MESSAGE);
             }
